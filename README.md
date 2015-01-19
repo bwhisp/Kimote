@@ -8,6 +8,11 @@ http://www.labri.fr/perso/falleri/dist/ens/projets/s8/sujets/8.pdf
 
 ## Dates importantes et réunions
 
+## Liens utiles
+
+* <https://cordova.apache.org/>
+* <http://kodi.tv/>
+
 ## Contacts
 
 * Jean-Rémy Falleri - <falleri@labri.fr>
