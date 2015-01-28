@@ -15,13 +15,41 @@
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- jQuery Mobile -->
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js"></script>
+        <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js"></script>-->
         <!-- jQuery UI -->
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         
-        <script type="text/javascript" src="js/connect.js"></script>
+        <form id="login" method="get" action="js/connect.js">
+            <p>
+                <label for="ip">@IP :</label>
+                <input type="text" name="ip" id="ip" value="" />
+       
+                <br />
+                <label for="port">Port :</label>
+                <input type="number" name="port" id="port" value=""/>
+                
+                <input type="submit" id="envoyer" value="Envoyer" onClick="login()"/>
+            </p>
+        </form>
+        
+        <script type="application/javascript" src="js/connect.js"></script>
+        
+        <img src="img/arrow.jpg" width="145" height="145" alt="Plan" usemap="#logo" />
+ 
+        <script type="application/javascript" src="js/arrow.js"></script>
+        <map name="logo"> <!-- coords = "gauche, haut, droite, bas" -->
+            <area shape="rect" coords="5,50,40,80" href="#" alt="left" onClick="arrow('left')"/>
+            <area shape="rect" coords="105,50,140,80" href="#" alt="right" onClick="arrow('right')"/>
+            <area shape="rect" coords="55,5,90,35" href="#" alt="up" onClick="arrow('up')"/>
+            <area shape="rect" coords="60,95,85,130" href="#" alt="down" onClick="arrow('down')"/>
+            <area shape="rect" coords="45,40,100,90" href="#" alt="ok" />
+        </map>
+        
+        
         
     </body>
 </html>
+
+<!---->

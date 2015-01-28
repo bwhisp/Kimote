@@ -10,18 +10,33 @@
  */
 
 // Récupère les paramètres de param.json (pas utilisé dans connect.js)
-$.getJSON("js/param.json", function(data) {  
-    console.log("JSON Data: " + data);
-    $.each(data, function(key, val) {
-        console.log(key + ":" + val);
-    });
-});
+//$.getJSON("js/param.json", function (data) {  
+//    console.log("JSON Data: " + data);
+//    $.each(data, function (key, val) {
+//        console.log(key + ":" + val);
+//    });
+//});
 
-var ip = '172.16.90.221';
-var port = '8080';
+//var ip = document.getElementById("ip").value;
+
+//
+var ip;
+var port;
+var url;
+
+// Connexion à partir du formulaire login
+function login () {
+    ip = document.forms["login"].elements["ip"].value; 
+    port = document.forms["login"].elements["port"].value;
+    //this.ip = form.ip.value;
+    //this.port = form.port.value;
+    
+    url = 'http://' + ip + ':' + port;
+    
+}
+
 var method = 'Input.Left'; // Test avec Input.Left (déplacement gauche)
-
-var url = 'http://' + ip + ':' + port + '/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '", "id": 1}';
+param_url = '/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '", "id": 1}';
 
 $.ajax({
     type: "GET", // Impossible de POST avec jsonp
