@@ -1,18 +1,7 @@
-var ip;
-var port;
-var url;
-
-// ip et port a récupérer avec connect.js
 function arrow (direction) {
-    //ip = document.forms["login"].elements["ip"].value; 
-    //port = document.forms["login"].elements["port"].value;
-    
-    ip = "192.168.22.167";
-    port = "8080";
-    
-    url = 'http://' + ip + ':' + port;
     
     var method = 'Input.';
+    
     if (direction === 'left') {
         method = method + 'Left';
     }
@@ -25,23 +14,35 @@ function arrow (direction) {
     else if (direction === 'down') {
         method = method + 'Down';
     }
+    else if (direction === 'select') {
+        method = method + 'Select';
+    }
+    else if (direction === 'home') {
+        method = method + 'Home';
+    }
+    else if (direction === 'back') {
+        method = method + 'Back';
+    }
     
     param_url = '/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '", "id": 1}';
     
-    complete_url = url + param_url;
+    complete_url = window.base_url + param_url;
 
     $.ajax({
         type: "GET", // Impossible de POST avec jsonp
         crossDomain: true,
         url: complete_url,
-        username: "kodi",
-        password: "pass",
+        username: window.username,
+        password: window.password,
         data: "{}",
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
         cache: true,
         jsonp: false,
         jsonpCallback: " "
+        /*beforeSend: function(xhr) { 
+            xhr.setRequestHeader("Authorization", "Basic " + btoa(window.username + ":" + window.password)); 
+        }*/
     });
 
 }

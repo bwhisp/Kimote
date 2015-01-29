@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         
-        <form id="login" method="get" action="js/connect.js">
+        <form id="login" method="get" action="#">
             <p>
                 <label for="ip">@IP :</label>
                 <input type="text" name="ip" id="ip" value="" />
@@ -30,26 +30,40 @@
                 <label for="port">Port :</label>
                 <input type="number" name="port" id="port" value=""/>
                 
+                <br />
+                <label for="username">Username :</label>
+                <input type="text" name="username" id="username" value="">
+
+                <br />
+                <label for="password">Password :</label>
+                <input type="password" name="password" id="password" value="">
+
                 <input type="submit" id="envoyer" value="Envoyer" onClick="login()"/>
             </p>
         </form>
         
         <script type="application/javascript" src="js/connect.js"></script>
         
-        <img src="img/arrow.jpg" width="145" height="145" alt="Plan" usemap="#logo" />
- 
+        <img src="img/arrow.jpg" width="145" height="145" alt="arrow" usemap="#arrow" />
+
         <script type="application/javascript" src="js/arrow.js"></script>
-        <map name="logo"> <!-- coords = "gauche, haut, droite, bas" -->
+        <map name="arrow"> <!-- coords = "gauche, haut, droite, bas" -->
             <area shape="rect" coords="5,50,40,80" href="#" alt="left" onClick="arrow('left')"/>
             <area shape="rect" coords="105,50,140,80" href="#" alt="right" onClick="arrow('right')"/>
             <area shape="rect" coords="55,5,90,35" href="#" alt="up" onClick="arrow('up')"/>
             <area shape="rect" coords="60,95,85,130" href="#" alt="down" onClick="arrow('down')"/>
-            <area shape="rect" coords="45,40,100,90" href="#" alt="ok" />
+            <area shape="rect" coords="45,40,100,90" href="#" alt="ok" onClick="arrow('select')"/>
         </map>
         
+        <img src="img/home.png" width="40" height="40" alt="home" usemap="#home" />
+        <map name="home"> <!-- coords = "gauche, haut, droite, bas" -->
+            <area shape="rect" coords="0,0,40,40" href="#" alt="home" onClick="arrow('home')"/>
+        </map>
         
+        <img src="img/back.png" width="40" height="40" alt="home" usemap="#back" />
+        <map name="back"> <!-- coords = "gauche, haut, droite, bas" -->
+            <area shape="rect" coords="0,0,40,40" href="#" alt="back" onClick="arrow('back')"/>
+        </map>
         
     </body>
 </html>
-
-<!---->
