@@ -8,13 +8,7 @@
  *          attendu
  * 
  */
-
-var ip;
-var port;
-var username;
-var password;
-var base_url;
-
+ 
 // Connexion à partir du formulaire login
 function login () {
     ip = document.forms["login"].elements["ip"].value; 
