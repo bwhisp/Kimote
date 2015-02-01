@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html ng-app="app"> 
+	<head>
+		<title>Kodi Remote</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+        <link rel="stylesheet" type="text/css" href="stylesheets/css/style.css" />
+	</head>
+
+	<body>
+		<header class="header">
+			Kodi Remote
+		</header>
+
+		<section class="view" ng-view>
+		</section>
+		
+		<nav class="nav">
+			<a href="#remote" class="nav-remote" ng-click="menu='remote'" ng-class="{active: menu=='remote'}"><img class="icon-remote" src="img/ic_gamepad_black_48dp.png"/img></a>
+
+			<a href="#movies" class="nav-movies" ng-click="menu='movies'" ng-class="{active: menu=='movies'}"><img class="icon-movies" src="img/ic_video_collection_black_48dp.png"/img></a>
+
+			<a href="#music" class="nav-music" ng-click="menu='music'" ng-class="{active: menu=='music'}"><img class="icon-music" src="img/ic_my_library_music_black_48dp.png"/img></a>
+
+			<a href="#pics" class="nav-pics" ng-click="menu='pics'" ng-class="{active: menu=='pics'}"><img class="icon-pics" src="img/ic_photo_library_black_48dp.png"/img></a>
+			
+			<a href="#settings" class="nav-settings" ng-click="menu='settings'" ng-class="{active: menu=='settings'}"><img class="icon-settings" src="img/ic_settings_black_48dp.png"/img></a>
+		</nav>
+		
+		<script src="js/framework/jquery.js"></script>
+		<script src="js/framework/angular/angular.min.js"></script>
+		<script src="js/framework/angular-resource/angular-resource.js"></script>
+		<script src="js/framework/angular-route/angular-route.js"></script>
+		<script src="js/framework/angular-animate/angular-animate.js"></script>
+		<script src="js/app.js"></script>
+		<script type="application/javascript" src="js/connect.js"></script>
+		<script type="application/javascript" src="js/request.js"></script>
+	</body>
+</html>
