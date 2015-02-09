@@ -16,5 +16,5 @@ function login () {
     username = document.forms["login"].elements["username"].value;
     password = document.forms["login"].elements["password"].value;
     
-    base_url = 'http://' + ip + ':' + port;
+    base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
 }

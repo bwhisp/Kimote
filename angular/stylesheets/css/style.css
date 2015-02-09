@@ -17,7 +17,7 @@
  * under the License.
  */
 
-@import "fonts";
+@import url(fonts.css);
 
 * {
     -webkit-box-sizing: border-box;
@@ -82,11 +82,20 @@ md-toolbar h1 {
     -webkit-animation:fade 3000ms infinite;
 }
 
-.login {
-    position: absolute;
-    margin: 0 auto;
-    width: 350px;
-    top: 40%;
+form {
+    width: 45%;
+    margin: 0 auto; 
+}
+
+form input { 
+    width: 100%; 
+}
+
+.form-wrapper {
+    position:absolute;
+    top:25%;
+    right:0;
+    left:0;
 }
 
 label {

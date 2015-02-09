@@ -1,22 +1,24 @@
 <section ng-controller="SettingsCtrl">
 	<section class="panel farRight">
-		<form id="login" method="get" action="#">
-            <label for="ip">@IP :</label>
-            <input type="text" name="ip" id="ip" value="" />
-   
-            <br />
-            <label for="port">Port :</label>
-            <input type="number" name="port" id="port" value=""/>
-            
-            <br />
-            <label for="username">Username :</label>
-            <input type="text" name="username" id="username" value="">
+        <div class="form-wrapper">
+    		<form id="login">
+                <label for="ip">@IP :</label>
+                <input type="text" name="ip" id="ip" value="" />
+       
+                <br />
+                <label for="port">Port :</label>
+                <input type="number" name="port" id="port" value=""/>
+                
+                <br />
+                <label for="username">Username :</label>
+                <input type="text" name="username" id="username" value="">
 
-            <br />
-            <label for="password">Password :</label>
-            <input type="password" name="password" id="password" value="">
+                <br />
+                <label for="password">Password :</label>
+                <input type="password" name="password" id="password" value="">
 
-            <input type="submit" id="save" value="Sauvegarder" onClick="login()"/>
-        </form>
+                <input type="submit" id="save" value="Sauvegarder" onClick="login()"/>
+            </form>
+        </div>
 	</section>
 </section>

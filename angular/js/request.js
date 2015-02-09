@@ -25,21 +25,21 @@ function request (input) {
     }
     else if (input === 'shutdown') {
         method = 'Application.';
-        method = method + 'Quit'; //OnQuit = quitter Kodi, Shutdown = éteindre le système
+        method = method + 'Quit'; //OnQuit = quitter Kodi, System.Shutdown = éteindre le système
     }
 
-    sendRequest(method);
-    
+    sendRequest($http,method);
 }
 
 function sendRequest (method) {
 
-    param_url = '/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '", "id": 1}';
+    //param_url = '/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '", "id": 1}'; // le "id": 1
+    param_url = '/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '"}';
 
     complete_url = window.base_url + param_url;
 
     $.ajax({
-        type: "GET", // Impossible de POST avec jsonp
+        type: "GET",
         crossDomain: true,
         url: complete_url,
         username: window.username,
@@ -47,6 +47,12 @@ function sendRequest (method) {
         data: "{}",
         contentType: "application/json; charset=utf-8",
         dataType: "jsonp",
+        /*success: function(response) {
+            alert(response);
+        },
+        error: function(error) {
+            alert(JSON.stringify(error));
+        },*/
         cache: true,
         jsonp: false,
         jsonpCallback: " "

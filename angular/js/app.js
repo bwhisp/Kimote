@@ -2,10 +2,9 @@ document.addEventListener('deviceready', function (){
 
 }, false);
 
-var app = angular.module('app', ['ngRoute', 'ngAnimate']);
+var app = angular.module('app', ['ngRoute', 'appCtrl']);
 
 app.config(['$routeProvider', function ($routeProvider) {
-
 	$routeProvider
 		.when('/remote', {
 			templateUrl: 'views/remote.html',
@@ -31,24 +30,3 @@ app.config(['$routeProvider', function ($routeProvider) {
 			redirectTo: '/remote'
 		});
 }]);
-
-app.controller('RemoteCtrl', function($scope) {
-	$scope.menu = 'remote';
-});
-
-app.controller('MoviesCtrl', function($scope) {
-	$scope.menu = 'movies';
-});
-
-app.controller('MusicCtrl', function($scope) {
-	$scope.menu = 'music';
-});
-
-app.controller('PicsCtrl', function($scope) {
-	$scope.menu = 'pics';
-});
-
-app.controller('SettingsCtrl', function($scope) {
-	$scope.menu = 'settings';
-});
-

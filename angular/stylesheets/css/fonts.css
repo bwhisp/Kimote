@@ -7,7 +7,7 @@
          url('fonts/Roboto/roboto_regular_macroman/Roboto-Regular-webfont.woff') format('woff'),
          url('fonts/Roboto/roboto_regular_macroman/Roboto-Regular-webfont.ttf') format('truetype'),
          url('fonts/Roboto/roboto_regular_macroman/Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
-    font-weight: lighter;
+    font-weight: normal;
     font-style: normal;
 }
 
