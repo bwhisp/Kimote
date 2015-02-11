@@ -62,4 +62,16 @@ appCtrl.controller('PicsCtrl', function($scope) {
 
 appCtrl.controller('SettingsCtrl', function($scope) {
 	$scope.menu = 'settings';
+
+	$scope.IPMODEL = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
+
+	$scope.login = function() {
+    	ip = $scope.ip;
+	    port = $scope.port.toString();
+    	username = $scope.user;
+    	password = $scope.pass;
+	
+		base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
+    	//$location.path(base_url);
+	}
 });
