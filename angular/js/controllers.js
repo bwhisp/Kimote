@@ -31,14 +31,6 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	        method = 'Application.';
 	        method = method + 'Quit'; //OnQuit = quitter Kodi, System.Shutdown = éteindre le système
 	    }
-	    else if(input == 'setmute') {
-	    	method = 'Application.';
-	    	method = method + 'SetMute'; 
-	    }
-	    else if(input == 'setvolume'){
-	    	method = 'Application';
-	    	method = method + 'SetVolume';
-	    }
 
 	    sendRequest($http, method);
 	}
