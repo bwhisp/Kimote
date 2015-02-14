@@ -1,0 +1,41 @@
+<section ng-controller="SettingsCtrl" class="panel farRight">
+    <span class="form">
+        <div class="form-wrapper">
+
+            <md-content class="md-padding">
+                <form name="myLogin">
+                    <md-input-container flex>
+                        <label>IP Hôte</label>
+                        <input ng-model="ip" ng-pattern=IPMODEL required>
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label>Port du Media Center</label>
+                        <input ng-model="port" min="0" max="65535" required>
+                    </md-input-container>
+
+                    <br/>
+                    
+                    <div class="auth">
+                        <p>AUTHENTIFICATION</p>
+                        <md-input-container flex>
+                            <label>LOGIN</label>
+                            <input ng-model="user" required>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <label>MOT DE PASSE</label>
+                            <input ng-model="pass" required>
+                        </md-input-container>
+                    </div>
+                    
+                    <section layout-align="center center">
+                        <!--<input type="submit" ng-click="login()" value="Connecter"/>-->
+                        <md-button class="md-raised md-primary" ng-click="login()">Connecter</md-button>
+                    </section>
+                </form>
+            </md-content>
+
+        </div>
+    </span>
+</section>

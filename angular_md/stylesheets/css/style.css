@@ -1,0 +1,265 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+@import url(fonts.css);
+@import url(../../js/framework/angular-material/angular-material.css);
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0;
+}
+
+/* Portrait layout (default) */
+.app {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+md-toolbar h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0;
+    overflow:visible;
+    padding:0;
+    text-align:center;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+form {
+    width: 50%;
+    margin: 0 auto; 
+}
+
+form input { 
+    width: 100%; 
+}
+
+.form-wrapper {
+    position:absolute;
+    top:20px;
+    right:0;
+    left:0;
+}
+
+label {
+    font-family: 'Roboto';
+    display: block;
+    width: 150px;
+    float: left;
+}
+
+input {
+    font-family: 'Roboto';
+}
+
+*:focus { 
+    outline: none;
+    outline-width: 0;
+}
+
+/*.header {
+    font-family: 'Roboto';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 50px; line-height: 50px;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    background-color: #11A7AB;
+}*/
+
+md-toolbar h1 {
+    font-size: 1.250em;
+    font-weight: 400;
+    margin: auto;
+    height: 56px !important;
+}
+
+.toolbar md-tab {
+    color: #90caf9 !important;
+    background-color: #3F51B5 !important;
+}
+.toolbar md-tab.active, .toolbar md-tab:focus {
+    color: white !important; 
+}
+.toolbar .md-header .md-ripple {
+    border-color: #C5CAE9 !important; 
+}
+.toolbar md-tabs-ink-bar {
+    background-color: #C5CAE9 !important; 
+}
+.toolbar md-tabs .md-paginator {
+    color: white; 
+}
+
+md-tabs {
+    overflow: hidden !important;
+}
+
+md-tab {
+    padding: 0px !important;
+}
+
+.view {
+    font-family: 'Roboto';
+    position: absolute;
+    top: 104px; right: 0; bottom: 0px; left: 0;
+}
+
+.nav-remote, .nav-movies, .nav-music, .nav-pics, .nav-settings {
+    display: block;
+    width: 100%;
+    height: 70px; line-height: 70px;
+    transition-duration: 0.5s;
+}
+
+.icon-remote, .icon-movies, .icon-music, .icon-pics, .icon-settings {
+    display: inline-block;
+    margin-top: 20px;
+    width: 30px;
+}
+
+.panel {
+    position: absolute;
+    top:0; left:0; bottom:0; right:0;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    
+}
+
+.farLeft {
+    transform: translate3D(0,0,0);
+}
+
+.left {
+    transform: translate3D(0,0,0);
+}
+
+.center {
+    transform: translate3D(0,0,0);
+}
+
+.right {
+    transform: translate3D(0,0,0);
+}
+
+.farRight {
+    transform: translate3D(0,0,0);
+}
+
+.arrow_right {
+    left: 64%;
+    top: 41%; 
+}
+
+.arrow_left {
+    top: 41%;
+    left: 30%;
+}
+
+.arrow_up, .select, .arrow_down, .arrow_left, .arrow_right {
+    position: absolute;
+}
+
+.arrow_up {
+    top: 31%;
+    left: 47%;
+}
+
+.select {
+    top: 40%;
+    left: 47%;
+}
+
+.arrow_down {
+    top: 50%;
+    left: 47%;
+}
+
+.back, .home, .shutdown {
+    position: absolute;
+}
+
+.back {
+    top: 65%;
+    left: 10%;
+}
+
+.shutdown {
+    top: 65%;
+    right: 8%;
+}
+
+.home {
+    top: 65%;
+    left: 50%;
+}
+
+/*input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+}*/
+
+md-input-container label {
+    width: 100%;
+}
