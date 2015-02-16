@@ -25,6 +25,24 @@
 
             <!-- shutdown -->
             <a href="#shutdown"><img class="shutdown" src="img/ic_power_black_48dp.png" width="40" height="40" alt="shutdown" ng-click="request('up')" /></a>
+
+            <!-- mute sound -->
+            <a href="#mutesound"><img class="mutesound" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mutesound" ng-click="request('mutesound')" /></a>
+
+            <!-- set sound -->
+            <a href="#setsound"><img class="setsound" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="setsound" ng-click="request('setsound')"/></a>
         </div>
+        
+        <div class="sound">
+            <div class="sound-slider">
+                <md-slider flex class="md-primary" md-discrete name="slider" aria-label="slider" ng-model="sound" min="0" max="100"></md-slider>
+            </div>
+        </div>
+        
+        <md-button ng-click="volUp()">Volume up</md-button>
+        <md-button ng-click="volDown()">Volume down</md-button>
+
+        {{sound}}
+        
 	</section>
 </section>

@@ -1,7 +1,15 @@
-var appCtrl = angular.module('appCtrl', []);
+var appCtrl = angular.module('appCtrl', ['ngMaterial']);
 
 appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	$scope.menu = 'remote';
+	
+	$scope.sound = 50;
+	$scope.volUp = function () {
+		$scope.sound += 1;
+	};
+	$scope.volDown = function () {
+		$scope.sound -= 1;
+	};
 
 	$scope.request = function request(input) {
 		method = 'Input.';
@@ -29,7 +37,16 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 		}
 		else if (input === 'shutdown') {
 			method = 'Application.';
-			method = method + 'OnQuit'; //OnQuit = quitter Kodi, System.Shutdown = éteindre le système
+			method = method + 'Quit'; //OnQuit = quitter Kodi, System.Shutdown = éteindre le système
+		}
+		else if(input == 'setmute') {
+			method = 'Application.';
+			method = method + 'SetMute';
+		}
+		else if(input == 'setvolume'){
+			method = 'Application';
+			method = method + 'SetVolume';
+			$scope.sound = 0;
 		}
 
 		sendRequest($http, method);
@@ -69,7 +86,7 @@ appCtrl.controller('SettingsCtrl', function($scope) {
 		port = $scope.port.toString();
 		username = $scope.user;
 		password = $scope.pass;
-	
+
 		base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
 		//$location.path(base_url);
 	}
