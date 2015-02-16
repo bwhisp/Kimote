@@ -228,7 +228,7 @@ input {
     left: 47%;
 }
 
-.back, .home, .shutdown, .mutesound, .setsound {
+.back, .home, .shutdown {
     position: absolute;
 }
 
@@ -245,16 +245,6 @@ input {
 .home {
     top: 65%;
     left: 50%;
-}
-
-.mutesound{
-    top: 30%;
-    left: 10%;
-}
-
-.setsound{
-    top: 25%;
-    left: 10%;
 }
 
 input.ng-invalid.ng-touched {

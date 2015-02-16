@@ -1,5 +1,8 @@
 <section ng-controller="RemoteCtrl">
 	<section class="panel farLeft">
+
+		<a href="#connect"><img class="connect" src="img/connect.jpg" width="70" height="70" alt="connect" ng-click="request('connect')"/></a>
+	
         <!-- arrow_up -->
         <a href="#arrow_up"><img class="arrow_up" src="img/ic_keyboard_arrow_up_black_48dp.png" width="70" height="70" alt="arrow_up" ng-click="request('up')"/></a>
 
@@ -24,11 +27,15 @@
         <!-- shutdown -->
         <a href="#shutdown"><img class="shutdown" src="img/ic_settings_power_black_48dp.png" width="40" height="40" alt="shutdown" ng-click="request('up')" /></a>
 
-        <!-- mute sound -->
-        <a href="#mutesound"><img class="mutesound" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mutesound" ng-click="request('mutesound')" /></a>
+		       <!-- mute sound -->
+        <a href="#mute"><img class="mute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mute" ng-click="request('mute')" /></a>
 
         <!-- set sound -->
-        <a href="#setsound"><img class="setsound" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="setsound" ng-click="request('setsound')"/></a>
+        <a href="#volumeUp"><img class="volumeUp" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="volumeUp" ng-click="request('volumeUp')"/></a>
+		
+	
+		<a href="#volumeDown"><img class="volumeDown" src="img/ic_volume_down_black_48dp.png" width="40" height="40" alt="volumeDown" ng-click="request('volumeDown')"/></a>
 
+		
 	</section>
 </section>
