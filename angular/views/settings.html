@@ -1,17 +1,5 @@
-<section ng-controller="SettingsCtrl" class="panel farRight">
-      <span class="form">
-            <div class="form-wrapper">
-                 <form name="myLogin" >
-                        <label for="ip"> @IP</label> <input name="ip" ng-model="ip" ng-pattern=IPMODEL required />
-                        <br/>
-                        <label for="port"> Port</label><input name="port" type="number" ng-model="port" min="0" max="65535" required/>
-                        <br/>
-                        <label for="user"> Username</label><input name="user" ng-model="user" required/>
-                        <br/>
-                        <label for="pass"> Password</label><input name="pass" type="password" ng-model="pass" required/>
-                        <br/>
-                       <input type="submit" ng-click="login()" value="Connecter"/>
-                  </form>
-            </div>
-      </span>
+<section ng-controller="SettingsCtrl">
+	<section class="panel right">
+		Settings
+	</section>
 </section>
