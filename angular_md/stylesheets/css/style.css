@@ -292,3 +292,13 @@ md-slider input[type="number"] {
     top: 25%;
     left: 10%;
 }
+
+.toolbar-icons {
+    position: absolute;
+    right: 5px;
+    top: 12px;
+}
+
+.search, .about {
+    padding: 2px !important;
+}
