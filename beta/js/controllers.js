@@ -40,6 +40,12 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	    	method = method + 'SetMute'; 
 			params = ',"params":{"mute":true}';
 	    }
+		
+		else if(input === 'unmute') {
+	    	method = 'Application.';
+	    	method = method + 'SetMute'; 
+			params = ',"params":{"mute":false}';
+	    }
 		else if(input === 'volumeUp') {
 	    	method = 'Application.';
 	    	method = method + 'SetVolume'; 
@@ -55,8 +61,8 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	}
 
 	function sendRequest($http, method) {
-	
-		param_url = 'http://kodi:azerty@192.168.22.12:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
+
+		param_url = 'http://kodi:coucou@192.168.20.160:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
 
 		$http.jsonp(param_url);
 
