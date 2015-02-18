@@ -49,7 +49,8 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 		else if(input === 'volumeUp') {
 	    	method = 'Application.';
 	    	method = method + 'SetVolume'; 
-			params = ',"params":{"volume":' + '-' + 100 + '}';
+			params = ',"params":{"volume":' + volume+ 100 + '}';
+		
 	    }		
 		
 	    else if(input === 'SetVolume'){
@@ -63,7 +64,6 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	function sendRequest($http, method) {
 	
 		param_url = 'http://kodi:coucou@192.168.20.160:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
-
 		$http.jsonp(param_url);
 
 	}
