@@ -56,7 +56,7 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 
 	function sendRequest($http, method) {
 	
-		param_url = 'http://kodi:coucou@192.168.22.30:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
+		param_url = 'http://kodi:azerty@192.168.22.12:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
 
 		$http.jsonp(param_url);
 
