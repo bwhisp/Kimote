@@ -1,8 +1,10 @@
 var appCtrl = angular.module('appCtrl', []);
+var vol = 50;
 
 appCtrl.controller('RemoteCtrl', function($scope,$http) {
 
 	$scope.request = function request(input) {
+
 		method = 'Input.';
 		params = '';
 		
@@ -48,21 +50,26 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	    }
 		else if(input === 'volumeUp') {
 	    	method = 'Application.';
-	    	method = method + 'SetVolume'; 
-			params = ',"params":{"volume":' + '-' + 100 + '}';
+	    	method = method + 'SetVolume';
+	    	vol = vol + 1;
+			params = ',"params":{"volume":'	+vol+ '}';
+			sendRequest($http, method,params);
 	    }		
 		
-	    else if(input === 'SetVolume'){
-	    	method = 'Application';
-	    	method = method + 'SetVolume' + '"params":{"volume":' + 100 + '},"permission":"ControlPlayback"';
+	    else if(input === 'volumeDown'){
+	    	method = 'Application.';
+	    	method = method + 'SetVolume';
+	    	vol = vol - 1;
+			params = ',"params":{"volume":'	+vol+ '}';
+			sendRequest($http, method,params);
 	    }
 
-	    sendRequest($http, method);
+	    sendRequest($http, method,params);
 	}
 
-	function sendRequest($http, method) {
+	function sendRequest($http, method,params) {
 
-		param_url = 'http://kodi:coucou@192.168.20.160:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
+		param_url = 'http://kodi:coucou@192.168.22.12:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
 
 		$http.jsonp(param_url);
 
