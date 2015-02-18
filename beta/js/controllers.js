@@ -51,7 +51,8 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 		else if(input === 'volumeUp') {
 	    	method = 'Application.';
 	    	method = method + 'SetVolume';
-	    	vol = vol + 1;
+	    	if(vol <= 100)
+	    		vol = vol + 1;
 			params = ',"params":{"volume":'	+vol+ '}';
 			sendRequest($http, method,params);
 	    }		
@@ -59,7 +60,8 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	    else if(input === 'volumeDown'){
 	    	method = 'Application.';
 	    	method = method + 'SetVolume';
-	    	vol = vol - 1;
+	    	if(vol >= 0)
+	    		vol = vol - 1;
 			params = ',"params":{"volume":'	+vol+ '}';
 			sendRequest($http, method,params);
 	    }
