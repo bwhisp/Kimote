@@ -53,10 +53,10 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	};
 
 	function sendRequest($http, method) {
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '"}';
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id":1}';
 		complete_url = window.base_url + param_url;
 
-		$http.jsonp(complete_url);
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}});
 
 		/*.error(function() {
 			alert('Impossible de se connecter');
@@ -64,8 +64,31 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	}
 });
 
-appCtrl.controller('MoviesCtrl', function($scope) {
+appCtrl.controller('MoviesCtrl', function($scope,$http) {
 	$scope.menu = 'movies';
+
+	$scope.showMovies = function() {
+		method = "VideoLibrary.GetMovies";
+		params = '{"filter":{"field":"playcount","operator":"is","value":"0"},"limits":{"start":0,"end":75},"properties":["art","rating","thumbnail","playcount","file"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
+
+		sendRequest($http, method, params);
+	};
+
+	function sendRequest($http, method, params) {
+
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}}).success(function(data, status, headers, config) {
+			$scope.movie = data.result.movies[0].label;
+			console.log($scope.movie);
+		}).error(function(data, status, headers, config) {
+			console.log('Data: ' + data);
+            console.log('Status: ' + status);
+            console.log('Headers: ' + headers);
+            console.log('Config: ' + config);
+		});
+	}
 });
 
 appCtrl.controller('MusicCtrl', function($scope) {

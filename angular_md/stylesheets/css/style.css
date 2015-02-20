@@ -273,14 +273,16 @@ md-slider input[type="number"] {
     top: 80%;
     overflow: hidden;
     height: 20%;
-    width: 80%;
-    left: 10%;
+    width: 100%;
+    left: 0;
     line-height: 25%;
 }
 
 .sound-slider {
     position: relative;
     top: 30%;
+    width: 80%;
+    left: 10%;
 }
 
 .mutesound{
@@ -300,5 +302,10 @@ md-slider input[type="number"] {
 }
 
 .search, .about {
-    padding: 2px !important;
+    padding: 1px !important;
+}
+
+.icon-about, .icon-search {
+    position: relative;
+    top: 2px;
 }

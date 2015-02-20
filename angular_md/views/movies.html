@@ -1,5 +1,10 @@
 <section ng-controller="MoviesCtrl">
 	<section class="panel left">
-		Movies
+		Liste des films
+
+		<md-button class="md-primary movies-list" ng-click="showMovies()">
+			<img class="icon-movies-list" src="img/ic_video_collection_black_48dp.png" width="40" /img>
+		</md-button>
+		{{movie}}
 	</section>
 </section>
