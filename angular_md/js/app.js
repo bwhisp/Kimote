@@ -2,7 +2,7 @@ document.addEventListener('deviceready', function (){
 
 }, false);
 
-var app = angular.module('app', ['ngRoute', 'ngMaterial', 'appCtrl']);
+var app = angular.module('app', ['ngRoute', 'ngMaterial', 'ngAnimate', 'appCtrl']);
 
 app.config(['$routeProvider', function ($routeProvider) {
 	$routeProvider
@@ -75,8 +75,7 @@ app.factory('Logger', function($http) {
 
 	logger.getBouton = function () {
 		return bouton;
-	}
+	};
 
 	return logger;
 });
-
