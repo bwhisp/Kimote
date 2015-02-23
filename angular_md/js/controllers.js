@@ -99,7 +99,7 @@ appCtrl.controller('PicsCtrl', function($scope) {
 	$scope.menu = 'pics';
 });
 
-appCtrl.controller('SettingsCtrl', function($scope) {
+appCtrl.controller('SettingsCtrl', function($scope, $http) {
 	$scope.menu = 'settings';
 
 	$scope.IPMODEL = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
@@ -111,7 +111,15 @@ appCtrl.controller('SettingsCtrl', function($scope) {
 		password = $scope.pass;
 
 		base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
-		//$location.path(base_url);
+		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"JSONRPC.Ping"}&callback=JSON_CALLBACK';
+
+		$http.jsonp(base_url+ping_url)
+			.success(function(data, status){
+				window.location = "#/remote";
+			})
+			.error(function(data, status){
+				alert("Error"+status);
+			});
 	};
 });
 
