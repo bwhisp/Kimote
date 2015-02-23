@@ -3,7 +3,7 @@
         <div class="form-wrapper">
 
             <md-content class="md-padding">
-                <form name="myLogin">
+                <form name="myLogin" ng-hide="connected">
                     <md-input-container flex>
                         <label>IP Hôte</label>
                         <input ng-model="ip" ng-pattern=IPMODEL required>
@@ -34,8 +34,12 @@
                         <md-button class="md-raised md-primary" ng-click="login()">Connecter</md-button>
                     </section>
                 </form>
-            </md-content>
 
+                <section layout-align="center center" ng-show="connected">
+                    <md-button class="md-raised md-primary" ng-click="logout()">Déconnecter</md-button>
+                </section>
+
+            </md-content>
         </div>
     </span>
 </section>

@@ -99,28 +99,30 @@ appCtrl.controller('PicsCtrl', function($scope) {
 	$scope.menu = 'pics';
 });
 
-appCtrl.controller('SettingsCtrl', function($scope, $http) {
+appCtrl.controller('SettingsCtrl', function($scope, Logger) {
 	$scope.menu = 'settings';
-
 	$scope.IPMODEL = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
 
+	$scope.bouton = Logger.getBouton();
+	$scope.connected = Logger.getConn();
+	$scope.errCon = Logger.getErr();
+
 	$scope.login = function() {
-		ip = $scope.ip;
-		port = $scope.port.toString();
-		username = $scope.user;
-		password = $scope.pass;
-
-		base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
-		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"JSONRPC.Ping"}&callback=JSON_CALLBACK';
-
-		$http.jsonp(base_url+ping_url)
-			.success(function(data, status){
-				window.location = "#/remote";
-			})
-			.error(function(data, status){
-				alert("Error"+status);
-			});
+		Logger.login($scope.user, $scope.pass, $scope.ip, $scope.port);
+		
+		$scope.bouton = Logger.getBouton();
+		$scope.connected = Logger.getConn();
+		$scope.errCon = Logger.getErr();
 	};
+
+	$scope.logout = function () {
+		Logger.logout();
+
+		$scope.bouton = Logger.getBouton();
+		$scope.connected = Logger.getConn();
+		$scope.errCon = Logger.getErr();
+	};
+
 });
 
 appCtrl.controller('AboutCtrl', function($scope, $mdDialog) {
