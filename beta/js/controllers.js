@@ -67,13 +67,25 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 			sendRequest($http, method,params);
 	    }
 
+		   else if(input === 'pause'){
+	    	method = 'Player.';
+	    	method = method + 'PlayPause';
+			params =  ',"params":{"playerid":0}';
+			sendRequest($http, method,params);
+	    }
+
+		   else if(input === 'play'){
+	    	method = 'Application.';
+	    	method = method + '';
+	    	params = '';
+			sendRequest($http, method,params);
+	    }
+
 	    sendRequest($http, method,params);
 	}
 
-
 	function sendRequest($http, method,params) {
-	
-		param_url = 'http://kodi:coucou@192.168.20.160:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
+		param_url = 'http://kodi:coucou@192.168.1.22:8080/jsonrpc?request={"jsonrpc": "2.0", "method": "' + method + '" '+ params +' }';
 		$http.jsonp(param_url);
 
 	}
