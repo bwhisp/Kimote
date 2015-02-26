@@ -1,47 +1,59 @@
 <section ng-controller="RemoteCtrl">
 	<section class="panel farLeft">
-
-	<a href="#connect"><img class="connect" src="img/ic_mood_black_48dp.png" width="70" height="70" alt="connect" ng-click="request('connect')"/></a>
-	
-        <!-- arrow_up -->
-        <a href="#arrow_up"><img class="arrow_up" src="img/ic_keyboard_arrow_up_black_48dp.png" width="70" height="70" alt="arrow_up" ng-click="request('up')"/></a>
-
-        <!-- select -->
-        <a href="#select"><img class="select" src="img/ic_check_black_48dp.png" width="70" height="70" alt="select" ng-click="request('select')" /></a>
-
-        <!-- arrow_down -->
-        <a href="#arrow_down"><img class="arrow_down" src="img/ic_keyboard_arrow_down_black_48dp.png" width="70" height="70" alt="arrow_down" ng-click="request('down')" /></a>
-
-        <!-- arrow_left -->
-        <a href="#arrow_left"><img class="arrow_left" src="img/ic_keyboard_arrow_left_black_48dp.png" width="70" height="70" alt="arrow_left" ng-click="request('left')" /></a>
-
-        <!-- arrow_right -->
-        <a href="#arrow_right"><img class="arrow_right" src="img/ic_keyboard_arrow_right_black_48dp.png" width="70" height="70" alt="arrow_right" ng-click="request('right')"/></a>
-
-        <!-- back -->
-        <a href="#back"><img class="back" src="img/ic_replay_black_48dp.png" width="40" height="40" alt="home" ng-click="request('back')" /></a>
         
-        <!-- home -->
-        <a href="#home"><img class="home" src="img/ic_home_black_48dp.png" width="40" height="40" alt="home" ng-click="request('home')" /></a>
-
-        <!-- shutdown -->
-        <a href="#shutdown"><img class="shutdown" src="img/ic_settings_power_black_48dp.png" width="40" height="40" alt="shutdown" ng-click="request('up')" /></a>
-
-        <!-- mute sound -->
-        <a href="#mute"><img class="mute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mute" ng-click="request('mute')" /></a>
-
-	<!-- unmute sound -->
-        <a href="#unmute"><img class="unmute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="unmute" ng-click="request('unmute')" /></a>
+        <div class="main-remote">
+			<!-- connect -->
+				<a href="#connect"><img class="connect" src="img/ic_mood_black_48dp.png" width="70" height="70" alt="connect" ng-click="request('connect')"/></a>
 		
-		<!-- play sound -->
-        <a href="#play"><img class="play" src="img/ic_play_arrow_black_48dp.png" width="40" height="40" alt="play" ng-click="request('play')" /></a>
+            <!-- arrow_up -->
+            <a href="#arrow_up"><img class="arrow_up" src="img/ic_keyboard_arrow_up_black_48dp.png" width="70" height="70" alt="arrow_up" ng-click="request('up')"/></a>
+
+            <!-- select -->
+            <a href="#select"><img class="select" src="img/ic_check_black_48dp.png" width="70" height="70" alt="select" ng-click="request('select')" /></a>
+
+            <!-- arrow_down -->
+            <a href="#arrow_down"><img class="arrow_down" src="img/ic_keyboard_arrow_down_black_48dp.png" width="70" height="70" alt="arrow_down" ng-click="request('down')" /></a>
+
+            <!-- arrow_left -->
+            <a href="#arrow_left"><img class="arrow_left" src="img/ic_keyboard_arrow_left_black_48dp.png" width="70" height="70" alt="arrow_left" ng-click="request('left')" /></a>
+
+            <!-- arrow_right -->
+            <a href="#arrow_right"><img class="arrow_right" src="img/ic_keyboard_arrow_right_black_48dp.png" width="70" height="70" alt="arrow_right" ng-click="request('right')"/></a>
+
+            <!-- back -->
+            <a href="#back"><img class="back" src="img/ic_keyboard_backspace_black_48dp.png" width="40" height="40" alt="home" ng-click="request('back')" /></a>
+            
+            <!-- home -->
+            <a href="#home"><img class="home" src="img/ic_home_black_48dp.png" width="40" height="40" alt="home" ng-click="request('home')" /></a>
+
+            <!-- shutdown -->
+            <a href="#shutdown"><img class="shutdown" src="img/ic_power_black_48dp.png" width="40" height="40" alt="shutdown" ng-click="request('up')" /></a>
+
+			<!-- mute sound -->
+			<a href="#mute"><img class="mute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mute" ng-click="request('mute')" /></a>
+
+			<!-- unmute sound -->
+			<a href="#unmute"><img class="unmute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="unmute" ng-click="request('unmute')" /></a>
+			
+			<!-- play sound -->
+			<!-- <a href="#play"><img class="play" src="img/ic_play_arrow_black_48dp.png" width="40" height="40" alt="play" ng-click="request('play')" /></a> -->
 		 
-		<!-- pause sound -->
-        <a href="#pause"><img class="pause" src="img/ic_pause_circle_outline_black_48dp.png" width="40" height="40" alt="pause" ng-click="request('pause')" /></a>		
+			<!-- pause sound -->
+		<!-- 	<a href="#pause"><img class="pause" src="img/ic_pause_circle_outline_black_48dp.png" width="40" height="40" alt="pause" ng-click="request('pause')" /></a>	 -->
+			
+			<!-- set sound -->
+			<a href="#volumeUp"><img class="volumeUp" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="volumeUp" ng-click="request('volumeUp')"/></a>
         
-		<!-- set sound -->
-        <a href="#volumeUp"><img class="volumeUp" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="volumeUp" ng-click="request('volumeUp')"/></a>
-        <a href="#volumeDown"><img class="volumeDown" src="img/ic_volume_down_black_48dp.png" width="40" height="40" alt="volumeDown" ng-click="request('volumeDown')"/></a>
-	
+			<a href="#volumeDown"><img class="volumeDown" src="img/ic_volume_down_black_48dp.png" width="40" height="40" alt="volumeDown" ng-click="request('volumeDown')"/></a>
+		
+	   </div>
+        
+        <div class="sound">
+            <div class="sound-slider">
+                <md-slider flex class="md-primary" name="slider" aria-label="slider" ng-model="sound" min="0" max="100" ng-click="setVol()"></md-slider>
+            </div>
+        </div>
+
+        
 	</section>
 </section>
