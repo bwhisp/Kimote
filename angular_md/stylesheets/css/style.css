@@ -18,6 +18,7 @@
  */
 
 @import url(fonts.css);
+@import url(font-awesome/css/font-awesome.css);
 @import url(../../js/framework/angular-material/angular-material.css);
 
 * {
@@ -429,7 +430,7 @@ md-slider input[type="number"] {
 .thumbnail-wrapper a:hover .play {
     position: relative; 
     font-size: 40px; 
-    color: #ffffff; 
+    color: #ffffff;
     z-index: 1000; 
     opacity: 1; 
     line-height:150px;
@@ -442,4 +443,10 @@ md-slider input[type="number"] {
     height: 100%; 
     background-color: #000000; 
     opacity: .7;
+}
+
+.searchBar {
+    display: inline-block;
+    padding: 0;
+    top: -4px;
 }

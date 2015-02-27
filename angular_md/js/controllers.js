@@ -10,7 +10,7 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 		$scope.sound -= 1;
 	};
 
-	$scope.request = function request(input) {
+	$scope.requestInput = function requestInput(input) {
 		method = 'Input.';
 
 		if (input === 'left') {
@@ -34,16 +34,20 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 		else if (input === 'back') {
 			method = method + 'Back';
 		}
-		else if (input === 'shutdown') {
-			method = 'Application.';
-			method = method + 'Quit'; //OnQuit = quitter Kodi, System.Shutdown = éteindre le système
+
+		sendRequest($http, method);
+	};
+
+	$scope.requestApplication = function requestApplication(input) {
+		method = 'Application.';
+
+		if (input === 'shutdown') {
+			method = method + 'Quit';
 		}
-		else if(input == 'setmute') {
-			method = 'Application.';
+		else if (input === 'setmute') {
 			method = method + 'SetMute';
 		}
-		else if(input == 'setvolume'){
-			method = 'Application';
+		else if (input === 'setvolume') {
 			method = method + 'SetVolume';
 			$scope.sound = 0;
 		}
@@ -52,10 +56,20 @@ appCtrl.controller('RemoteCtrl', function($scope,$http) {
 	};
 
 	function sendRequest($http, method) {
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id":1}';
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id": 1}';
 		complete_url = window.base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}}).error(function() {
+			alert("Vous n'êtes pas connecté");
+		});
+	}
+
+	function sendRequestWithParams($http, method, params) {
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": '+ params +', "id": 1}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.error(function() {
 			alert("Vous n'êtes pas connecté");
 		});
 	}
@@ -67,7 +81,7 @@ appCtrl.controller('MoviesCtrl', function($scope,$http,$location) {
 	//showMovies() définit la méthode et les paramètres
 	$scope.showMovies = function() {
 		method = "VideoLibrary.GetMovies";
-		params = '{"filter":{"field":"playcount","operator":"is","value":"0"},"limits":{"start":0,"end":75},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
+		params = '{"limits":{"start":0,"end":75},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
 
 		getMovies($http, method, params);
 	};
@@ -89,6 +103,8 @@ appCtrl.controller('MoviesCtrl', function($scope,$http,$location) {
             console.log('Config: ' + config);
 		});
 	}
+
+	$scope.Math = window.Math;
 
 	//conversion du champ runtime en heures
 	$scope.toHours = function (duration) {
@@ -180,4 +196,12 @@ appCtrl.controller('AboutCtrl', function($scope, $mdDialog) {
 		});
 		$mdDialog.show(about);
 	}
+});
+
+appCtrl.controller('GlobalCtrl', function($rootScope,$scope) {
+	$rootScope.global = {
+		search: ''
+	};
+
+	$scope.showSearch = true;
 });
