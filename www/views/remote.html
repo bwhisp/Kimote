@@ -1,0 +1,48 @@
+<section ng-controller="RemoteCtrl">
+	<section class="panel farLeft">
+        
+        <div class="main-remote">
+            <!-- arrow_up -->
+            <a href="#arrow_up"><img class="arrow_up" src="img/ic_keyboard_arrow_up_black_48dp.png" width="70" height="70" alt="arrow_up" ng-click="requestInput('up')"/></a>
+
+            <!-- select -->
+            <a href="#select"><img class="select" src="img/ic_check_black_48dp.png" width="70" height="70" alt="select" ng-click="requestInput('select')" /></a>
+
+            <!-- arrow_down -->
+            <a href="#arrow_down"><img class="arrow_down" src="img/ic_keyboard_arrow_down_black_48dp.png" width="70" height="70" alt="arrow_down" ng-click="requestInput('down')" /></a>
+
+            <!-- arrow_left -->
+            <a href="#arrow_left"><img class="arrow_left" src="img/ic_keyboard_arrow_left_black_48dp.png" width="70" height="70" alt="arrow_left" ng-click="requestInput('left')" /></a>
+
+            <!-- arrow_right -->
+            <a href="#arrow_right"><img class="arrow_right" src="img/ic_keyboard_arrow_right_black_48dp.png" width="70" height="70" alt="arrow_right" ng-click="requestInput('right')"/></a>
+
+            <!-- back -->
+            <a href="#back"><img class="back" src="img/ic_keyboard_backspace_black_48dp.png" width="40" height="40" alt="home" ng-click="requestInput('back')" /></a>
+            
+            <!-- home -->
+            <a href="#home"><img class="home" src="img/ic_home_black_48dp.png" width="40" height="40" alt="home" ng-click="requestInput('home')" /></a>
+
+            <!-- shutdown -->
+            <a href="#shutdown"><img class="shutdown" src="img/ic_power_black_48dp.png" width="40" height="40" alt="shutdown" ng-click="requestApplication('shutdown')" /></a>
+
+            <!-- mute sound -->
+            <a href="#mute"><img class="mute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mute" ng-click="requestApplication('mute')" /></a>
+
+            <!-- unmute sound -->
+            <a href="#unmute"><img class="unmute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="unmute" ng-click="requestApplication('unmute')" /></a>
+
+            <!-- set sound -->
+            <a href="#volumeUp"><img class="volumeUp" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="volumeUp" ng-click="requestApplication('volumeUp')"/></a>
+        
+            <a href="#volumeDown"><img class="volumeDown" src="img/ic_volume_down_black_48dp.png" width="40" height="40" alt="volumeDown" ng-click="requestApplication('volumeDown')"/></a>
+        </div>
+        
+        <div class="sound">
+            <div class="sound-slider">
+                <md-slider flex class="md-primary" name="slider" aria-label="slider" ng-model="sound" min="0" max="100" ng-click="setVol()"></md-slider>
+            </div>
+        </div>
+        
+	</section>
+</section>

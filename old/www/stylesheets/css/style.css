@@ -1,0 +1,235 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+@import url(fonts.css);
+/* line 23, ../sass/style.scss */
+* {
+  -webkit-tap-highlight-color: transparent;
+  /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+/* line 27, ../sass/style.scss */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Portrait layout (default) */
+/* line 34, ../sass/style.scss */
+.app {
+  background: url(../img/logo.png) no-repeat center top;
+  /* 170px x 200px */
+  position: absolute;
+  /* position in the center of the screen */
+  left: 50%;
+  top: 50%;
+  height: 50px;
+  /* text area height */
+  width: 225px;
+  /* text area width */
+  text-align: center;
+  padding: 180px 0px 0px 0px;
+  /* image height is 200px (bottom 20px are overlapped with text) */
+  margin: -115px 0px 0px -112px;
+  /* offset vertical: half of image height and text area height */
+  /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1 / 1) and (min-width: 400px) {
+  /* line 49, ../sass/style.scss */
+  .app {
+    background-position: left center;
+    padding: 75px 0px 75px 170px;
+    /* padding-top + padding-bottom + text area = image height */
+    margin: -90px 0px 0px -198px;
+    /* offset vertical: half of image height */
+    /* offset horizontal: half of image width and text area width */
+  }
+}
+/* line 57, ../sass/style.scss */
+md-toolbar h1 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0px;
+  overflow: visible;
+  padding: 0px;
+  text-align: center;
+}
+
+/* line 66, ../sass/style.scss */
+.event {
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 12px;
+  margin: 0px 30px;
+  padding: 2px 0px;
+}
+
+/* line 75, ../sass/style.scss */
+.event.listening {
+  background-color: #333333;
+  display: block;
+}
+
+/* line 80, ../sass/style.scss */
+.event.received {
+  background-color: #4B946A;
+  display: none;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+@-webkit-keyframes fade {
+  from {
+    opacity: 1.0;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1.0;
+  }
+}
+/* line 97, ../sass/style.scss */
+.blink {
+  animation: fade 3000ms infinite;
+  -webkit-animation: fade 3000ms infinite;
+}
+
+/* line 102, ../sass/style.scss */
+.header {
+  font-family: 'Roboto';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  line-height: 50px;
+  color: #FFF;
+  text-transform: uppercase;
+  text-align: center;
+  background-color: #1F253D;
+}
+
+/* line 113, ../sass/style.scss */
+form {
+  width: 40%;
+  margin-top: 90%;
+  margin-right: 30%;
+  margin-left: 30%;
+  background-color: white;
+}
+
+/* line 121, ../sass/style.scss */
+div.form {
+  width: 100%;
+  border: 1px solid #000;
+}
+
+/* line 126, ../sass/style.scss */
+label {
+  font-family: 'Roboto';
+  display: block;
+  width: 150px;
+  float: left;
+}
+
+/* line 133, ../sass/style.scss */
+img.arrow_left {
+  top: 200px;
+  left: -150px;
+}
+
+/* line 138, ../sass/style.scss */
+img.arrow_right {
+  top: 200px;
+  left: -30px;
+}
+
+/* line 143, ../sass/style.scss */
+img.arrow_up {
+  top: 140px;
+  left: -89px;
+}
+
+/* line 148, ../sass/style.scss */
+img.arrow_down {
+  top: 260px;
+  left: -89px;
+}
+
+/* line 153, ../sass/style.scss */
+.arrow_left, .arrow_right, .arrow_up, .arrow_down, .select {
+  position: absolute;
+  margin-left: 50%;
+  cursor: pointer;
+}
+
+/* line 159, ../sass/style.scss */
+img.select {
+  top: 213px;
+  left: -75px;
+}
+
+/* line 164, ../sass/style.scss */
+img.back {
+  top: 110px;
+  left: -150px;
+}
+
+/* line 169, ../sass/style.scss */
+img.home {
+  top: 110px;
+  left: -74px;
+}
+
+/* line 174, ../sass/style.scss */
+img.shutdown {
+  top: 110px;
+  left: 0px;
+}
+
+/* line 179, ../sass/style.scss */
+.home, .back, .shutdown {
+  position: absolute;
+  margin-left: 50%;
+  cursor: pointer;
+}
+
+/* line 185, ../sass/style.scss */
+input {
+  font-family: 'Roboto';
+}
+
+/* line 189, ../sass/style.scss */
+*:focus {
+  outline: none;
+  outline-width: 0;
+}

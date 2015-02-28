@@ -1,114 +1,82 @@
 <!DOCTYPE html>
 
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<html ng-app="app"> 
+	<head>
+		<title>Kodi Remote</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
         <link rel="stylesheet" type="text/css" href="stylesheets/css/style.css" />
-        <title>Connexion</title>
-    </head>
-    
-    <body>
-        <header class="header">
-            Kodi Remote
-        </header>
+	</head>
 
-        <div id="form ">
-            <form id="login" method="get" action="#">
-                <p>
-                    <label for="ip">@IP :</label>
-                    <input type="text" name="ip" id="ip" value="" />
-           
-                    <br />
-                    <label for="port">Port :</label>
-                    <input type="number" name="port" id="port" value=""/>
-                    
-                    <br />
-                    <label for="username">Username :</label>
-                    <input type="text" name="username" id="username" value="">
+	<body ng-controller="GlobalCtrl">
 
-                    <br />
-                    <label for="password">Password :</label>
-                    <input type="password" name="password" id="password" value="">
+		<!-- Header -->
+		<div class="toolbar">
+			<md-toolbar>
+				<h1 class="md-toolbar-tools">
+					<span class="apptitle">Kodi Remote</span>
+					<div class="toolbar-icons" ng-controller="AboutCtrl">
+						
+						<div class="searchBar" ng-hide="showSearch">
+							<input ng-model="global.search" class="search-input" placeholder="Rechercher">
+						</div>
+						<span ng-show="showSearch"></span>
+						
+						<md-button class="md-primary search" ng-click="showSearch=!showSearch">
+							<img class="icon-search" src="img/ic_search_24px.svg" /img>
+						</md-button>
 
-                    <input type="submit" id="save" value="Sauvegarder" onClick="login()"/>
-                </p>
-            </form>
-        </div>
-        
-        <script type="application/javascript" src="js/connect.js"></script>
-        
-        <script type="application/javascript" src="js/request.js"></script>
-        
-        <!-- arrow_up -->
-        <img class="arrow_up" src="img/ic_keyboard_arrow_up_black_48dp.png" width="70" height="70" alt="arrow_up" usemap="#arrow_up" />
+						<md-button class="md-primary about" ng-click="showAbout($event)">
+							<img class="icon-about" src="img/ic_more_vert_24px.svg" width="24" /img>
+						</md-button>
+					</div>
+				</h1>
 
-        <map name="arrow_up"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="18,25,52,48" href="#" alt="up" onClick="request('up')"/>
-        </map>
+				<md-tabs md-stretch-tabs>
+					<md-tab id="remote-tab" aria-controls="remote-content">
+						<a href="#remote" class="nav-remote"><img class="icon-remote" src="img/ic_gamepad_black_48dp.png"/img></a>
+					</md-tab>
+					<md-tab id="movies-tab" aria-controls="movies-content">
+						<a href="#movies" class="nav-movies"><img class="icon-movies" src="img/ic_video_collection_black_48dp.png"/img></a>
+					</md-tab>
+					<md-tab id="music-tab" aria-controls="music-content">
+						<a href="#music" class="nav-music"><img class="icon-music" src="img/ic_my_library_music_black_48dp.png"/img></a>
+					</md-tab>
+					<md-tab id="pics-tab" aria-controls="pics-content">
+						<a href="#pics" class="nav-pics"><img class="icon-pics" src="img/ic_photo_library_black_48dp.png"/img></a>
+					</md-tab>
+					<md-tab id="settings-tab" aria-controls="settings-content">
+						<a href="#settings" class="nav-settings"><img class="icon-settings" src="img/ic_settings_black_48dp.png"/img></a>
+					</md-tab>
+				</md-tabs>
+			</md-toolbar>
+		</div>
 
-        <!-- select -->
-        <img class="select" src="img/ic_check_black_48dp.png" width="40" height="40" alt="select" usemap="#select" />
+		<!-- Vues (Remote, films, musique, photos, réglages) -->
+		<section class="view" ng-view></section>
+		
+		<script src="js/framework/hammerjs/hammer.min.js"></script>
+		<script src="js/framework/angular/angular.min.js"></script>
+		<script src="js/framework/angular-route/angular-route.min.js"></script>
+		<script src="js/framework/angular-aria/angular-aria.min.js"></script>
+		<script src="js/framework/angular-animate/angular-animate.min.js"></script>
+		<script src="js/framework/angular-resource/angular-resource.min.js"></script>
+		<script src="js/framework/angular-material/angular-material.min.js"></script>
+		<script src="js/framework/angular-cookies/angular-cookies.min.js"></script>
+		<script src="js/framework/jquery/jquery.js"></script>
+		
 
-        <map name="select"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="0,0,40,40" href="#" alt="select" onClick="request('select')"/>
-        </map>
-
-        <!-- arrow_down -->
-        <img class="arrow_down" src="img/ic_keyboard_arrow_down_black_48dp.png" width="70" height="70" alt="arrow_down" usemap="#arrow_down" />
-
-        <map name="arrow_down"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="18,25,52,48" href="#" alt="down" onClick="request('down')"/>
-        </map>
-
-        <!-- arrow_left -->
-        <img class="arrow_left" src="img/ic_keyboard_arrow_left_black_48dp.png" width="70" height="70" alt="arrow_left" usemap="#arrow_left" />
-
-        <map name="arrow_left"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="22,52,46,18" href="#" alt="left" onClick="request('left')"/>
-        </map>
-
-        <!-- arrow_right -->
-        <img class="arrow_right" src="img/ic_keyboard_arrow_right_black_48dp.png" width="70" height="70" alt="arrow_right" usemap="#arrow_right" />
-
-        <map name="arrow_right"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="46,52,22,18" href="#" alt="right" onClick="request('right')"/>
-        </map>
-
-        <!-- back -->
-        <img class="back" src="img/ic_replay_black_48dp.png" width="40" height="40" alt="home" usemap="#back" />
-        <map name="back"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="0,0,40,40" href="#" alt="back" onClick="request('back')"/>
-        </map>
-        
-        <!-- home -->
-        <img class="home" src="img/ic_home_black_48dp.png" width="40" height="40" alt="home" usemap="#home" />
-        <map name="home"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="0,0,40,40" href="#" alt="home" onClick="request('home')"/>
-        </map>
-
-        <!-- shutdown -->
-        <img class="shutdown" src="img/ic_settings_power_black_48dp.png" width="40" height="40" alt="shutdown" usemap="#shutdown" />
-        <map name="shutdown"> <!-- coords = "gauche, haut, droite, bas" -->
-            <area shape="rect" coords="0,0,40,40" href="#" alt="shutdown" onClick="request('shutdown')"/>
-        </map>
-        
-        <script src="js/framework/jquery.js"></script>
-
-        <!-- jQuery -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> -->
-
-        <!-- jQuery Mobile -->
-        <!-- <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.mobile.min.js"></script> -->
-
-        <!-- jQuery UI -->
-        <!--<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>-->
-
-    </body>
+		<script src="js/app.js"></script>
+		<script src="js/controllers/GlobalCtrl.js"></script>
+		<script src="js/controllers/AboutCtrl.js"></script>
+		<script src="js/controllers/RemoteCtrl.js"></script>
+		<script src="js/controllers/MoviesCtrl.js"></script>
+		<script src="js/controllers/MusicCtrl.js"></script>
+		<script src="js/controllers/PicsCtrl.js"></script>
+		<script src="js/controllers/SettingsCtrl.js"></script>
+		<script src="js/factories.js"></script>
+		
+	</body>
 </html>
