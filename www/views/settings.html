@@ -25,17 +25,18 @@
 
                         <md-input-container flex>
                             <label>Mot de passe</label>
-                            <input ng-model="pass" required>
+                            <input ng-model="pass" type='password' required>
                         </md-input-container>
                     </div>
                     
                     <section layout-align="center center">
+                        <!--<input type="submit" ng-click="login()" value="Connecter"/>-->
                         <md-button class="md-raised md-primary" ng-click="login()">Connecter</md-button>
                         <br/>
                         <input type="checkbox" ng-model="StoreID" class="checkbox"> 
                         Mémoriser
                         <br/>
-                        <a href="" ng-click="removeID()">Effacer les identifiants</a>
+        				<a href="" ng-click="removeID()">Effacer les identifiants</a>
                     </section>
                 </form>
 

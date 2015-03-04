@@ -494,3 +494,7 @@ md-slider input[type="number"] {
 .search-input:focus::-moz-placeholder {
     color:transparent;
 }
+
+form input.checkbox {
+    width : auto;
+}
