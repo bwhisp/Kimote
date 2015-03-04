@@ -155,7 +155,117 @@ appCtrl.controller('MoviesCtrl', function($scope,$http,$location) {
 	};
 });
 
-appCtrl.controller('MusicCtrl', function($scope) {
+appCtrl.controller('MusicCtrl', function($scope,$http,$location) {
+	//Requête http pour afficher la liste des albums
+	$scope.showAAlbums = function() {
+		method = "AudioLibrary.GetAlbums";
+		//params = '{"limits":{"start":0,"end":75},"properties":["artist","rating","thumbnail","playcount","style","year","genre"],"sort": {"order":"ascending","method":"label"}},"id":"libAAlbums"';
+		params='{"limits":{"start":0,"end":50},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true}},"id":"libAlbums"}';
+
+		getAAlbums($http, method, params);
+	};
+
+	//getMovies() effectue la requête
+	function getAAlbums($http, method, params) {
+
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.success(function(data, status, headers, config) {
+			$scope.aalbums = data.result.albums;
+		})
+		.error(function(data, status, headers, config) {
+			console.log('Data: ' + data);
+            console.log('Status: ' + status);
+            console.log('Headers: ' + headers);
+            console.log('Config: ' + config);
+		});
+		console.log('AALBUMS' + $scope);
+		getASongs($http,$scope.aalbums);
+	}
+
+	function getASongs($http,aalbums){
+		method ="AudioLibrary.GetSongs";
+		params ='{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true}},"id":"libSongs"}';
+		
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.success(function(data, status, headers, config) {
+			$scope.asongs = data.result.songs;
+		})
+		.error(function(data, status, headers, config) {
+			console.log('Data: ' + data);
+            console.log('Status: ' + status);
+            console.log('Headers: ' + headers);
+            console.log('Config: ' + config);
+		});
+	};
+
+	function playSong(file){
+		method = "Player.Open";
+		params = '{"item":{"file":"' + file + '"}}';
+
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.success(function(data, status, headers, config) {
+			$location.path("/remote"); // fixer le tab actif
+		})
+		.error(function(data, status, headers, config) {
+			alert("Impossible de lire la piste musicale");
+		});
+	};
+
+	
+
+
+
+	//conversion du champ runtime en heures
+	$scope.toMinutes = function (duration) {
+		//var sec_num = parseInt(duration, 10);
+		var minutes = Math.floor((duration/60));
+		var seconds = duration - (minutes*60);
+
+		if (seconds < 10) {
+			seconds = "0" + seconds;
+		}
+		var time = minutes + 'm' + seconds;
+		return time;
+	};
+
+	//téléchargement l'image de présentation du film
+	$scope.getThumbnail = function (thumbnailUri) {
+		thumbnailUri = thumbnailUri.replace("image://","");
+		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
+		
+		return $scope.thumbnailUriDecoded;
+	};
+
+	$scope.selectedAAlbum = undefined;
+	$scope.selectAAlbum = function (index) {
+		if ($scope.selectedAAlbum !== index) {
+			$scope.selectedAAlbum = index;
+		}
+		else {
+			$scope.selectedAAlbum = undefined;
+		}
+	};
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 appCtrl.controller('PicsCtrl', function($scope) {
