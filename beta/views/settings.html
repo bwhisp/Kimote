@@ -1,0 +1,50 @@
+<section ng-controller="SettingsCtrl" class="panel farRight">
+    <span class="form">
+        <div class="form-wrapper">
+
+            <md-content class="md-padding">
+                <form name="myLogin" ng-hide="connected">
+                    <md-input-container flex>
+                        <label>IP Hôte</label>
+                        <input ng-model="ip" ng-pattern=IPMODEL required>
+                    </md-input-container>
+
+                    <md-input-container flex>
+                        <label>Port du Media Center</label>
+                        <input ng-model="port" min="0" max="65535" required>
+                    </md-input-container>
+
+                    <br/>
+                    
+                    <div class="auth">
+                        <p>AUTHENTIFICATION</p>
+                        <md-input-container flex>
+                            <label>Login</label>
+                            <input ng-model="user" required>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <label>Mot de passe</label>
+                            <input ng-model="pass" type='password' required>
+                        </md-input-container>
+                    </div>
+                    
+                    <section layout-align="center center">
+                        <!--<input type="submit" ng-click="login()" value="Connecter"/>-->
+                        <md-button class="md-raised md-primary" ng-click="login()">Connecter</md-button>
+                        <br/>
+                        <input type="checkbox" ng-model="StoreID" class="checkbox"> 
+                        Mémoriser
+                        <br/>
+        				<a href="" ng-click="removeID()">Effacer les identifiants</a>
+                    </section>
+                </form>
+
+                <section layout-align="center center" ng-show="connected">
+                    <md-button class="md-raised md-primary" ng-click="logout()">Déconnecter</md-button>
+                </section>
+
+            </md-content>
+        </div>
+    </span>
+</section>
