@@ -50,6 +50,58 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	}
 
+	$scope.showSongs = function() {
+		method = "AudioLibrary.GetSongs";
+		params = '{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true}},"id":"libSongs"}';
+
+		getSongs($http, method, params);
+	};
+
+	function getSongs($http, method, params) {
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.success(function(data, status, headers, config) {
+			$scope.songs = data.result.songs;
+		})
+		.error(function(data, status, headers, config) {
+			console.log('Data: ' + data);
+            console.log('Status: ' + status);
+            console.log('Headers: ' + headers);
+            console.log('Config: ' + config);
+		});
+	}
+
+	function playSong(file){
+		method = "Player.Open";
+		params = '{"item":{"file":"' + file + '"}}';
+
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.success(function(data, status, headers, config) {
+			//$location.path("/remote"); // fixer le tab actif
+		})
+		.error(function(data, status, headers, config) {
+			alert("Impossible de lire la piste musicale");
+		});
+	};
+
+	$scope.toMinutes = function (duration) {
+
+		var minutes = Math.floor((duration/60));
+		var seconds = duration - (minutes*60);
+
+		if (seconds < 10) {
+			seconds = "0" + seconds;
+		}
+
+		var time = minutes + ':' + seconds;
+		return time;
+	};
+
 	$scope.getThumbnailArtist = function (thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
@@ -58,9 +110,9 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 	};
 
 	$scope.getThumbnailAlbum = function (thumbnailUri) {
-		thumbnailUri.replace('thumbnail: "',"").replace('.mp3/"',".mp3");
-		thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
-		$scope.thumbnailUriComplete = window.base_url + '/image/' + thumbnailUriDecoded;
+		thumbnailUri = thumbnailUri.replace("image://","");
+		thumbnailURIencoded = encodeURIComponent(thumbnailUri);
+		$scope.thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
 
 		return $scope.thumbnailUriComplete;
 	};
