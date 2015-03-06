@@ -197,6 +197,10 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     
 }
 
+.panelalbums {
+    overflow-y: auto;
+}
+
 .farLeft {
     transform: translate3D(0,0,0);
 }

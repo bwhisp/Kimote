@@ -1,4 +1,7 @@
-app.controller('MusicCtrl', function($scope,$http,$location) {
+app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
+
+	$scope.artist_label = $routeParams.artistLabel;
+
 	$scope.showArtists = function() {
 		method = "AudioLibrary.GetArtists";
 		params = '{"properties":["style","description","born","yearsactive","died","thumbnail","genre","fanart"],"limits":{"start":1,"end":2000}},"id":"libMusic"';
@@ -47,11 +50,19 @@ app.controller('MusicCtrl', function($scope,$http,$location) {
 		});
 	}
 
-	$scope.getThumbnail = function (thumbnailUri) {
+	$scope.getThumbnailArtist = function (thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
 		
 		return $scope.thumbnailUriDecoded;
+	};
+
+	$scope.getThumbnailAlbum = function (thumbnailUri) {
+		thumbnailUri.replace('thumbnail: "',"").replace('.mp3/"',".mp3");
+		thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
+		$scope.thumbnailUriComplete = window.base_url + '/image/' + thumbnailUriDecoded;
+
+		return $scope.thumbnailUriComplete;
 	};
 
 	$scope.selectedAlbum = undefined;
