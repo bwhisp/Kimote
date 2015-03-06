@@ -46,3 +46,47 @@ app.factory('Logger', function($http) {
 
 	return logger;
 });
+
+app.factory('Sounder', function($http) {
+	var sounder = {};
+
+	var muted = false;
+	var errMute = false;
+	var errUnmute = false;
+
+
+	sounder.SetMute = function () {
+		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":true}}&callback=JSON_CALLBACK';
+
+		$http.jsonp(window.base_url+ping_url)
+			.success(function(data, status){
+				muted = true;
+				window.location = "#/settings";
+				window.location = "#/remote";
+			})
+			.error(function(data, status){
+				errMute = true;
+			});
+	};
+	
+	sounder.SetUnMute = function () {
+		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":false}}&callback=JSON_CALLBACK';
+
+		$http.jsonp(window.base_url+ping_url)
+			.success(function(data, status){
+				muted = false;
+				window.location = "#/settings";
+				window.location = "#/remote";
+			})
+			.error(function(data, status){
+				errUnMute = true;
+			});
+	};	
+
+	sounder.getMuted = function () {
+		return muted;
+	};
+
+
+	return sounder;
+});
