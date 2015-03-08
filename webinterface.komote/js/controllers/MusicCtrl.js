@@ -73,7 +73,8 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	}
 
-	function playSong(file){
+	$scope.playSong = function (file){
+
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
@@ -82,6 +83,7 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+			console.log("musique ok");
 			//$location.path("/remote"); // fixer le tab actif
 		})
 		.error(function(data, status, headers, config) {

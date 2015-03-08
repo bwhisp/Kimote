@@ -197,7 +197,7 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     
 }
 
-.panelalbums {
+.panelalbums, .panelsongs {
     overflow-y: auto;
 }
 

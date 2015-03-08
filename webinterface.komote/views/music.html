@@ -6,7 +6,7 @@
 			<div flex="100" class="content" ui-view>
 				<md-item ng-repeat="artist in artists | filter: global.search" class="item">
 					<md-item-content class="music tile md-whiteframe-z1" layout="column">
-						<div layout="row" layout-fill class="folded">
+						<div layout="row" layout-fill>
 							<div class="md-tile-left" height="150">
 								<div class="thumbnail-wrapper-artist">	
 									<img class="thumbnail" ng-src={{getThumbnailArtist(artist.thumbnail)}} height="150">
@@ -15,6 +15,7 @@
 
 							<div class="md-tile-content" layout="column" layout-align="start">
 								<h3 class="artist-label">{{artist.label}}</h3>
+
 								<h4>
 									<span ng-repeat="genre in artist.genre">
 										{{genre}}{{$last ? '' : ', '}}
@@ -23,7 +24,14 @@
 								<md-divider layout-fill></md-divider>
 								
 								<a href="#music-albums/{{artist.label}}">
-									<md-button md-no-ink class="md-primary">Tous les albums de {{artist.label}}</md-button>
+									<md-button md-no-ink class="md-primary">
+										Tous les albums de {{artist.label}}
+									</md-button>
+								</a>
+								<a href="#music-songs/{{artist.label}}">
+									<md-button md-no-ink class="md-primary">
+										Tous les titres de {{artist.label}}
+									</md-button>
 								</a>
 							</div>
 						</div>
