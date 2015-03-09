@@ -64,6 +64,14 @@ app.controller('RemoteCtrl', function($scope,$http) {
 			method = method + 'ExecuteAction';
 			params = '{"action":"skipprevious"}';
 		}
+		else if (input === 'fastforward') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"fastforward"}';
+		}
+		else if (input === 'rewind') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"rewind"}';
+		}
 
 		sendRequestWithParams($http, method, params);
 	};
