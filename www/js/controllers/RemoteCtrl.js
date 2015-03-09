@@ -67,7 +67,6 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 		if (input === 'shutdown') {
 			method = method + 'Quit';
 			params = '{}';
-		sendRequestWithParams($http, method, params);			
 		}
 		else if (input === 'mute') {
 			$scope.SetMute();
@@ -82,7 +81,6 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 				vol = vol + 1;
 
 			params = '{"volume":' + vol + '}';
-		sendRequestWithParams($http, method, params);			
 		}
 		else if (input === 'volumeDown') {
 			method = method + 'SetVolume';
@@ -91,10 +89,21 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 				vol = vol - 1;
 
 			params = '{"volume":' + vol + '}';
-		sendRequestWithParams($http, method, params);			
 		}
 
+		sendRequestWithParams($http, method, params);
+	};
 
+	$scope.requestGUI = function requestGUI(input) {
+		
+		method = 'GUI.';
+
+		if (input === 'fullscreen') {
+			method = method + 'SetFullscreen';
+			params = '{"fullscreen":true}';
+		}
+
+		sendRequestWithParams($http, method, params);
 	};
 
 	function sendRequest($http, method) {
