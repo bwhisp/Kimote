@@ -33,32 +33,52 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 		$scope.muted = Sounder.getMuted();
 	}
 	
+
 	$scope.requestInput = function requestInput(input) {
 		method = 'Input.';
 
 		if (input === 'left') {
 			method = method + 'Left';
+			params = '{}';
 		}
 		else if (input === 'right') {
 			method = method + 'Right';
+			params = '{}';
 		}
 		else if (input === 'up') {
 			method = method + 'Up';
+			params = '{}';
 		}
 		else if (input === 'down') {
 			method = method + 'Down';
+			params = '{}';
 		}
 		else if (input === 'select') {
 			method = method + 'Select';
+			params = '{}';
 		}
 		else if (input === 'home') {
 			method = method + 'Home';
+			params = '{}';
 		}
 		else if (input === 'back') {
 			method = method + 'Back';
+			params = '{}';
+		}
+		else if (input === 'play') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"play"}';
+		}
+		else if (input === 'pause') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"pause"}';
+		}
+		else if (input === 'stop') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"stop"}';
 		}
 
-		sendRequest($http, method);
+		sendRequestWithParams($http, method, params);
 	};
 
 	$scope.requestApplication = function requestApplication(input) {
