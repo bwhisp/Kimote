@@ -48,15 +48,17 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 		}
 		else if (input === 'play') {
 			
-			Manager.setPlay();
+			Manager.SetPlay();
 			$scope.played=Manager.getPlayed();
 			$scope.paused=Manager.getPaused();
+			params = '{}';
 			
 		}
 		else if (input === 'pause') {
-					Manager.setPause();
+			Manager.SetPause();
 			$scope.played=Manager.getPlayed();
 			$scope.paused=Manager.getPaused();
+			params = '{}';
 		}
 		else if (input === 'stop') {
 			method = method + 'ExecuteAction';
@@ -98,7 +100,6 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 			$scope.muted = Sounder.getMuted();
 		}
 		else if (input === 'volumeUp') {
-
 			Sounder.VolUp($scope.volume);
 			$scope.volume = Sounder.getVolume();
 		}

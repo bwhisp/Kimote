@@ -132,7 +132,7 @@ app.factory('Sounder', function($http) {
 	
 	}
 	
-		sounder.getMuted = function () {
+	sounder.getMuted = function () {
 		return muted;
 	};
 	
@@ -154,7 +154,7 @@ app.factory('Manager', function($http) {
 	var errPause = false;
 	
 
-	managerer.SetPlay = function () {
+	manager.SetPlay = function () {
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Input.ExecuteAction", "params":{"action":"play"}}&callback=JSON_CALLBACK';
 
 		$http.jsonp(window.base_url+ping_url)
@@ -186,12 +186,12 @@ app.factory('Manager', function($http) {
 	
 	
 		manager.getPaused = function () {
-		return paused;
-	};
+			return paused;
+		};
 	
-	manager.getPlayed = function () {
+		manager.getPlayed = function () {
 			return played;
-	};
+		};
 
 
 
