@@ -94,8 +94,13 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 		sendRequestWithParams($http, method, params);			
 		}
 
+		else if(input === 'pause'){
+	    	method = "Player.PlayPause";
+			params =  ',"params":{"playerid":0}';
+			sendRequestWithParams($http, method,params);
+	    }
 
-	};
+		};
 
 	function sendRequest($http, method) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id": 1}';
