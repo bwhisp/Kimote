@@ -1,39 +1,38 @@
-var vol = 50;
+//var vol = 50;
 
 app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 	
-	$scope.sound = vol;
+	$scope.sound = Sounder.getVolume();
+	
 	$scope.muted = Sounder.getMuted();
+	$scope.volume = Sounder.getVolume();
 	
 	$scope.setVol = function () {
-		vol = $scope.sound;
-		method = 'Application.';
-		method = method + 'SetVolume';
-		params = '{"volume":' + $scope.sound + '}';
-		
-		sendRequestWithParams($http, method, params);
+		Sounder.SetVol($scope.sound);
+		$scope.sound = Sounder.getVolume();
 	};
 
 	$scope.SetMute = function () {
-		//window.base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
-//ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":true}}&callback=JSON_CALLBACK';
-
-		//$http.jsonp(window.base_url+ping_url);
 		Sounder.SetMute();
 		$scope.muted = Sounder.getMuted();
 		
 	}
 	
 	$scope.SetUnMute = function () {
-		//window.base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
-		//ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":false}}&callback=JSON_CALLBACK';
-
-		//$http.jsonp(window.base_url+ping_url);
 		Sounder.SetUnMute();
 		$scope.muted = Sounder.getMuted();
 	}
 	
-
+	$scope.VolUp = function () {
+		Sounder.VolUp($scope.volume);
+		$scope.volume = Sounder.getVolume();
+	}
+	
+	$scope.VolDown = function () {
+		Sounder.VolDown($scope.volume);
+		$scope.volume = Sounder.getVolume();	
+	}	
+	
 	$scope.requestInput = function requestInput(input) {
 		method = 'Input.';
 
@@ -95,6 +94,12 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 			$scope.SetUnMute();
 		}
 		else if (input === 'volumeUp') {
+<<<<<<< HEAD
+			$scope.VolUp();
+		}
+		else if (input === 'volumeDown') {
+			$scope.VolDown();	
+=======
 			method = method + 'SetVolume';
 			
 			if (vol < 100)
@@ -109,6 +114,7 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 				vol = vol - 1;
 
 			params = '{"volume":' + vol + '}';
+>>>>>>> 0bbfcf488a7d2579bd053b2b3668d9d9463d9fe9
 		}
 
 
