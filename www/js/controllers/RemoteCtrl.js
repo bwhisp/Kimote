@@ -2,10 +2,10 @@
 
 app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 	
-	$scope.sound = Sounder.getVolume();
-	
+
 	$scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
+	$scope.sound = Sounder.getVolume();	
 	
 	$scope.paused=Manager.getPaused();
 	$scope.played=Manager.getPlayed();
@@ -15,27 +15,6 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 		$scope.sound = Sounder.getVolume();
 	};
 
-	$scope.SetMute = function () {
-		Sounder.SetMute();
-		$scope.muted = Sounder.getMuted();
-		
-	}
-	
-	$scope.SetUnMute = function () {
-		Sounder.SetUnMute();
-		$scope.muted = Sounder.getMuted();
-	}
-	
-	$scope.VolUp = function () {
-		Sounder.VolUp($scope.volume);
-		$scope.volume = Sounder.getVolume();
-	}
-	
-	$scope.VolDown = function () {
-		Sounder.VolDown($scope.volume);
-		$scope.volume = Sounder.getVolume();	
-	}	
-	
 	$scope.requestInput = function requestInput(input) {
 		method = 'Input.';
 
@@ -91,6 +70,14 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 			method = method + 'ExecuteAction';
 			params = '{"action":"skipprevious"}';
 		}
+		else if (input === 'fastforward') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"fastforward"}';
+		}
+		else if (input === 'rewind') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"rewind"}';
+		}
 
 		sendRequestWithParams($http, method, params);
 	};
@@ -103,17 +90,22 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 			params = '{}';
 		}
 		else if (input === 'mute') {
-			$scope.SetMute();
+			Sounder.SetMute();
+			$scope.muted = Sounder.getMuted();	
 		}
 		else if (input === 'unmute') {
-			$scope.SetUnMute();
+			Sounder.SetUnMute();
+			$scope.muted = Sounder.getMuted();
 		}
 		else if (input === 'volumeUp') {
 
-			$scope.VolUp();
+			Sounder.VolUp($scope.volume);
+			$scope.volume = Sounder.getVolume();
 		}
 		else if (input === 'volumeDown') {
-			$scope.VolDown();	
+			Sounder.VolDown($scope.volume);
+			$scope.volume = Sounder.getVolume();
+		}
 
 		sendRequestWithParams($http, method, params);
 	};
