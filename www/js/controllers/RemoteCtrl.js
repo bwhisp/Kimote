@@ -75,6 +75,14 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 			method = method + 'ExecuteAction';
 			params = '{"action":"stop"}';
 		}
+		else if (input === 'next') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"skipnext"}';
+		}
+		else if (input === 'previous') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"skipprevious"}';
+		}
 
 		sendRequestWithParams($http, method, params);
 	};
