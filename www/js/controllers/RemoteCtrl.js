@@ -12,26 +12,6 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 		$scope.sound = Sounder.getVolume();
 	};
 
-	$scope.SetMute = function () {
-		Sounder.SetMute();
-		$scope.muted = Sounder.getMuted();	
-	}
-	
-	$scope.SetUnMute = function () {
-		Sounder.SetUnMute();
-		$scope.muted = Sounder.getMuted();
-	}
-	
-	$scope.VolUp = function () {
-		Sounder.VolUp($scope.volume);
-		$scope.volume = Sounder.getVolume();
-	}
-	
-	$scope.VolDown = function () {
-		Sounder.VolDown($scope.volume);
-		$scope.volume = Sounder.getVolume();	
-	}	
-	
 	$scope.requestInput = function requestInput(input) {
 		method = 'Input.';
 
@@ -95,16 +75,20 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 			params = '{}';
 		}
 		else if (input === 'mute') {
-			$scope.SetMute();
+			Sounder.SetMute();
+			$scope.muted = Sounder.getMuted();	
 		}
 		else if (input === 'unmute') {
-			$scope.SetUnMute();
+			Sounder.SetUnMute();
+			$scope.muted = Sounder.getMuted();
 		}
 		else if (input === 'volumeUp') {
-			$scope.VolUp();
+			Sounder.VolUp($scope.volume);
+			$scope.volume = Sounder.getVolume();
 		}
 		else if (input === 'volumeDown') {
-			$scope.VolDown();	
+			Sounder.VolDown($scope.volume);
+			$scope.volume = Sounder.getVolume();
 		}
 
 		sendRequestWithParams($http, method, params);
