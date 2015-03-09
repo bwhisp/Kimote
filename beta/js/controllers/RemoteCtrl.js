@@ -73,8 +73,26 @@ app.controller('RemoteCtrl', function($scope,$http) {
 			params = '{"volume":' + vol + '}';
 		}
 
+		else if (input === 'fullscreen') {
+			method = 'GUI.SetFullscreen';
+			params = '{"fullscreen":true}';
+		}
+
 		sendRequestWithParams($http, method, params);
 	};
+
+
+	/*$scope.requestPlayer = function requestPlayer(input) {
+		method = 'Player.';
+
+		if (input === 'pause') {
+			method = method + 'PlayPause';
+			params = ',"params":{"playerid":0}';
+		}
+
+		sendRequestWithParams($http, method, params);
+	};*/
+
 
 	function sendRequest($http, method) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id": 1}';
