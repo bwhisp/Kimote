@@ -94,14 +94,14 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 			$scope.SetUnMute();
 		}
 		else if (input === 'volumeUp') {
+<<<<<<< HEAD
 
+=======
+>>>>>>> d2a53290f7c9a8603c7750e36e73cb086397d3f6
 			$scope.VolUp();
 		}
 		else if (input === 'volumeDown') {
 			$scope.VolDown();	
-
-		}
-
 
 		sendRequestWithParams($http, method, params);
 	};
