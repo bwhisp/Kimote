@@ -94,27 +94,10 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 			$scope.SetUnMute();
 		}
 		else if (input === 'volumeUp') {
-<<<<<<< HEAD
 			$scope.VolUp();
 		}
 		else if (input === 'volumeDown') {
 			$scope.VolDown();	
-=======
-			method = method + 'SetVolume';
-			
-			if (vol < 100)
-				vol = vol + 1;
-
-			params = '{"volume":' + vol + '}';
-		}
-		else if (input === 'volumeDown') {
-			method = method + 'SetVolume';
-
-			if (vol > 0)
-				vol = vol - 1;
-
-			params = '{"volume":' + vol + '}';
->>>>>>> 0bbfcf488a7d2579bd053b2b3668d9d9463d9fe9
 		}
 
 		sendRequestWithParams($http, method, params);
