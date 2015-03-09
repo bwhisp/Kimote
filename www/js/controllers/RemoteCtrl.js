@@ -1,11 +1,14 @@
 //var vol = 50;
 
-app.controller('RemoteCtrl', function($scope,$http, Sounder) {
+app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager) {
 	
 	$scope.sound = Sounder.getVolume();
 	
 	$scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
+	
+	$scope.paused=Manager.getPaused();
+	$scope.played=Manager.getPlayed();
 	
 	$scope.setVol = function () {
 		Sounder.SetVol($scope.sound);
@@ -65,12 +68,16 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 			params = '{}';
 		}
 		else if (input === 'play') {
-			method = method + 'ExecuteAction';
-			params = '{"action":"play"}';
+			
+			Manager.setPlay();
+			$scope.played=Manager.getPlayed();
+			$scope.paused=Manager.getPaused();
+			
 		}
 		else if (input === 'pause') {
-			method = method + 'ExecuteAction';
-			params = '{"action":"pause"}';
+					Manager.setPause();
+			$scope.played=Manager.getPlayed();
+			$scope.paused=Manager.getPaused();
 		}
 		else if (input === 'stop') {
 			method = method + 'ExecuteAction';

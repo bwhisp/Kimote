@@ -42,8 +42,8 @@
             <a href="#fullscreen"><img class="fullscreen" src="img/ic_fullscreen_black_48dp.png" width="40" height="40" alt="fullscreen" ng-click="requestGUI('fullscreen')"/></a>
 
             <!-- Play / Pause / Stop -->
-            <a href="#play"><img class="play" src="img/ic_play_arrow_black_48dp.png" width="40" height="40" alt="play" ng-click="requestInput('play')"/></a>
-            <a href="#pause"><img class="pause" src="img/ic_pause_black_48dp.png" width="40" height="40" alt="pause" ng-click="requestInput('pause')"/></a>
+            <a href="#play" ng-show="played"><img class="play" src="img/ic_play_arrow_black_48dp.png" width="40" height="40" alt="play" ng-click="requestInput('play')"/></a>
+            <a href="#pause" ng-hide="played"><img class="pause" src="img/ic_pause_black_48dp.png" width="40" height="40" alt="pause" ng-click="requestInput('pause')"/></a>
             <a href="#stop"><img class="stop" src="img/ic_stop_black_48dp.png" width="40" height="40" alt="stop" ng-click="requestInput('stop')"/></a>
 
              <!-- Skip next / previous -->
@@ -53,8 +53,7 @@
 
         </div>
 
-
-        
+       
         <div class="sound">
             <div class="sound-slider">
                 <md-slider flex class="md-primary" name="slider" aria-label="slider" ng-model="sound" min="0" max="100" ng-click="setVol()"></md-slider>
