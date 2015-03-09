@@ -197,6 +197,10 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     
 }
 
+.panelalbums, .panelsongs {
+    overflow-y: auto;
+}
+
 .farLeft {
     transform: translate3D(0,0,0);
 }
@@ -217,6 +221,7 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
 
 .farRight {
     transform: translate3D(0,0,0);
+    overflow-y: auto;
 }
 
 .arrow_right {
@@ -410,17 +415,18 @@ md-slider input[type="number"] {
 }
 
 .thumbnail-wrapper {
-    position: relative; 
-    width: 100px; 
+    position: relative;
+    width: 100px;
     height: 150px;
+    background-color: #EEEEEE;
 }
 
 .thumbnail-wrapper a {
     position: absolute;
     top: 0; 
     display: block; 
-    width: 100%; 
-    height: 100%; 
+    width: 100%;
+    height: 100%;
     text-align: center; 
     text-decoration: none;
 }
@@ -588,9 +594,9 @@ form input.checkbox {
 
 .thumbnail-wrapper-artist {
     position: relative; 
-    width: 150px; 
+    width: 150px;
     height: 150px;
-    background-color: grey;
+    background-color: #EEEEEE;
 }
 
 .thumbnail-wrapper-artist a {
@@ -601,4 +607,50 @@ form input.checkbox {
     height: 100%; 
     text-align: center; 
     text-decoration: none;
+}
+
+.thumbnail-wrapper-album {
+    position: relative; 
+    width: 150px; 
+    height: 150px;
+    background-color: #EEEEEE;
+}
+
+.thumbnail-wrapper-album a {
+    position: absolute;
+    top: 0; 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+    text-align: center; 
+    text-decoration: none;
+}
+
+.thumbnail-wrapper-album a .play, .thumbnail-wrapper-album a .overlay {
+    opacity: 0;
+}
+
+.thumbnail-wrapper-album a:hover .play, .thumbnail-wrapper-album a:hover .overlay {
+    display: block;
+    transition: opacity .25s ease-in-out;
+    -moz-transition: opacity .25s ease-in-out;
+    -webkit-transition: opacity .25s ease-in-out;
+}
+
+.thumbnail-wrapper-album a:hover .play {
+    position: relative; 
+    font-size: 40px;
+    color: #ffffff;
+    z-index: 1000;
+    opacity: 1;
+    line-height:150px;
+}
+
+.thumbnail-wrapper-album a:hover .overlay {
+    position: absolute; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: #000000; 
+    opacity: .7;
 }

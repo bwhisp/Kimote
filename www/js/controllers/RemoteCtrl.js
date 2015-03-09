@@ -1,9 +1,10 @@
 var vol = 50;
 
-app.controller('RemoteCtrl', function($scope,$http) {
+app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 	
 	$scope.sound = vol;
-
+	$scope.muted = Sounder.getMuted();
+	
 	$scope.setVol = function () {
 		vol = $scope.sound;
 		method = 'Application.';
@@ -13,6 +14,25 @@ app.controller('RemoteCtrl', function($scope,$http) {
 		sendRequestWithParams($http, method, params);
 	};
 
+	$scope.SetMute = function () {
+		//window.base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
+//ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":true}}&callback=JSON_CALLBACK';
+
+		//$http.jsonp(window.base_url+ping_url);
+		Sounder.SetMute();
+		$scope.muted = Sounder.getMuted();
+		
+	}
+	
+	$scope.SetUnMute = function () {
+		//window.base_url = 'http://' + username + ':' + password + '@' + ip + ':' + port;
+		//ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":false}}&callback=JSON_CALLBACK';
+
+		//$http.jsonp(window.base_url+ping_url);
+		Sounder.SetUnMute();
+		$scope.muted = Sounder.getMuted();
+	}
+	
 	$scope.requestInput = function requestInput(input) {
 		method = 'Input.';
 
@@ -47,14 +67,13 @@ app.controller('RemoteCtrl', function($scope,$http) {
 		if (input === 'shutdown') {
 			method = method + 'Quit';
 			params = '{}';
+		sendRequestWithParams($http, method, params);			
 		}
 		else if (input === 'mute') {
-			method = method + 'SetMute';
-			params = '{"mute":true}';
+			$scope.SetMute();
 		}
 		else if (input === 'unmute') {
-			method = method + 'SetMute';
-			params = '{"mute":false}';
+			$scope.SetUnMute();
 		}
 		else if (input === 'volumeUp') {
 			method = method + 'SetVolume';
@@ -63,6 +82,7 @@ app.controller('RemoteCtrl', function($scope,$http) {
 				vol = vol + 1;
 
 			params = '{"volume":' + vol + '}';
+		sendRequestWithParams($http, method, params);			
 		}
 		else if (input === 'volumeDown') {
 			method = method + 'SetVolume';
@@ -71,9 +91,10 @@ app.controller('RemoteCtrl', function($scope,$http) {
 				vol = vol - 1;
 
 			params = '{"volume":' + vol + '}';
+		sendRequestWithParams($http, method, params);			
 		}
 
-		sendRequestWithParams($http, method, params);
+
 	};
 
 	function sendRequest($http, method) {

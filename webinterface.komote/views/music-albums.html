@@ -1,30 +1,30 @@
 <section ng-controller="MusicCtrl">
-	<section class="panel albums">
-
-		<div ng-init="showAlbums()"></div>
+	<section class="panel panelalbums">
+		<div ng-init="showAlbums(); showSongs();"></div>
 		<md-content layout="row" flex layout-align="center" layout-fill>
 			<div flex="100" class="content" ui-view>
-				<md-item ng-repeat="album in albums | filter: global.search" class="item" ng-class="{'selected-item' : $index == selectedAlbum}">
+				<md-item ng-repeat="album in albums | filter: {artist:artist_label} | filter : global.search" class="item" ng-class="{'selected-item' : $index == selectedAlbum}">
 					<md-item-content class="music tile md-whiteframe-z1" ng-class="{'selected md-whiteframe-z2' : $index == selectedAlbum}" layout="column">
-						<div layout="row" layout-fill ng-click="selectAlbum($index)" class="folded">
-							<div class="md-tile-left" ng-show="$index == selectedAlbum" ng-click="playMovie(movie.file)" height="150">
-								<div class="thumbnail-wrapper">
-									<img class="thumbnail" ng-src={{getThumbnail(album.thumbnail)}} height="150">
-									<a href="#remote"><div class="play"><img src="img/ic_play_arrow_white_48dp.png" width="60"></div><div class="overlay"></div></a>
+						<div layout="row" layout-fill ng-click="selectAlbum($index)">
+							<div class="md-tile-left" ng-show="$index == selectedAlbum" height="150">
+								<div class="thumbnail-wrapper-album">
+									<img class="thumbnail" ng-src={{getThumbnailAlbum(album.thumbnail)}} height="150" width="150">
 								</div>
 							</div>
 
 							<div class="md-tile-content" layout="column" layout-align="start">
 								<h3 class="album-label">{{album.label}}</h3>
 								<h4>
+									{{album.artist.toString()}} - {{album.year}} -
 									<span ng-repeat="genre in album.genre">
-										{{genre}}{{$last ? '' : ', '}} 
+										{{genre}}{{$last ? '' : ', '}}
 									</span>
-
 								</h4>
 								<md-divider layout-fill ng-show="$index == selectedAlbum"></md-divider>
-								<div layout="column" layout-fill class="expanded">
-									<p class="album-plot" ng-show="$index == selectedAlbum"></p>
+								<div layout="column" layout-fill class="expanded" ng-show="$index == selectedAlbum">
+									<h4 ng-repeat="song in songs | filter : {album:album.label}">
+										<md-button ng-click="playSong(song.file); $event.stopPropagation();">{{song.track}}. <b>{{song.label}}</b> {{toMinutes(song.duration)}} </md-button>
+									</h4>
 								</div>
 							</div>
 						</div>

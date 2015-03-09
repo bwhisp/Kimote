@@ -27,10 +27,10 @@
             <a href="#shutdown"><img class="shutdown" src="img/ic_power_black_48dp.png" width="40" height="40" alt="shutdown" ng-click="requestApplication('shutdown')" /></a>
 
             <!-- mute sound -->
-            <a href="#mute"><img class="mute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mute" ng-click="requestApplication('mute')" /></a>
+            <a href="#mute" ng-hide="muted"><img class="mute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="mute" ng-click="requestApplication('mute')" /></a>
 
             <!-- unmute sound -->
-            <a href="#unmute"><img class="unmute" src="img/ic_volume_off_black_48dp.png" width="40" height="40" alt="unmute" ng-click="requestApplication('unmute')" /></a>
+            <a href="#unmute" ng-show="muted"><img class="unmute" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="unmute" ng-click="requestApplication('unmute')" /></a>
 
             <!-- set sound -->
             <a href="#volumeUp"><img class="volumeUp" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="volumeUp" ng-click="requestApplication('volumeUp')"/></a>

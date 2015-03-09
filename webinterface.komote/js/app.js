@@ -22,8 +22,12 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'views/music.html',
 			controller: 'MusicCtrl'
 		})
-		.when('/music-albums', {
+		.when('/music-albums/:artistLabel', {
 			templateUrl: 'views/music-albums.html',
+			controller: 'MusicCtrl'
+		})
+		.when('/music-songs/:artistLabel', {
+			templateUrl: 'views/music-songs.html',
 			controller: 'MusicCtrl'
 		})
 		.when('/pics', {

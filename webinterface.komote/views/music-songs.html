@@ -1,0 +1,27 @@
+<section ng-controller="MusicCtrl">
+	<section class="panel panelsongs">
+		<div ng-init="showSongs()">
+			<md-content layout="row" flex layout-align="center" layout-fill>
+				<div flex="100" class="content" ui-view>
+					<md-item ng-repeat="song in songs | filter: {artist:artist_label} | filter : global.search" class="item">
+						<md-item-content class="music tile md-whiteframe-z1" layout="column" >
+							<div layout="row" layout-fill>
+								<div class="md-tile-content" layout="column" layout-align="start" >
+									<h3 class="song-label">
+										<md-button ng-click="playSong(song.file)">
+											{{song.label}}
+										</md-button>
+										{{toMinutes(song.duration)}}
+									</h3>
+									<h4>
+										<b>{{song.artist.toString()}}</b> {{song.album}} 
+									</h4>
+								</div>
+							</div>
+						</md-item-content>
+					</md-item>
+				</div>
+			</md-content>
+		</div>
+	</section>
+</section>
