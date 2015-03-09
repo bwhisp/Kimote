@@ -2,10 +2,10 @@
 
 app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 	
-	$scope.sound = Sounder.getVolume();
-	
+
 	$scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
+	$scope.sound = Sounder.getVolume();	
 	
 	$scope.setVol = function () {
 		Sounder.SetVol($scope.sound);
@@ -14,8 +14,7 @@ app.controller('RemoteCtrl', function($scope,$http, Sounder) {
 
 	$scope.SetMute = function () {
 		Sounder.SetMute();
-		$scope.muted = Sounder.getMuted();
-		
+		$scope.muted = Sounder.getMuted();	
 	}
 	
 	$scope.SetUnMute = function () {
