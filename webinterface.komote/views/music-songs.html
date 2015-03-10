@@ -6,14 +6,14 @@
 					<md-item ng-repeat="song in songs | filter: {artist:artist_label} | filter : global.search" class="item">
 						<md-item-content class="music tile md-whiteframe-z1" layout="column" >
 							<div layout="row" layout-fill>
-								<div class="md-tile-content" layout="column" layout-align="start" >
+								<div class="md-tile-content song-tile" layout="column" layout-align="start" >
 									<h3 class="song-label">
 										<md-button ng-click="playSong(song.file)">
 											{{song.label}}
 										</md-button>
 										{{toMinutes(song.duration)}}
 									</h3>
-									<h4>
+									<h4 class="song-artist-album-label">
 										<b>{{song.artist.toString()}}</b> {{song.album}} 
 									</h4>
 								</div>

@@ -197,7 +197,7 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     
 }
 
-.panelalbums, .panelsongs {
+.panelalbums, .panelsongs, .panelseries {
     overflow-y: auto;
 }
 
@@ -653,4 +653,92 @@ form input.checkbox {
     height: 100%; 
     background-color: #000000; 
     opacity: .7;
+}
+
+.song-tile {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.song-artist-album-label {
+    padding-left: 6px;
+}
+
+
+/* liste séries */
+
+.selected-item ~ .item .series,
+.item:first-child .series {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.selected-item ~ .item .series.selected,
+.item:first-child .series.selected {
+    margin-top: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.item:last-child .series {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.item .tile .folded {
+    cursor: pointer;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.item .series {
+    background-color: white;
+    transition: all 100ms;
+}
+.item .series h3,
+.item .series p {
+    transition: all 100ms;
+}
+.item .series p {
+    opacity: 1;
+    height: inherit;
+}
+.item .series p.ng-hide {
+    opacity: 0;
+    height: 0;
+}
+.item .series.selected {
+    margin: 10px -10px;
+    border-radius: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.item .series.selected .expanded {
+    visibility: visible;
+}
+.item .series.selected .expanded,
+.item .series.selected .expanded > * {
+    max-height: 700px;
+    opacity: 1;
+}
+.item .series.selected .expanded .md-label {
+    border: hidden;
+}
+.item .series.selected h3 {
+    font-size: 1.8em !important;
+}
+.item .series .expanded {
+    visibility: hidden;
+}
+.item .series .expanded,
+.item .series .expanded > * {
+    max-height: 0;
+    opacity: 0;
+    transition: all 100ms;
+}
+.item .series .expanded .split {
+    padding: 10px;
+}
+.item .series .face {
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    width: 48px;
+    height: 48px;
+    margin: 16px;
 }
