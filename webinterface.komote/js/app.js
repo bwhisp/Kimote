@@ -18,6 +18,10 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'views/series.html',
 			controller: 'SeriesCtrl'
 		})
+		.when('/series-seasons/:seriesId', {
+			templateUrl: 'views/series-seasons.html',
+			controller: 'SeriesCtrl'
+		})
 		.when('/music', {
 			templateUrl: 'views/music.html',
 			controller: 'MusicCtrl'

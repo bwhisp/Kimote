@@ -1,6 +1,6 @@
 <section ng-controller="MusicCtrl">
 	<section class="panel panelalbums">
-		<div ng-init="showAlbums(); showSongs();"></div>
+		<div ng-init="showAlbums(); showSongs()"></div>
 		<md-content layout="row" flex layout-align="center" layout-fill>
 			<div flex="100" class="content" ui-view>
 				<md-item ng-repeat="album in albums | filter: {artist:artist_label} | filter : global.search" class="item" ng-class="{'selected-item' : $index == selectedAlbum}">

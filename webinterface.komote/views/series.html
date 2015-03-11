@@ -25,6 +25,10 @@
 								<md-divider layout-fill ng-show="$index == selectedSeries"></md-divider>
 								<div layout="column" layout-fill class="expanded">
 									<p class="movie-plot" ng-show="$index == selectedSeries">{{tvshow.plot}}</p>
+									<a href="#series-seasons/{{tvshow.tvshowid}}">
+										<md-button md-no-ink class="md-primary">
+											Episodes
+										</md-button>
 								</div>
 							</div>
 						</div>
