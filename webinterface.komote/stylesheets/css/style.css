@@ -194,10 +194,9 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     -webkit-overflow-scrolling: touch;
     -webkit-transition-duration: 0.5s;
     -moz-transition-duration: 0.5s;
-    
 }
 
-.panelalbums, .panelsongs, .panelseries {
+.panelalbums, .panelsongs, .panelseries, .panelseries-season {
     overflow-y: auto;
 }
 

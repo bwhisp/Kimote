@@ -18,9 +18,9 @@
 
 									<md-divider layout-fill ng-show="$index == selectedSeries"></md-divider>
 									<div layout="column" layout-fill class="expanded" ng-show="$index == selectedSeries">
-										<h4 ng-repeat="episode in episodes">
-											<mb-button ng-click="playEpisode(episode.file); $event.stopPropagation();">
-												{{episode.title}}
+										<h4 ng-repeat="episode in episodes | filter : {season:season.season}">
+											<md-button ng-click="playEpisode(episode.file); $event.stopPropagation();">
+												<b>{{episode.title}}</b>
 											</md-button>
 										</h4>
 									</div>
