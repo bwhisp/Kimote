@@ -1,27 +1,36 @@
 <section ng-controller="MusicCtrl">
 	<section class="panel panelsongs">
-		<div ng-init="showSongs()">
-			<md-content layout="row" flex layout-align="center" layout-fill>
-				<div flex="100" class="content" ui-view>
-					<md-item ng-repeat="song in songs | filter: {artist:artist_label} | filter : global.search" class="item">
-						<md-item-content class="music tile md-whiteframe-z1" layout="column" >
-							<div layout="row" layout-fill>
-								<div class="md-tile-content song-tile" layout="column" layout-align="start" >
-									<h3 class="song-label">
-										<md-button ng-click="playSong(song.file)">
-											{{song.label}}
-										</md-button>
-										{{toMinutes(song.duration)}}
-									</h3>
-									<h4 class="song-artist-album-label">
-										<b>{{song.artist.toString()}}</b> {{song.album}} 
-									</h4>
-								</div>
+		<div ng-init="showSongs()"></div>
+
+
+		<md-content layout="column" flex layout-align="center" layout-fill>
+
+			<div layout="column" layout-align="space-around center" ng-show="loader">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			</div>
+
+			<div flex="100" class="content" ui-view>
+
+
+
+				<md-item ng-repeat="song in songs | filter: {artist:artist_label} | filter : global.search" class="item">
+					<md-item-content class="music tile md-whiteframe-z1" layout="column" >
+						<div layout="row" layout-fill>
+							<div class="md-tile-content song-tile" layout="column" layout-align="start" >
+								<h3 class="song-label">
+									<md-button ng-click="playSong(song.file)">
+										{{song.label}}
+									</md-button>
+									{{toMinutes(song.duration)}}
+								</h3>
+								<h4 class="song-artist-album-label">
+									<b>{{song.artist.toString()}}</b> {{song.album}}
+								</h4>
 							</div>
-						</md-item-content>
-					</md-item>
-				</div>
-			</md-content>
-		</div>
+						</div>
+					</md-item-content>
+				</md-item>
+			</div>
+		</md-content>
 	</section>
 </section>

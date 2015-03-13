@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-<html ng-app="app"> 
+<html ng-app="app">
 	<head>
 		<title>Kodi Remote</title>
 
 		<meta charset="utf-8">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi"/>
 
-        <link rel="stylesheet" type="text/css" href="stylesheets/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="stylesheets/css/style.css"/>
 	</head>
 
 	<body ng-controller="GlobalCtrl">
@@ -18,12 +18,12 @@
 				<h1 class="md-toolbar-tools">
 					<span class="apptitle">Kodi Remote</span>
 					<div class="toolbar-icons" ng-controller="AboutCtrl">
-						
+
 						<div class="searchBar" ng-hide="showSearch">
 							<input ng-model="global.search" class="search-input" placeholder="Rechercher">
 						</div>
 						<span ng-show="showSearch"></span>
-						
+
 						<md-button class="md-primary search" ng-click="showSearch=!showSearch">
 							<img class="icon-search" src="img/ic_search_white_48dp.png" width="24" /img>
 						</md-button>
@@ -59,7 +59,7 @@
 
 		<!-- Vues (Remote, films, musique, photos, réglages) -->
 		<section class="view" ng-view></section>
-		
+
 		<script src="js/framework/hammerjs/hammer.min.js"></script>
 		<script src="js/framework/angular/angular.min.js"></script>
 		<script src="js/framework/angular-route/angular-route.min.js"></script>
@@ -69,7 +69,7 @@
 		<script src="js/framework/angular-material/angular-material.min.js"></script>
 		<script src="js/framework/angular-cookies/angular-cookies.min.js"></script>
 		<script src="js/framework/jquery/jquery.js"></script>
-		
+
 		<script src="js/app.js"></script>
 		<script src="js/controllers/GlobalCtrl.js"></script>
 		<script src="js/controllers/AboutCtrl.js"></script>
@@ -80,6 +80,6 @@
 		<script src="js/controllers/PicsCtrl.js"></script>
 		<script src="js/controllers/SettingsCtrl.js"></script>
 		<script src="js/factories.js"></script>
-		
+
 	</body>
 </html>

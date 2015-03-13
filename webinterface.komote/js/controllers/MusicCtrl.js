@@ -61,11 +61,14 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
+		$scope.loader = true;
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+			$scope.loader = false;
 			$scope.songs = data.result.songs;
 		})
 		.error(function(data, status, headers, config) {
+			$scope.loader = false;
 			console.log('Data: ' + data);
             console.log('Status: ' + status);
             console.log('Headers: ' + headers);
@@ -107,7 +110,7 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 	$scope.getThumbnailArtist = function (thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
-		
+
 		return $scope.thumbnailUriDecoded;
 	};
 
