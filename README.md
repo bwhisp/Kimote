@@ -7,14 +7,9 @@ http://www.labri.fr/perso/falleri/dist/ens/projets/s8/sujets/8.pdf
 ### Structure
 
 projetS8/
-
- ├ angular: version avec AngularJS
-
- ├ angular_md: version AngularJS + Material Design
-
  ├ beta: version de test
-
- └ www: version de base, js+jquery seulement
+ ├ webinterface.komote : interface web de Komote (add-on sur Kodi)
+ └ www: interface app mobile
 
 ## Liens utiles
 
