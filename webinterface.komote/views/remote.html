@@ -1,6 +1,6 @@
 <section ng-controller="RemoteCtrl">
 	<section class="panel farLeft">
-        
+
         <div class="main-remote">
             <!-- arrow_up -->
             <a href="#arrow_up"><img class="arrow_up" src="img/ic_keyboard_arrow_up_black_48dp.png" width="70" height="70" alt="arrow_up" ng-click="requestInput('up')"/></a>
@@ -19,7 +19,7 @@
 
             <!-- back -->
             <a href="#back"><img class="back" src="img/ic_keyboard_backspace_black_48dp.png" width="40" height="40" alt="home" ng-click="requestInput('back')" /></a>
-            
+
             <!-- home -->
             <a href="#home"><img class="home" src="img/ic_home_black_48dp.png" width="40" height="40" alt="home" ng-click="requestInput('home')" /></a>
 
@@ -34,15 +34,29 @@
 
             <!-- set sound -->
             <a href="#volumeUp"><img class="volumeUp" src="img/ic_volume_up_black_48dp.png" width="40" height="40" alt="volumeUp" ng-click="requestApplication('volumeUp')"/></a>
-        
+
             <a href="#volumeDown"><img class="volumeDown" src="img/ic_volume_down_black_48dp.png" width="40" height="40" alt="volumeDown" ng-click="requestApplication('volumeDown')"/></a>
+
+			<!-- full screen -->
+            <a href="#fullscreen"><img class="fullscreen" src="img/ic_fullscreen_black_48dp.png" width="40" height="40" alt="fullscreen" ng-click="requestGUI('fullscreen')"/></a>
+
+            <!-- Play / Pause / Stop -->
+            <a href="#play" ng-show="paused"><img class="play" src="img/ic_play_arrow_black_48dp.png" width="40" height="40" alt="play" ng-click="requestInput('play')"/></a>
+            <a href="#pause" ng-show="played"><img class="pause" src="img/ic_pause_black_48dp.png" width="40" height="40" alt="pause" ng-click="requestInput('pause')"/></a>
+            <a href="#stop"><img class="stop" src="img/ic_stop_black_48dp.png" width="40" height="40" alt="stop" ng-click="requestInput('stop')"/></a>
+
+            <!-- Skip next / Rewind / Fastforward / previous -->
+            <a href="#previous"><img class="previous" src="img/ic_skip_previous_black_48dp.png" width="40" height="40" alt="previous" ng-click="requestInput('previous')"/></a>
+            <a href="#rewind"><img class="rewind" src="img/ic_fast_rewind_black_48dp.png" width="40" height="40" alt="rewind" ng-click="requestInput('rewind')"/></a>
+            <a href="#fastforward"><img class="fastforward" src="img/ic_fast_forward_black_48dp.png" width="40" height="40" alt="fastforward" ng-click="requestInput('fastforward')"/></a>
+            <a href="#next"><img class="next" src="img/ic_skip_next_black_48dp.png" width="40" height="40" alt="next" ng-click="requestInput('next')"/></a>
         </div>
-        
+
         <div class="sound">
             <div class="sound-slider">
                 <md-slider flex class="md-primary" name="slider" aria-label="slider" ng-model="sound" min="0" max="100" ng-click="setVol()"></md-slider>
             </div>
         </div>
-        
+
 	</section>
 </section>

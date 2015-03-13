@@ -2,7 +2,6 @@
 	<section class="panel panelsongs">
 		<div ng-init="showSongs()"></div>
 
-
 		<md-content layout="column" flex layout-align="center" layout-fill>
 
 			<div layout="column" layout-align="space-around center" ng-show="loader">
@@ -10,13 +9,10 @@
 			</div>
 
 			<div flex="100" class="content" ui-view>
-
-
-
 				<md-item ng-repeat="song in songs | filter: {artist:artist_label} | filter : global.search" class="item">
 					<md-item-content class="music tile md-whiteframe-z1" layout="column" >
 						<div layout="row" layout-fill>
-							<div class="md-tile-content song-tile" layout="column" layout-align="start" >
+							<div class="md-tile-content song-tile" layout="column" layout-align="start">
 								<h3 class="song-label">
 									<md-button ng-click="playSong(song.file)">
 										{{song.label}}

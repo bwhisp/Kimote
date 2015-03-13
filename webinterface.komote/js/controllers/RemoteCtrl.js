@@ -1,47 +1,89 @@
-var vol = 50;
+//var vol = 50;
 
-app.controller('RemoteCtrl', function($scope,$http) {
-	
-	$scope.sound = vol;
+app.controller('RemoteCtrl', function($scope,$http,Sounder,Manager) {
+
+	$scope.muted = Sounder.getMuted();
+	$scope.volume = Sounder.getVolume();
+	$scope.sound = Sounder.getVolume();
+
+	$scope.paused = Manager.getPaused();
+	$scope.played = Manager.getPlayed();
 
 	$scope.setVol = function () {
-		vol = $scope.sound;
-		method = 'Application.';
-		method = method + 'SetVolume';
-		params = '{"volume":' + $scope.sound + '}';
-		
-		sendRequestWithParams($http, method, params);
+		Sounder.SetVol($scope.sound);
+		$scope.sound = Sounder.getVolume();
 	};
 
 	$scope.requestInput = function requestInput(input) {
+
 		method = 'Input.';
 
 		if (input === 'left') {
 			method = method + 'Left';
+			params = '{}';
 		}
 		else if (input === 'right') {
 			method = method + 'Right';
+			params = '{}';
 		}
 		else if (input === 'up') {
 			method = method + 'Up';
+			params = '{}';
 		}
 		else if (input === 'down') {
 			method = method + 'Down';
+			params = '{}';
 		}
 		else if (input === 'select') {
 			method = method + 'Select';
+			params = '{}';
 		}
 		else if (input === 'home') {
 			method = method + 'Home';
+			params = '{}';
 		}
 		else if (input === 'back') {
 			method = method + 'Back';
+			params = '{}';
+		}
+		else if (input === 'play') {
+			Manager.SetPlay();
+			$scope.played = Manager.getPlayed();
+			$scope.paused = Manager.getPaused();
+			params = '{}';
+		}
+		else if (input === 'pause') {
+			Manager.SetPause();
+			$scope.played = Manager.getPlayed();
+			$scope.paused = Manager.getPaused();
+			params = '{}';
+		}
+		else if (input === 'stop') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"stop"}';
+		}
+		else if (input === 'next') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"skipnext"}';
+		}
+		else if (input === 'previous') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"skipprevious"}';
+		}
+		else if (input === 'fastforward') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"fastforward"}';
+		}
+		else if (input === 'rewind') {
+			method = method + 'ExecuteAction';
+			params = '{"action":"rewind"}';
 		}
 
-		sendRequest($http, method);
+		sendRequestWithParams($http, method, params);
 	};
 
 	$scope.requestApplication = function requestApplication(input) {
+
 		method = 'Application.';
 
 		if (input === 'shutdown') {
@@ -49,28 +91,32 @@ app.controller('RemoteCtrl', function($scope,$http) {
 			params = '{}';
 		}
 		else if (input === 'mute') {
-			method = method + 'SetMute';
-			params = '{"mute":true}';
+			Sounder.SetMute();
+			$scope.muted = Sounder.getMuted();
 		}
 		else if (input === 'unmute') {
-			method = method + 'SetMute';
-			params = '{"mute":false}';
+			Sounder.SetUnMute();
+			$scope.muted = Sounder.getMuted();
 		}
 		else if (input === 'volumeUp') {
-			method = method + 'SetVolume';
-			
-			if (vol < 100)
-				vol = vol + 1;
-
-			params = '{"volume":' + vol + '}';
+			Sounder.VolUp($scope.volume);
+			$scope.volume = Sounder.getVolume();
 		}
 		else if (input === 'volumeDown') {
-			method = method + 'SetVolume';
+			Sounder.VolDown($scope.volume);
+			$scope.volume = Sounder.getVolume();
+		}
 
-			if (vol > 0)
-				vol = vol - 1;
+		sendRequestWithParams($http, method, params);
+	};
 
-			params = '{"volume":' + vol + '}';
+	$scope.requestGUI = function requestGUI(input) {
+
+		method = 'GUI.';
+
+		if (input === 'fullscreen') {
+			method = method + 'SetFullscreen';
+			params = '{"fullscreen":true}';
 		}
 
 		sendRequestWithParams($http, method, params);
