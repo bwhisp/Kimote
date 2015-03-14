@@ -1,3 +1,9 @@
+/*
+ * @name SettingsCtrl
+ * @requires $scope, $cookieStore, Logger
+ * @description - Controleur pour la vue settings.html, formulaire de connexion
+ */
+
 app.controller('SettingsCtrl', function($scope, $cookieStore, Logger) {
 	$scope.IPMODEL = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
 
@@ -7,7 +13,7 @@ app.controller('SettingsCtrl', function($scope, $cookieStore, Logger) {
 
 	$scope.login = function () {
 		Logger.login($scope.user, $scope.pass, $scope.ip, $scope.port);
-		
+
 		$scope.bouton = Logger.getBouton();
 		$scope.connected = Logger.getConn();
 		$scope.errCon = Logger.getErr();
@@ -38,6 +44,6 @@ app.controller('SettingsCtrl', function($scope, $cookieStore, Logger) {
 
 	$scope.ip = $cookieStore.get('ip');
 	$scope.port = parseInt($cookieStore.get('port'));
-$scope.user = $cookieStore.get('user');
+	$scope.user = $cookieStore.get('user');
 	$scope.pass = $cookieStore.get('pass');
 });

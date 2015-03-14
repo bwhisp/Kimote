@@ -1,30 +1,13 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
+/*************************************************/
+/******************** imports ********************/
+/*************************************************/
 
 @import url(fonts.css);
 @import url(../../js/framework/angular-material/angular-material.css);
 
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+/**********************************************************/
+/******************** trucs de cordova ********************/
+/**********************************************************/
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -56,15 +39,6 @@ input[type=number]::-webkit-outer-spin-button {
     }
 }
 
-md-toolbar h1 {
-    font-size:16px !important;
-    font-weight:normal;
-    margin:0;
-    overflow:visible;
-    padding:0;
-    text-align:center;
-}
-
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
@@ -77,52 +51,23 @@ md-toolbar h1 {
     to { opacity: 1.0; }
 }
 
-form {
-    width: 50%;
-    margin: 0 auto;
-}
+/******************************************************/
+/******************** header, tabs ********************/
+/******************************************************/
 
-form input {
-    width: 100%;
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
-
-.form-wrapper {
-    position:absolute;
-    top:10%;
-    right:0;
-    left:0;
-}
-
-label {
-    font-family: 'Roboto';
-    display: block;
-    width: 150px;
-    float: left;
-}
-
-input {
-    font-family: 'Roboto';
-}
-
-*:focus {
-    outline: none;
-    outline-width: 0;
-}
-
-/*.header {
-    font-family: 'Roboto';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 50px; line-height: 50px;
-    color: #FFF;
-    text-transform: uppercase;
-    text-align: center;
-    background-color: #11A7AB;
-}*/
 
 md-toolbar h1 {
-    font-size: 1.250em;
-    font-weight: 400;
+    font-size:16px !important;
+    font-weight:normal;
+    margin:0;
+    overflow:visible;
+    padding:0;
+    text-align:center;
     margin: auto;
     height: 56px !important;
 }
@@ -180,6 +125,72 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     width: 30px;
 }
 
+.toolbar-icons {
+    position: absolute;
+    right: 5px;
+    top: 12px;
+}
+
+.search, .about {
+    padding: 1px !important;
+}
+
+.icon-about, .icon-search {
+    position: relative;
+    top: 2px;
+}
+
+.searchBar {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    top: -3px;
+    right: -5px;
+    color: white;
+}
+.search-input {
+    width: 90%;
+    background-color: transparent;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom-width: 1px;
+    color: white;
+}
+
+.search-input:focus {
+    border-right: none;
+    border-left: none;
+    border-top: none;
+    border-bottom-width: 1px;
+    color: white;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: white;
+}
+.search-input:focus::-webkit-input-placeholder {
+    color:transparent;
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color: white;
+}
+.search-input:focus::-moz-placeholder {
+    color:transparent;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color: white;
+}
+.search-input:focus::-moz-placeholder {
+    color:transparent;
+}
+
+/***********************************************************/
+/******************** sections des vues ********************/
+/***********************************************************/
+
 .panel {
     position: absolute;
     top:0; left:0; bottom:0; right:0;
@@ -217,6 +228,22 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     transform: translate3D(0,0,0);
     overflow-y: auto;
 }
+
+.md-tile-left {
+    padding: 16px;
+}
+
+.md-tile-content {
+    position: relative;
+}
+
+.md-tile-content h3 {
+    font-size: 1.2em !important;
+}
+
+/*****************************************************/
+/******************** remote.html ********************/
+/*****************************************************/
 
 .arrow_right {
     left: 64%;
@@ -266,10 +293,6 @@ a.nav-remote:link, a.nav-movies:link, a.nav-series:link, a.nav-music:link, a.nav
     left: 50%;
 }
 
-md-input-container label {
-    width: 100%;
-}
-
 md-slider input[type="number"] {
     text-align: center;
 }
@@ -301,32 +324,9 @@ md-slider input[type="number"] {
     left: 10%;
 }
 
-.toolbar-icons {
-    position: absolute;
-    right: 5px;
-    top: 12px;
-}
-
-.search, .about {
-    padding: 1px !important;
-}
-
-.icon-about, .icon-search {
-    position: relative;
-    top: 2px;
-}
-
-.md-tile-left {
-    padding: 16px;
-}
-
-.md-tile-content {
-    position: relative;
-}
-
-.md-tile-content h3 {
-    font-size: 1.2em !important;
-}
+/*****************************************************/
+/******************** movies.html ********************/
+/*****************************************************/
 
 .movie-plot {
     text-align: justify;
@@ -459,56 +459,89 @@ md-slider input[type="number"] {
     opacity: .7;
 }
 
-.searchBar {
-    position: relative;
-    display: inline-block;
-    padding: 0;
-    top: -3px;
-    right: -5px;
-    color: white;
+/*****************************************************/
+/******************** series.html ********************/
+/*****************************************************/
+
+.selected-item ~ .item .series,
+.item:first-child .series {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
-.search-input {
-    width: 90%;
-    background-color: transparent;
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    border-bottom-width: 1px;
-    color: white;
+.selected-item ~ .item .series.selected,
+.item:first-child .series.selected {
+    margin-top: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.item:last-child .series {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+.item .tile .folded {
+    cursor: pointer;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.item .series {
+    background-color: white;
+    transition: all 100ms;
+}
+.item .series h3,
+.item .series p {
+    transition: all 100ms;
+}
+.item .series p {
+    opacity: 1;
+    height: inherit;
+}
+.item .series p.ng-hide {
+    opacity: 0;
+    height: 0;
+}
+.item .series.selected {
+    margin: 10px -10px;
+    border-radius: 2px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.item .series.selected .expanded {
+    visibility: visible;
+}
+.item .series.selected .expanded,
+.item .series.selected .expanded > * {
+    max-height: 700px;
+    opacity: 1;
+}
+.item .series.selected .expanded .md-label {
+    border: hidden;
+}
+.item .series.selected h3 {
+    font-size: 1.8em !important;
+}
+.item .series .expanded {
+    visibility: hidden;
+}
+.item .series .expanded,
+.item .series .expanded > * {
+    max-height: 0;
+    opacity: 0;
+    transition: all 100ms;
+}
+.item .series .expanded .split {
+    padding: 10px;
+}
+.item .series .face {
+    border-radius: 30px;
+    border: 1px solid #ddd;
+    width: 48px;
+    height: 48px;
+    margin: 16px;
 }
 
-.search-input:focus {
-    border-right: none;
-    border-left: none;
-    border-top: none;
-    border-bottom-width: 1px;
-    color: white;
-}
-
-::-webkit-input-placeholder { /* WebKit browsers */
-    color: white;
-}
-.search-input:focus::-webkit-input-placeholder {
-    color:transparent;
-}
-
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: white;
-}
-.search-input:focus::-moz-placeholder {
-    color:transparent;
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-   color: white;
-}
-.search-input:focus::-moz-placeholder {
-    color:transparent;
-}
-
-form input.checkbox {
-    width : auto;
-}
+/****************************************************/
+/******************** music.html ********************/
+/****************************************************/
 
 .selected-item ~ .item .music,
 .item:first-child .music {
@@ -658,81 +691,46 @@ form input.checkbox {
     padding-left: 6px;
 }
 
+/*******************************************************/
+/******************** settings.html ********************/
+/*******************************************************/
 
-/* liste séries */
+form {
+    width: 50%;
+    margin: 0 auto;
+}
 
-.selected-item ~ .item .series,
-.item:first-child .series {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+form input {
+    width: 100%;
 }
-.selected-item ~ .item .series.selected,
-.item:first-child .series.selected {
-    margin-top: 0;
-    margin-left: 0px;
-    margin-right: 0px;
+
+.form-wrapper {
+    position:absolute;
+    top:10%;
+    right:0;
+    left:0;
 }
-.item:last-child .series {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
+
+label {
+    font-family: 'Roboto';
+    display: block;
+    width: 150px;
+    float: left;
 }
-.item .tile .folded {
-    cursor: pointer;
-    margin-left: 0px;
-    margin-right: 0px;
+
+input {
+    font-family: 'Roboto';
 }
-.item .series {
-    background-color: white;
-    transition: all 100ms;
+
+*:focus {
+    outline: none;
+    outline-width: 0;
 }
-.item .series h3,
-.item .series p {
-    transition: all 100ms;
+
+md-input-container label {
+    width: 100%;
 }
-.item .series p {
-    opacity: 1;
-    height: inherit;
-}
-.item .series p.ng-hide {
-    opacity: 0;
-    height: 0;
-}
-.item .series.selected {
-    margin: 10px -10px;
-    border-radius: 2px;
-    margin-left: 0px;
-    margin-right: 0px;
-}
-.item .series.selected .expanded {
-    visibility: visible;
-}
-.item .series.selected .expanded,
-.item .series.selected .expanded > * {
-    max-height: 700px;
-    opacity: 1;
-}
-.item .series.selected .expanded .md-label {
-    border: hidden;
-}
-.item .series.selected h3 {
-    font-size: 1.8em !important;
-}
-.item .series .expanded {
-    visibility: hidden;
-}
-.item .series .expanded,
-.item .series .expanded > * {
-    max-height: 0;
-    opacity: 0;
-    transition: all 100ms;
-}
-.item .series .expanded .split {
-    padding: 10px;
-}
-.item .series .face {
-    border-radius: 30px;
-    border: 1px solid #ddd;
-    width: 48px;
-    height: 48px;
-    margin: 16px;
+
+form input.checkbox {
+    width : auto;
 }

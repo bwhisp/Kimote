@@ -1,3 +1,9 @@
+/*
+ * @name AboutCtrl
+ * @requires $scope, $http, $mdDialog
+ * @description - affichage ""à propos"
+ */
+
 app.controller('AboutCtrl', function($scope, $mdDialog) {
 	$scope.showAbout = showAbout;
 

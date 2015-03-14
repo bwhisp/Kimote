@@ -1,15 +1,20 @@
-app.controller('MoviesCtrl', function($scope,$http,$location) {
+/*
+ * @name MoviesCtrl
+ * @requires $scope, $http, $location
+ * @description - Controleur pour la vue movies.html, récupération et affichage des films
+ */
 
-	//Requête http pour afficher la liste des films
-	//showMovies() définit la méthode et les paramètres
+app.controller('MoviesCtrl', function($scope, $http, $location) {
+
+	//préparation de la requête http pour afficher la liste des films
 	$scope.showMovies = function() {
 		method = "VideoLibrary.GetMovies";
-		params = '{"limits":{"start":0,"end":75},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
+		params = '{"limits":{"start":0,"end":9999},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
 
 		getMovies($http, method, params);
 	};
 
-	//getMovies() effectue la requête
+	//récupération des films
 	function getMovies($http, method, params) {
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
@@ -29,30 +34,30 @@ app.controller('MoviesCtrl', function($scope,$http,$location) {
 
 	$scope.Math = window.Math;
 
-	//conversion du champ runtime en heures
-	$scope.toHours = function (duration) {
-		//var sec_num = parseInt(duration, 10);
+	//conversion du champ movie.runtime en heures
+	$scope.toHours = function(duration) {
 		var hours = Math.floor(duration/3600);
 		var minutes = Math.floor((duration - (hours*3600))/60);
-		//var seconds = duration - (hours*3600) - (minutes*60);
 
 		if (minutes < 10) {
 			minutes = "0" + minutes;
 		}
 		var time = hours + 'h' + minutes;
+
 		return time;
 	};
 
 	//téléchargement l'image de présentation du film
-	$scope.getThumbnail = function (thumbnailUri) {
+	$scope.getThumbnail = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
-		
+
 		return $scope.thumbnailUriDecoded;
 	};
 
+	//ouvre le tile du film sélectionné
 	$scope.selectedMovie = undefined;
-	$scope.selectMovie = function (index) {
+	$scope.selectMovie = function(index) {
 		if ($scope.selectedMovie !== index) {
 			$scope.selectedMovie = index;
 		}
@@ -61,7 +66,8 @@ app.controller('MoviesCtrl', function($scope,$http,$location) {
 		}
 	};
 
-	$scope.playMovie = function (file) {
+	//joue le film et redirection vers remote
+	$scope.playMovie = function(file) {
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 

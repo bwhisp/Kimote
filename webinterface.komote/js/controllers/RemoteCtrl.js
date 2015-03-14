@@ -1,6 +1,10 @@
-//var vol = 50;
+/*
+ * @name RemoteCtrl
+ * @requires $scope, $http, Sounder, Manager
+ * @description - Controleur pour la vue remote.html
+ */
 
-app.controller('RemoteCtrl', function($scope,$http,Sounder,Manager) {
+app.controller('RemoteCtrl', function($scope, $http, Sounder, Manager) {
 
 	$scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
@@ -9,7 +13,7 @@ app.controller('RemoteCtrl', function($scope,$http,Sounder,Manager) {
 	$scope.paused = Manager.getPaused();
 	$scope.played = Manager.getPlayed();
 
-	$scope.setVol = function () {
+	$scope.setVol = function() {
 		Sounder.SetVol($scope.sound);
 		$scope.sound = Sounder.getVolume();
 	};

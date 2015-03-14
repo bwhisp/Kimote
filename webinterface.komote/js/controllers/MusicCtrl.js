@@ -1,10 +1,16 @@
-app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
+/*
+ * @name MusicCtrl
+ * @requires $scope, $http, $location, $routeParams
+ * @description - Controleur pour les vues music.html, music-albums.html et music-songs.html
+ */
+
+app.controller('MusicCtrl', function($scope, $http, $location, $routeParams) {
 
 	$scope.artist_label = $routeParams.artistLabel;
 
 	$scope.showArtists = function() {
 		method = "AudioLibrary.GetArtists";
-		params = '{"properties":["style","description","born","yearsactive","died","thumbnail","genre","fanart"],"limits":{"start":1,"end":2000}},"id":"libMusic"';
+		params =  '{"properties":["style","description","born","yearsactive","died","thumbnail","genre","fanart"],"limits":{"start":1,"end":2000}},"id":"libMusic"';
 
 		getArtists($http, method, params);
 	};
@@ -28,7 +34,7 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 
 	$scope.showAlbums = function() {
 		method = "AudioLibrary.GetAlbums";
-		params = '{"limits":{"start":0,"end":50},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true}},"id":"libAlbums"}';
+		params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true}},"id":"libAlbums"}';
 
 		getAlbums($http, method, params);
 	};
@@ -76,7 +82,7 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	}
 
-	$scope.playSong = function (file){
+	$scope.playSong = function(file) {
 
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
@@ -94,7 +100,7 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	};
 
-	$scope.toMinutes = function (duration) {
+	$scope.toMinutes = function(duration) {
 
 		var minutes = Math.floor((duration/60));
 		var seconds = duration - (minutes*60);
@@ -107,14 +113,14 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 		return time;
 	};
 
-	$scope.getThumbnailArtist = function (thumbnailUri) {
+	$scope.getThumbnailArtist = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
 
 		return $scope.thumbnailUriDecoded;
 	};
 
-	$scope.getThumbnailAlbum = function (thumbnailUri) {
+	$scope.getThumbnailAlbum = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","");
 		thumbnailURIencoded = encodeURIComponent(thumbnailUri);
 		$scope.thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
@@ -123,7 +129,7 @@ app.controller('MusicCtrl', function($scope,$http,$location,$routeParams) {
 	};
 
 	$scope.selectedAlbum = undefined;
-	$scope.selectAlbum = function (index) {
+	$scope.selectAlbum = function(index) {
 		if ($scope.selectedAlbum !== index) {
 			$scope.selectedAlbum = index;
 		}

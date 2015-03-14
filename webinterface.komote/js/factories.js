@@ -141,8 +141,6 @@ app.factory('Sounder', function($http) {
 		return volume;
 	};
 
-
-
 	return sounder;
 });
 
@@ -153,7 +151,6 @@ app.factory('Manager', function($http) {
 	var paused = false;
 	var errPlay = false;
 	var errPause = false;
-
 
 	manager.SetPlay = function () {
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Input.ExecuteAction", "params":{"action":"play"}}&callback=JSON_CALLBACK';

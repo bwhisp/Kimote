@@ -1,15 +1,25 @@
-app.controller('SeriesCtrl', function($scope,$http,$location,$routeParams) {
+/*
+ * @name SeriesCtrl
+ * @requires $scope, $http, $location, $routeParams
+ * @description - Controleur pour les vues series.html et series-seasons.html,
+ * 				  récupération et affichage des des séries, saisons et épisodes
+ */
 
+app.controller('SeriesCtrl', function($scope, $http, $location, $routeParams) {
+
+	//paramètre seriesId passé dans l'url pour accéder aux saisons d'une séries choisie
 	$scope.series_id = $routeParams.seriesId;
-	
+
+	//préparation de la requête http pour afficher la liste des séries
 	$scope.showSeries = function() {
 		method = "VideoLibrary.GetTVShows";
 		params = '{"limits": { "start" : 0, "end": 100}, "properties": ["art", "genre", "plot", "title", "originaltitle", "year", "rating", "thumbnail", "playcount", "file","season"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
-	
-		getSeries($http,method,params);
+
+		getSeries($http, method, params);
 	};
 
-	function getSeries($http,method,params) {
+	//récupération des séries
+	function getSeries($http, method, params) {
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
@@ -26,14 +36,15 @@ app.controller('SeriesCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	}
 
+	//préparation de la requête http pour afficher la liste des saisons d'une série
 	$scope.showSeasons = function(tvshowid) {
 		method = "VideoLibrary.GetSeasons";
 		params = '{"tvshowid":' + tvshowid + ',"limits": { "start" : 0, "end": 100}, "properties": ["season","showtitle","thumbnail","episode","tvshowid"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
 
-		getSeasons($http,method,params);
+		getSeasons($http, method, params);
 	};
 
-	function getSeasons($http,method,params) {
+	function getSeasons($http, method, params) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
@@ -49,14 +60,15 @@ app.controller('SeriesCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	}
 
+	//préparation de la requête http pour afficher la liste des épisodes d'une saison
 	$scope.showEpisodes = function (tvshowid) {
 		method = "VideoLibrary.GetEpisodes";
 		params = '{"tvshowid":' + tvshowid + ',"limits": { "start" : 0, "end": 100}, "properties": ["title","runtime","season","episode","tvshowid","file"], "sort": { "order": "ascending", "method": "label" } }, "id": "libTvShows"';
 
-		getEpisodes($http,method,params);
+		getEpisodes($http, method, params);
 	};
 
-	function getEpisodes($http,method,params) {
+	function getEpisodes($http, method, params) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
@@ -72,7 +84,8 @@ app.controller('SeriesCtrl', function($scope,$http,$location,$routeParams) {
 		});
 	}
 
-	$scope.playEpisode = function (file) {
+	//lancer l'épisode cliqué
+	$scope.playEpisode = function(file) {
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
@@ -91,7 +104,8 @@ app.controller('SeriesCtrl', function($scope,$http,$location,$routeParams) {
 
 	$scope.Math = window.Math;
 
-	$scope.toHours = function (duration) {
+	//conversion de la durée d'un épisode
+	$scope.toHours = function(duration) {
 		//var sec_num = parseInt(duration, 10);
 		var hours = Math.floor(duration/3600);
 		var minutes = Math.floor((duration - (hours*3600))/60);
@@ -104,22 +118,25 @@ app.controller('SeriesCtrl', function($scope,$http,$location,$routeParams) {
 		return time;
 	};
 
-	$scope.getThumbnailSeries = function (thumbnailUri) {
+	//récupération du thumbnail de la série
+	$scope.getThumbnailSeries = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
-		
+
 		return $scope.thumbnailUriDecoded;
 	};
 
-	$scope.getThumbnailSeason = function (thumbnailUri) {
+	//récupération du thumbnail d'une saison
+	$scope.getThumbnailSeason = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
-		
+
 		return $scope.thumbnailUriDecoded;
 	};
 
+	//ouvre le tile de la série sélectionnée
 	$scope.selectedSeries = undefined;
-	$scope.selectSeries = function (index) {
+	$scope.selectSeries = function(index) {
 		if ($scope.selectedSeries !== index) {
 			$scope.selectedSeries = index;
 		}
