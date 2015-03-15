@@ -38,10 +38,6 @@ app.config(['$routeProvider', function ($routeProvider) {
 			templateUrl: 'views/pics.html',
 			controller: 'PicsCtrl'
 		})
-		.when('/settings', {
-			templateUrl: 'views/settings.html',
-			controller: 'SettingsCtrl'
-		})
 		.otherwise({
 			redirectTo: '/remote'
 		});

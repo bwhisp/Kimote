@@ -16,9 +16,10 @@ app.controller('MoviesCtrl', function($scope, $http, $location) {
 
 	//récupération des films
 	function getMovies($http, method, params) {
+		var base_url = prepareUrl();
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -68,11 +69,13 @@ app.controller('MoviesCtrl', function($scope, $http, $location) {
 
 	//joue le film et redirection vers remote
 	$scope.playMovie = function(file) {
+		var base_url = prepareUrl();
+
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -82,4 +85,13 @@ app.controller('MoviesCtrl', function($scope, $http, $location) {
 			alert("Impossible de lire le film");
 		});
 	};
+
+	function prepareUrl() {
+		kodiIP = $location.host();
+		kodiPort = $location.port();
+
+		base_url = 'http://' + kodiIP + ':' + kodiPort;
+
+		return base_url;
+	}
 });

@@ -20,9 +20,10 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $routeParams) {
 
 	//récupération des séries
 	function getSeries($http, method, params) {
+		var base_url = prepareUrl();
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -45,8 +46,10 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $routeParams) {
 	};
 
 	function getSeasons($http, method, params) {
+		var base_url = prepareUrl();
+
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -69,8 +72,10 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $routeParams) {
 	};
 
 	function getEpisodes($http, method, params) {
+		var base_url = prepareUrl();
+
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -86,11 +91,13 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $routeParams) {
 
 	//lancer l'épisode cliqué
 	$scope.playEpisode = function(file) {
+		var base_url = prepareUrl();
+
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -144,4 +151,13 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $routeParams) {
 			$scope.selectedSeries = undefined;
 		}
 	};
+
+	function prepareUrl() {
+		kodiIP = $location.host();
+		kodiPort = $location.port();
+
+		base_url = 'http://' + kodiIP + ':' + kodiPort;
+
+		return base_url;
+	}
 });

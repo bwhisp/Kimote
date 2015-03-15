@@ -1,10 +1,10 @@
 /*
  * @name RemoteCtrl
- * @requires $scope, $http, Sounder, Manager
+ * @requires $scope, $http, $location, Sounder, Manager
  * @description - Controleur pour la vue remote.html
  */
 
-app.controller('RemoteCtrl', function($scope, $http, Sounder, Manager) {
+app.controller('RemoteCtrl', function($scope, $http, $location, Sounder, Manager) {
 
 	$scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
@@ -127,8 +127,10 @@ app.controller('RemoteCtrl', function($scope, $http, Sounder, Manager) {
 	};
 
 	function sendRequest($http, method) {
+		var base_url = prepareUrl();
+
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id": 1}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}}).error(function() {
 			alert("Vous n'êtes pas connecté");
@@ -136,12 +138,23 @@ app.controller('RemoteCtrl', function($scope, $http, Sounder, Manager) {
 	}
 
 	function sendRequestWithParams($http, method, params) {
+		var base_url = prepareUrl();
+
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": '+ params +', "id": 1}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.error(function() {
 			alert("Vous n'êtes pas connecté");
 		});
+	}
+
+	function prepareUrl() {
+		kodiIP = $location.host();
+		kodiPort = $location.port();
+
+		base_url = 'http://' + kodiIP + ':' + kodiPort;
+
+		return base_url;
 	}
 });

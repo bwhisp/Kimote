@@ -16,9 +16,10 @@ app.controller('MusicCtrl', function($scope, $http, $location, $routeParams) {
 	};
 
 	function getArtists($http, method, params) {
+		var base_url = prepareUrl();
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -40,9 +41,10 @@ app.controller('MusicCtrl', function($scope, $http, $location, $routeParams) {
 	};
 
 	function getAlbums($http, method, params) {
+		var base_url = prepareUrl();
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -64,8 +66,10 @@ app.controller('MusicCtrl', function($scope, $http, $location, $routeParams) {
 	};
 
 	function getSongs($http, method, params) {
+		var base_url = prepareUrl();
+
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$scope.loader = true;
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
@@ -83,12 +87,13 @@ app.controller('MusicCtrl', function($scope, $http, $location, $routeParams) {
 	}
 
 	$scope.playSong = function(file) {
+		var base_url = prepareUrl();
 
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
+		complete_url = base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
@@ -137,4 +142,13 @@ app.controller('MusicCtrl', function($scope, $http, $location, $routeParams) {
 			$scope.selectedAlbum = undefined;
 		}
 	};
+
+	function prepareUrl() {
+		kodiIP = $location.host();
+		kodiPort = $location.port();
+
+		base_url = 'http://' + kodiIP + ':' + kodiPort;
+
+		return base_url;
+	}
 });
