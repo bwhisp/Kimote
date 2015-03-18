@@ -9,4 +9,5 @@
     </author>
     <content src="index.html" />
     <access origin="*" launch-external="yes"/>
+    <icon src="www/img/logo_final.png" />
 </widget>
