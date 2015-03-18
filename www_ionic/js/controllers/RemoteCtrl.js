@@ -1,6 +1,17 @@
-app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, Sounder, Manager) {
+app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, Sounder, Manager, Runtime) {
 
 	$scope.model = {};
+
+	$scope.model.runtime;
+	$scope.getRuntime = function () {
+	$scope.model.runtime=Runtime.GetRuntime();
+	};
+
+	setInterval($scope.getRuntime,500);
+	$scope.setRuntime = function () {
+		Runtime.SetRuntime($scope.model.runtime);	
+	};
+		
     $scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
 	$scope.sound = Sounder.getVolume();

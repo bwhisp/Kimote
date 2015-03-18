@@ -11,8 +11,9 @@
             <!--<div class="col col-10">
                 <i class="icon ion-ios-fastforward"></i>
             </div>-->
-
-
+<div class="range">
+        <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-click="setRuntime()">
+</div>
         <div class="nav-buttons">
             <div class="row nav-button-up">
 			<div ng-hide="muted">
@@ -89,6 +90,7 @@
             <button class="icon ion-volume-low" ng-click="requestApplication('volumeDown')"></button>
             <input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-click="setVol()">
             <button class="icon ion-volume-high" ng-click="requestApplication('volumeUp')"></button>
-        </div>
+        </div> 
+
     </ion-content>
 </ion-view>
