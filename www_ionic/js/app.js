@@ -5,6 +5,16 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
+
+// Notifications natives
+document.addEventListener('deviceready', function() {
+    if (navigator.notification) {
+        window.alert = function (message) {
+            navigator.notification.alert(message,null,"Komote",'OK');
+        };
+    }
+}, false);
+
 var app = angular.module('app', ['ionic','ngCookies']);
 
 app.run(function($ionicPlatform) {
