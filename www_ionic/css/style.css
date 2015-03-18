@@ -91,6 +91,6 @@
 }
 
 .icon.ion-volume-low, .icon.ion-volume-high{
-	border: none;
-	background: none;
+	border: none !important;
+	background: none !important;
 }
