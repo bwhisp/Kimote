@@ -14,7 +14,7 @@ app.controller('SettingsCtrl', function($scope, $cookieStore, Logger) {
 		$scope.connected = Logger.getConn();
 		$scope.errCon = Logger.getErr();
 
-		if ($scope.StoreID) {
+		if ($scope.model.StoreID) {
 			$cookieStore.put('ip',$scope.model.ip);
 			$cookieStore.put('port',$scope.model.port.toString());
 			$cookieStore.put('user',$scope.model.user);
