@@ -89,3 +89,8 @@
 .memoriser {
     margin-right: 20px;
 }
+
+.icon.ion-volume-low, .icon.ion-volume-high{
+	border: none;
+	background: none;
+}

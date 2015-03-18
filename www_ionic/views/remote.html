@@ -15,8 +15,22 @@
 
         <div class="nav-buttons">
             <div class="row nav-button-up">
+			<div ng-hide="muted">
                 <div class="col col-33">
                     <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="requestApplication('mute')"></button>
+					
+                </div>			
+			</div>
+			<div ng-show="muted">
+                <div class="col col-33">
+					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="requestApplication('unmute')"></button>
+					
+                </div>			
+			</div>			
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-volume-mute"   ng-click="requestApplication('mute')"></button>
+					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="requestApplication('unmute')"></button>
+					
                 </div>
                 <div class="col col-33">
                     <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="requestInput('up')"></button>
@@ -72,9 +86,9 @@
         </div>
 
         <div class="range sound">
-            <i class="icon ion-volume-low"></i>
+            <button class="icon ion-volume-low" ng-click="requestApplication('volumeDown')"></button>
             <input type="range" name="volume" ng-model="sound" min="0" max="100" ng-click="setVol()">
-            <i class="icon ion-volume-high"></i>
+            <button class="icon ion-volume-high" ng-click="requestApplication('volumeUp')"></button>
         </div>
     </ion-content>
 </ion-view>

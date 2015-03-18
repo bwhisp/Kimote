@@ -62,8 +62,6 @@ app.factory('Sounder', function($http) {
 		$http.jsonp(window.base_url + ping_url)
 		.success(function(data, status) {
 			muted = true;
-			window.location = "#/settings";
-			window.location = "#/remote";
 		})
 		.error(function(data, status) {
 			errMute = true;
@@ -76,8 +74,6 @@ app.factory('Sounder', function($http) {
 		$http.jsonp(window.base_url + ping_url)
 		.success(function(data, status) {
 			muted = false;
-			window.location = "#/settings";
-			window.location = "#/remote";
 		})
 		.error(function(data, status) {
 			errUnMute = true;
