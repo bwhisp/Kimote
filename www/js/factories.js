@@ -48,6 +48,7 @@ app.factory('Logger', function($http) {
 });
 
 app.factory('Sounder', function($http) {
+	
 	var sounder = {};
 
 	var muted = false;
