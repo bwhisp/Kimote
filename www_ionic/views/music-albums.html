@@ -1,0 +1,18 @@
+<ion-view view-title="{{artist_label}}">
+    <ion-nav-buttons side='right'>
+        <button class="button button-icon ion-android-search"></button>
+    </ion-nav-buttons>
+
+    <div ng-init="showAlbums(artist_id)"></div>
+    <ion-content>
+        <ion-list>
+            <a class="item item-thumbnail-left item-icon-right" ng-repeat="album in albums" href="#/tab/songs/{{album.label}}/{{album.albumid}}">
+                <img ng-src="{{getThumbnailAlbum(album.thumbnail)}}">
+                <h2>{{album.label}}</h2>
+                <p>{{album.year}}</p>
+                <p ng-repeat="genre in album.genre">{{genre}}{{$last ? '' : ', '}}</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

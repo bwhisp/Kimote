@@ -1,0 +1,11 @@
+<ion-view view-title="Saison {{season_id}}">
+    <div ng-init="showEpisodes(series_id, season_id)"></div>
+    <ion-content>
+        <ion-list>
+            <a class="item item-icon-right" ng-repeat="episode in episodes" href="#/tab/episode-detail/{{episode.label}}/{{episode.episodeid}}">
+                <h2>{{episode.label}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

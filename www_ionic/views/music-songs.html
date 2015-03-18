@@ -1,0 +1,12 @@
+<ion-view view-title="{{album_label}}">
+    <div ng-init="showSongs(album_id)"></div>
+    <ion-content>
+        <ion-list>
+            <a class="item item-icon-right" ng-repeat="song in songs" href="#" ng-click="playSong(song.file)">
+                {{song.track}}&nbsp;&nbsp;&nbsp; <b>{{song.label}}</b>
+                <span class="item-note">{{toMinutes(song.duration)}}</span>
+                <i class="icon ion-play positive"></i>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

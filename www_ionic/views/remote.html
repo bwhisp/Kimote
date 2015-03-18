@@ -1,0 +1,80 @@
+<ion-view view-title="Télécommande">
+    <ion-content class="padding">
+
+        <!--<div class="row">-->
+            <!--<div class="col col-10">
+                <i class="icon ion-ios-rewind"></i>
+            </div>-->
+            <!--<div class="range runtime">
+                <input type="range" name="volume">
+            </div>-->
+            <!--<div class="col col-10">
+                <i class="icon ion-ios-fastforward"></i>
+            </div>-->
+
+
+        <div class="nav-buttons">
+            <div class="row nav-button-up">
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="requestApplication('mute')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="requestInput('up')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-power" ng-click="requestApplication('shutdown')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+
+            <div class="row nav-button-middle">
+                <div class="col col-33">
+                    <button class="button-nav-custom button-nav-left button button-icon ion-chevron-left" ng-click="requestInput('left')"></button>
+                </div>
+
+                <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-checkmark-circled" ng-click="requestInput('select')"></button>
+                </div>
+
+                <div class="col col-33">
+                    <button class="button-nav-custom button-nav-right button button-icon ion-chevron-right" ng-click="requestInput('right')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+
+            <div class="row nav-button-down">
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-arrow-left-c" ng-click="requestInput('back')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-chevron-down" ng-click="requestInput('down')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-android-home" ng-click="requestInput('home')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="media-buttons-wrapper">
+            <div class="media-buttons">
+                <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="requestInput('previous')"></button>
+                <button class="button-media-custom button button-icon ion-ios-play" ng-click="requestInput('play')"></button>
+                <button class="button-media-custom button button-icon ion-ios-pause" ng-click="requestInput('pause')"></button>
+                <button class="button-media-custom button button-icon ion-stop" ng-click="requestInput('stop')"></button>
+                <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="requestInput('next')"></button>
+            </div>
+        </div>
+
+        <div class="range sound">
+            <i class="icon ion-volume-low"></i>
+            <input type="range" name="volume" ng-model="sound" min="0" max="100" ng-click="setVol()">
+            <i class="icon ion-volume-high"></i>
+        </div>
+    </ion-content>
+</ion-view>

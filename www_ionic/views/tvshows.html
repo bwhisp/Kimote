@@ -1,0 +1,18 @@
+<ion-view view-title="Séries TV">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-android-search"></button>
+    </ion-nav-buttons>
+
+    <div ng-init="showSeries()"></div>
+    <ion-content>
+        <ion-list>
+            <a class="item item-thumbnail-left item-icon-right" ng-repeat="tvshow in tvshows" href="#/tab/tvshows/{{tvshow.label}}/{{tvshow.tvshowid}}">
+                <img ng-src="{{getThumbnailSeries(tvshow.thumbnail)}}">
+                <h2>{{tvshow.label}}</h2>
+                <p>{{tvshow.year}}</p>
+                <p>Note : {{Math.round(tvshow.rating * 10) / 10}}/10</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>
