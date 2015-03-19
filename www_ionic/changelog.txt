@@ -1,0 +1,15 @@
+1. Ajout de la vue image
+	fichiers concernés : index.html tabs.html pics.html factories.js PicsCtrl.js app.js
+	
+	but : 	La vue ressemble à la télécommande, y'a un bouton zoom. Les boutons play pause, ect..., les barres son et avancement n'y sont pas. Cliquer sur l'onglet images doit mettre Kodi sur le menu images. 
+	
+	bugs constatés : Zoom n'a pas l'air de marcher (à tester + en détail). Le menu images ne peut être activé qu'une seule fois par connexion, c'est dû au fait que le controller ne se charge qu'une seule fois. J'essaie de trouver une solution. Le faire via la directive ng-init n'a pas l'air de marcher non plus.
+
+2. Nouvelle factory : Requester (si quelqu'un trouve un meilleur nom je suis preneur)
+	fichiers concernés : factories.js remote.html remoteCtrl.js picsCtrl.js pics.html
+
+	but : 	Pouvoir réutiliser les commandes qui étaient dans remoteCtrl.js et alleger les controllers. 
+			Les fonctions qui étaient dans remoteCtrl.js ont été déplacées dans la factory
+			Clic sur un bouton => appel de la fonction request du controller => appel selon cas de requestInput, requestApplication, requestGUI ect... qui sont dans la factory. 
+
+	bugs : 	Pour l'instant aucun
