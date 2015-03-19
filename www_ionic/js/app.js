@@ -140,7 +140,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     })
-
+    .state('tab.pics', {
+        url : '/pics',
+        views : {
+            'pics': {
+                templateUrl: 'views/pics.html',
+                controller: 'PicsCtrl'
+            }
+        }
+    })
     .state('tab.settings', {
         url: '/settings',
         views: {

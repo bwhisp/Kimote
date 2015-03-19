@@ -1,11 +1,11 @@
 app.controller('SettingsCtrl', function($scope, $cookieStore, Logger) {
-
 	$scope.model = {};
 	$scope.IPMODEL = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
 
 	$scope.bouton = Logger.getBouton();
 	$scope.connected = Logger.getConn();
 	$scope.errCon = Logger.getErr();
+	$scope.model.StoreID = false;
 
 	$scope.login = function () {
 		Logger.login($scope.model.user, $scope.model.pass, $scope.model.ip, $scope.model.port);

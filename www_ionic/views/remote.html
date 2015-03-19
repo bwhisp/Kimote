@@ -18,26 +18,26 @@
             <div class="row nav-button-up">
 			<div ng-hide="muted">
                 <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="requestApplication('mute')"></button>
+                    <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="request('mute')"></button>
 					
                 </div>			
 			</div>
 			<div ng-show="muted">
                 <div class="col col-33">
-					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="requestApplication('unmute')"></button>
+					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="request('unmute')"></button>
 					
                 </div>			
 			</div>			
                 <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-volume-mute"   ng-click="requestApplication('mute')"></button>
-					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="requestApplication('unmute')"></button>
+                    <button class="button-menu-custom button button-icon ion-volume-mute"   ng-click="request('mute')"></button>
+					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="request('unmute')"></button>
 					
                 </div>
                 <div class="col col-33">
-                    <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="requestInput('up')"></button>
+                    <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
                 </div>
                 <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-power" ng-click="requestApplication('shutdown')"></button>
+                    <button class="button-menu-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
                 </div>
             </div>
 
@@ -47,15 +47,15 @@
 
             <div class="row nav-button-middle">
                 <div class="col col-33">
-                    <button class="button-nav-custom button-nav-left button button-icon ion-chevron-left" ng-click="requestInput('left')"></button>
+                    <button class="button-nav-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
                 </div>
 
                 <div class="col col-33">
-                    <button class="button-nav-custom button button-icon ion-checkmark-circled" ng-click="requestInput('select')"></button>
+                    <button class="button-nav-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
                 </div>
 
                 <div class="col col-33">
-                    <button class="button-nav-custom button-nav-right button button-icon ion-chevron-right" ng-click="requestInput('right')"></button>
+                    <button class="button-nav-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
                 </div>
             </div>
 
@@ -65,31 +65,31 @@
 
             <div class="row nav-button-down">
                 <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-arrow-left-c" ng-click="requestInput('back')"></button>
+                    <button class="button-menu-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
                 </div>
                 <div class="col col-33">
-                    <button class="button-nav-custom button button-icon ion-chevron-down" ng-click="requestInput('down')"></button>
+                    <button class="button-nav-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
                 </div>
                 <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-android-home" ng-click="requestInput('home')"></button>
+                    <button class="button-menu-custom button button-icon ion-android-home" ng-click="request('home')"></button>
                 </div>
             </div>
         </div>
 
         <div class="media-buttons-wrapper">
             <div class="media-buttons">
-                <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="requestInput('previous')"></button>
-                <button class="button-media-custom button button-icon ion-ios-play" ng-click="requestInput('play')"></button>
-                <button class="button-media-custom button button-icon ion-ios-pause" ng-click="requestInput('pause')"></button>
-                <button class="button-media-custom button button-icon ion-stop" ng-click="requestInput('stop')"></button>
-                <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="requestInput('next')"></button>
+                <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
+                <button class="button-media-custom button button-icon ion-ios-play" ng-click="request('play')"></button>
+                <button class="button-media-custom button button-icon ion-ios-pause" ng-click="request('pause')"></button>
+                <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
+                <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
             </div>
         </div>
 
         <div class="range sound">
-            <button class="icon ion-volume-low" ng-click="requestApplication('volumeDown')"></button>
+            <button class="icon ion-volume-low" ng-click="request('volumeDown')"></button>
             <input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-click="setVol()">
-            <button class="icon ion-volume-high" ng-click="requestApplication('volumeUp')"></button>
+            <button class="icon ion-volume-high" ng-click="request('volumeUp')"></button>
         </div> 
 
     </ion-content>

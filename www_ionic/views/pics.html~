@@ -1,0 +1,57 @@
+<ion-view view-title="Pictures">
+
+      <ion-nav-buttons side="right">
+            <button class="button button-icon ion-android-search"></button>
+      </ion-nav-buttons>
+
+	<div ng-init="showPics()"></div>
+
+      <ion-content>
+		<div class="nav-buttons">
+                  <div class="row nav-button-up">
+                  <div class="col col-33">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                  <div class="col col-33">
+                        <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+                  </div>
+                  <div class="col col-33">
+                        <button class="button-menu-custom button button-icon ion-ios-search-strong" ng-click="request('zoom');"></button>
+                  </div>
+                  </div>
+                  
+                  <div class="row">
+                        <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                  </div>
+
+                  <div class="row nav-button-middle">
+                  <div class="col col-33">
+                    <button class="button-nav-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
+                  </div>
+
+                  <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
+                  </div>
+
+                  <div class="col col-33">
+                    <button class="button-nav-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
+                  </div>
+                  </div>
+
+                  <div class="row">
+                  <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                  </div>
+
+                  <div class="row nav-button-down">
+                  <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
+                  </div>
+                  <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
+                  </div>
+                  <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-android-home" ng-click="request('home')"></button>
+                  </div>
+            </div>
+            </div>
+
+      </ion-content>
+</ion-view>
