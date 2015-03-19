@@ -1,4 +1,4 @@
-app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location) {
+app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading) {
 
     $scope.movie_label = $stateParams.movieLabel;
 
@@ -11,17 +11,20 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location) {
 	};
 
     //récupération des films
-	function getMovies($http, method, params) {
+    function getMovies($http, method, params) {
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
+        $ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			$scope.movies = data.result.movies;
 		})
 		.error(function(data, status, headers, config) {
-			console.log('Data: ' + data);
+            $ionicLoading.hide();
+            console.log('Data: ' + data);
             console.log('Status: ' + status);
             console.log('Headers: ' + headers);
             console.log('Config: ' + config);
@@ -66,15 +69,6 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location) {
 
 		return $scope.thumbnailUriDecoded;
 	};
-
-    /*function prepareUrl() {
-		kodiIP = "172.16.90.221";
-		kodiPort = "8080";
-
-		base_url = 'http://' + kodiIP + ':' + kodiPort;
-
-		return base_url;
-	}*/
 
     $scope.Math = window.Math;
 });

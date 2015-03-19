@@ -1,4 +1,4 @@
-app.controller('SeriesCtrl', function($scope, $http, $location, $stateParams) {
+app.controller('SeriesCtrl', function($scope, $http, $location, $stateParams, $ionicLoading) {
 
     $scope.series_id = $stateParams.seriesId;
     $scope.series_label = $stateParams.seriesLabel;
@@ -22,11 +22,14 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $stateParams) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
+        $ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			$scope.tvshows = data.result.tvshows;
 		})
 		.error(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			console.log('Data: ' + data);
             console.log('Status: ' + status);
             console.log('Headers: ' + headers);
@@ -72,11 +75,14 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $stateParams) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
+        $ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			$scope.seasons = data.result.seasons;
 		})
 		.error(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			console.log('Data: ' + data);
             console.log('Status: ' + status);
             console.log('Headers: ' + headers);
@@ -97,11 +103,14 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $stateParams) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
+        $ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			$scope.episodes = data.result.episodes;
 		})
 		.error(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			console.log('Data: ' + data);
             console.log('Status: ' + status);
             console.log('Headers: ' + headers);
@@ -121,11 +130,14 @@ app.controller('SeriesCtrl', function($scope, $http, $location, $stateParams) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
+        $ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			$scope.episodedetails = data.result.episodedetails;
 		})
 		.error(function(data, status, headers, config) {
+            $ionicLoading.hide();
 			console.log('Data: ' + data);
             console.log('Status: ' + status);
             console.log('Headers: ' + headers);
