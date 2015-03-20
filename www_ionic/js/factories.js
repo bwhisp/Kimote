@@ -299,6 +299,13 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				method = method + 'ExecuteAction';
 				params = '{"action":"rewind"}';
 				break;
+			case "zoom+" :
+				method = method + 'ExecuteAction';
+				params = '{"action":"zoomin"}';
+				break;
+			case "zoom-" :
+				method = method + 'ExecuteAction';
+				params = '{"action":"zoomout"}';
 		}
 
 		sendRequest($http, method, params);
@@ -353,12 +360,12 @@ app.factory('Requester', function($http, Manager, Sounder) {
 	};
 
 	requester.requestPlayer = function (input){
-		method = 'Player.';
+		method = 'Input.ExecuteAction';
 		
 		switch (input) {
 			case "zoom" : 
-				method = method + 'Zoom';
-				params = '{"playerid":0,"zoom":"in"}';
+				//method = method + 'Zoom';
+				params = '{"action":"zoomlevel1"}';
 				break;
 
 			default :
