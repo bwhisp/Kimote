@@ -1,34 +1,11 @@
 <ion-view view-title="Komote - Télécommande">
     <ion-content class="padding">
 
-        <!--<div class="row">-->
-            <!--<div class="col col-10">
-                <i class="icon ion-ios-rewind"></i>
-            </div>-->
-            <!--<div class="range runtime">
-                <input type="range" name="volume">
-            </div>-->
-            <!--<div class="col col-10">
-                <i class="icon ion-ios-fastforward"></i>
-            </div>-->
         <div class="nav-buttons">
             <div class="row nav-button-up">
-			<div ng-hide="muted">
                 <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="request('mute')"></button>
-					
-                </div>			
-			</div>
-			<div ng-show="muted">
-                <div class="col col-33">
-					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="request('unmute')"></button>
-					
-                </div>			
-			</div>			
-                <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-volume-mute"   ng-click="request('mute')"></button>
-					<button class="button-menu-custom button button-icon ion-volume-medium" ng-show="muted" ng-click="request('unmute')"></button>
-					
+                    <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="request('mute'); muted=true" ng-hide="muted"></button>
+					<button class="button-menu-custom button button-icon ion-volume-medium" ng-click="request('unmute'); muted=false" ng-show="muted"></button>
                 </div>
                 <div class="col col-33">
                     <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
@@ -39,7 +16,9 @@
             </div>
 
             <div class="row">
-                <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="col-100">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
             </div>
 
             <div class="row nav-button-middle">
