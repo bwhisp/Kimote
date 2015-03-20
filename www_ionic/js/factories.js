@@ -81,38 +81,6 @@ app.factory('Sounder', function($http) {
 	};
 
 
-	sounder.VolUp = function(vol) {
-		if (vol < 100)
-			vol = vol + 1;
-
-		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetVolume", "params":{"volume":' + vol + '}}&callback=JSON_CALLBACK';
-
-		$http.jsonp(window.base_url + ping_url)
-		.success(function(data, status) {
-			volume = vol;
-			window.location = "#/settings";
-			window.location = "#/remote";
-		})
-		.error(function(data, status) {
-		});
-	}
-
-	sounder.VolDown = function(vol) {
-		if (vol < 100)
-			vol = vol - 1;
-
-		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetVolume", "params":{"volume":' + vol + '}}&callback=JSON_CALLBACK';
-
-		$http.jsonp(window.base_url+ping_url)
-		.success(function(data, status) {
-			volume = vol;
-			window.location = "#/settings";
-			window.location = "#/remote";
-		})
-		.error(function(data, status) {
-		});
-	}
-
 	sounder.SetVol = function (sound) {
 
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetVolume", "params":{"volume":' + sound + '}}&callback=JSON_CALLBACK';
@@ -120,8 +88,6 @@ app.factory('Sounder', function($http) {
 		$http.jsonp(window.base_url+ping_url)
 		.success(function(data, status) {
 			volume = sound;
-			window.location = "#/settings";
-			window.location = "#/remote";
 		})
 		.error(function(data, status) {
 		});
@@ -302,6 +268,13 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				method = method + 'ExecuteAction';
 				params = '{"action":"rewind"}';
 				break;
+			case "zoom+" :
+				method = method + 'ExecuteAction';
+				params = '{"action":"zoomin"}';
+				break;
+			case "zoom-" :
+				method = method + 'ExecuteAction';
+				params = '{"action":"zoomout"}';
 		}
 
 		sendRequest($http, method, params);
@@ -356,12 +329,12 @@ app.factory('Requester', function($http, Manager, Sounder) {
 	};
 
 	requester.requestPlayer = function (input){
-		method = 'Player.';
+		method = 'Input.ExecuteAction';
 		
 		switch (input) {
 			case "zoom" : 
-				method = method + 'Zoom';
-				params = '{"playerid":0,"zoom":"in"}';
+				//method = method + 'Zoom';
+				params = '{"action":"zoomlevel1"}';
 				break;
 
 			default :

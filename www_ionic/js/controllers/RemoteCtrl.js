@@ -39,14 +39,14 @@ app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, So
 		
     $scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
-	$scope.sound = Sounder.getVolume();
+	$scope.model.sound = Sounder.getVolume();
 
 	$scope.paused = Manager.getPaused();
 	$scope.played = Manager.getPlayed();
 
 	$scope.setVol = function () {
 		Sounder.SetVol($scope.model.sound);
-		$scope.model.sound = Sounder.getVolume();
+		//$scope.model.sound = Sounder.getVolume();
 	};
 
 	$scope.request = function (input) {
@@ -64,13 +64,6 @@ app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, So
 			case "unmute" : 
 				Requester.requestApplication(input, 0);
 				break;
-			case "volumeUp" :
-				Requester.requestApplication(input, $scope.volume);
-				break;
-			case "volumeDown" : 
-				Requester.requestApplication(input, $scope.volume);
-				break;
-
 			default :
 				Requester.requestInput(input);
 				break;
@@ -78,8 +71,8 @@ app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, So
 
 		$scope.played = Manager.getPlayed();
 		$scope.paused = Manager.getPaused();
-		$scope.muted = Sounder.getMuted();
-		$scope.volume = Sounder.getVolume();
+		//$scope.muted = Sounder.getMuted();
+		//$scope.volume = Sounder.getVolume();
 	};
 
 });

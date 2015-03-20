@@ -133,6 +133,17 @@
 			sendRequestWithParams($http, method, params);
 		};
 
+		$scope.requestPlayer = function requestPlayer(input) {
+
+		if (input === 'shuffle') {
+
+				method = 'Player.SetShuffle';
+				params = '"shuffle": true ';
+			}
+
+		sendRequestWithParamsForPlayer($http, method, params);
+		};
+
 		function sendRequest($http, method) {
 			param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id": 1}';
 			complete_url = window.base_url + param_url;
@@ -149,6 +160,19 @@
 			$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 			.error(function() {
 				alert("Vous n'êtes pas connecté");
+			});
+		}
+
+			function sendRequestWithParamsForPlayer($http, method, params) {
+			ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
+			$http.jsonp(window.base_url+ping_url)
+			.success(function(data, status){
+				param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": {"playerid":'+data.result[0].playerid+', '+ params +'}, "id": 1}';
+				complete_url = window.base_url + param_url;
+				$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+					.error(function() {
+					alert("Vous n'êtes pas connecté");
+					});	
 			});
 		}
 	});
