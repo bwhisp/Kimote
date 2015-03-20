@@ -4,11 +4,11 @@ app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, So
 
 	$scope.model.runtime;
 	$scope.model.temps;
-
+	$scope.model.totaltime;
 	$scope.getRuntime = function () {
 		$scope.model.runtime=Runtime.GetRuntime().moment2;
 		$scope.model.temps=Runtime.GetRuntime().temps;
-		console.log("model.temps")
+		$scope.model.totaltime=Runtime.GetRuntime().totaltime;
 	};
 
 	setInterval($scope.getRuntime,500);
