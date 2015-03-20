@@ -103,10 +103,19 @@
 
 .runtime {
     position: absolute;
+    margin-left: auto;
+    margin-right: auto;
     bottom: 1%;
     width: 100%;
 }
-
+.time {
+    position: absolute;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 1%;
+    width: 100%;
+}
 /* settings.html */
 
 .auth {

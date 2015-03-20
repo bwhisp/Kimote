@@ -1,6 +1,6 @@
 <ion-view view-title="{{movie_label}}">
     <div ng-init="showMovies()"></div>
-    <ion-content ng-repeat="movie in movies | filter: movie_label" class="padding">
+    <ion-content ng-repeat="movie in movies | filter: movie_label" class="padding" overflow-scroll=true>
         <div class="card">
             <div class="item item-thumbnail-left">
                 <img ng-src="{{getThumbnail(movie.thumbnail)}}">
