@@ -1,5 +1,5 @@
 <ion-view view-title="Komote - Télécommande">
-    <ion-content class="padding">
+    <ion-content class="padding" scroll=false>
 
         <div class="nav-buttons">
             <div class="row nav-button-up">
@@ -60,14 +60,14 @@
                 <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
                 <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
             </div>
-        </div>          
+        </div>
             <div class="range runtime">
                 <button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
                 <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
                 <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
             </div>
 <div class="time">
-            {{toMinutes(model.temps)}} / 
+            {{toMinutes(model.temps)}} /
             {{toMinutes(model.totaltime)}}
 </div>
       <!--<div class="range runtime">
