@@ -150,6 +150,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     })
+    .state('tab.media', {
+        url: '/media',
+        views: {
+            'media': {
+                templateUrl: 'views/media.html',
+                controller: 'RemoteCtrl'
+            }
+        }
+    })	
     .state('tab.settings', {
         url: '/settings',
         views: {
@@ -159,6 +168,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     });
+	
+	
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/remote');

@@ -1,6 +1,7 @@
 app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading) {
 
     $scope.movie_label = $stateParams.movieLabel;
+	
 
     //préparation de la requête http pour afficher la liste des films
 	$scope.showMovies = function() {
@@ -43,6 +44,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
 			$location.path("/remote"); // fixer le tab actif
+			filmed = false;
 		})
 		.error(function(data, status, headers, config) {
 			alert("Impossible de lire le film");

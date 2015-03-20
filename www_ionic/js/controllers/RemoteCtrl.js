@@ -12,6 +12,10 @@ app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, So
 		Runtime.SetRuntime($scope.model.runtime);	
 	};
 		
+	$scope.goMedia = function () {
+		window.location = "#/media";
+	}		
+		
     $scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
 	$scope.model.sound = Sounder.getVolume();
