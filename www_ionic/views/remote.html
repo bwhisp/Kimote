@@ -11,9 +11,6 @@
             <!--<div class="col col-10">
                 <i class="icon ion-ios-fastforward"></i>
             </div>-->
-<div class="range">
-        <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-click="setRuntime()">
-</div>
         <div class="nav-buttons">
             <div class="row nav-button-up">
 			<div ng-hide="muted">
@@ -85,12 +82,14 @@
                 <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
             </div>
         </div>
-
-        <div class="range sound">
+        <div class="range runtime">
+            <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
+        </div>
+      <!--  <div class="range sound">
             <button class="icon ion-volume-low" ng-click="request('volumeDown')"></button>
             <input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-click="setVol()">
             <button class="icon ion-volume-high" ng-click="request('volumeUp')"></button>
-        </div> 
+        </div> -->
 
     </ion-content>
 </ion-view>

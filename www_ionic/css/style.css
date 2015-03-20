@@ -72,6 +72,12 @@
     width: 100%;
 }
 
+.runtime {
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+}
+
 /* settings.html */
 
 .auth {
