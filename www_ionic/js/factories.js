@@ -191,8 +191,11 @@ app.factory('Manager', function($http) {
 app.factory('Runtime', function($http) {
 	var runtime = {};
 
+	var infos = {};
 	var moment;
-	var moment2=0;
+	infos.moment2=0;
+	infos.temps=0;
+
 	
 	runtime.SetRuntime = function (moment) {
 					
@@ -226,10 +229,9 @@ app.factory('Runtime', function($http) {
 				$http.jsonp(window.base_url+ping_url2)
 					.success(function(data, status){
 					
-						moment2=data.result.percentage;
-				
-						console.log("estce bon" + moment2);
-								
+						infos.moment2=data.result.percentage;
+						infos.temps = data.result.time;
+												
 				})
 				.error(function(data, status){
 			
@@ -238,9 +240,10 @@ app.factory('Runtime', function($http) {
 			})
 			.error(function(data, status){
 			});
-		return moment2;	
+			console.log(infos);
+		return infos;	
 	};
-
+	console.log(runtime);
 	return runtime;
 });
 

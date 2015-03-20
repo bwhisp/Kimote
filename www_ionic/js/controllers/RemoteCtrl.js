@@ -3,14 +3,39 @@ app.controller('RemoteCtrl', function($scope, $http, $stateParams, $location, So
 	$scope.model = {};
 
 	$scope.model.runtime;
+	$scope.model.temps;
+
 	$scope.getRuntime = function () {
-		$scope.model.runtime=Runtime.GetRuntime();
+		$scope.model.runtime=Runtime.GetRuntime().moment2;
+		$scope.model.temps=Runtime.GetRuntime().temps;
+		console.log("model.temps")
 	};
 
 	setInterval($scope.getRuntime,500);
 	$scope.setRuntime = function () {
 		Runtime.SetRuntime($scope.model.runtime);	
 	};
+
+	$scope.toMinutes = function(temps) {
+
+        var seconds = temps.seconds;
+        var minutes = temps.minutes;
+        var hours = temps.hours;
+
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+
+        var time = hours + ':' + minutes + ':' + seconds;
+        return time;
+    };
 		
     $scope.muted = Sounder.getMuted();
 	$scope.volume = Sounder.getVolume();
