@@ -1,4 +1,4 @@
-<ion-view view-title="Komote - Réglages">
+<ion-view view-title="Réglages">
     <ion-content>
         <div class="list">
 
@@ -24,8 +24,12 @@
             </label>
 
             <div class="padding">
-                <button class="button button-block button-positive connexion" ng-click="login()">
+                <button class="button button-block button-positive connexion" ng-click="login(); connected=true" ng-hide="connected">
                     <i class="icon ion-checkmark icon-connexion"></i>Connexion
+                </button>
+
+                <button class="button button-block button-assertive" ng-click="logout(); connected=false" ng-show="connected">
+                    <i class="icon ion-close icon-deconnexion"></i>Déconnecter
                 </button>
 
                 <div class="row">
