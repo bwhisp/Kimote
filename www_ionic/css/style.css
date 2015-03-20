@@ -68,7 +68,7 @@
 
 .sound {
     position: absolute;
-    bottom: 5%;
+    bottom: 1%;
     width: 100%;
 }
 
@@ -79,6 +79,10 @@
 }
 
 .icon-connexion {
+    margin-right: 15px;
+}
+
+.icon-deconnexion {
     margin-right: 15px;
 }
 
