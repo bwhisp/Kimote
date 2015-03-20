@@ -253,11 +253,7 @@
 					ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":'+data.result[0].playerid+',"properties":["percentage", "time" ] }}&callback=JSON_CALLBACK';
 	$http.jsonp(window.base_url+ping_url2)
 					.success(function(data, status){
-						
-						moment2=data.result.percentage;
-					
-						console.log("estce bon" + moment2);
-									
+						moment2=data.result.percentage;		
 					})
 					.error(function(data, status){
 				
