@@ -43,7 +43,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('tab', {
         url: "/tab",
         abstract: true,
-        templateUrl: "views/tabs.html"
+        templateUrl: "views/tabs.html",
+        controller : 'PicsCtrl'
     })
 
     // Each tab has its own nav history stack:

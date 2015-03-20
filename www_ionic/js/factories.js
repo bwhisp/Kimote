@@ -340,6 +340,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				params = '{"fullscreen":true}';
 				break;
 			case "pictures" :
+				window.location = "#/tab/pics";
 				method = method + "ActivateWindow"
 				params = '{"window" : "pictures"}';
 				break;

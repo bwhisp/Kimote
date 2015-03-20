@@ -14,7 +14,4 @@ app.controller('PicsCtrl', function($scope, $http, Requester) {
 				break;
 		}
 	};
-
-	// Aller vers le menu image de kodi
-	$scope.request("pictures");
 });
