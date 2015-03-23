@@ -1,5 +1,5 @@
 <ion-view view-title="Komote - Télécommande">
-    <ion-content class="padding">
+    <ion-content class="padding" scroll=false>
 
         <div class="nav-buttons">
             <div class="row nav-button-up">
@@ -60,17 +60,34 @@
                 <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
                 <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
             </div>
-        </div>          
+        </div>
+<<<<<<< HEAD
+		
+		<div class="col col-33">
+                <button class="button" ng-click="goMedia()">
+                    Connexion
+                </button>
+		</div>
+<!--         <div class="range runtime">
+=======
             <div class="range runtime">
                 <button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
                 <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
                 <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
             </div>
+<<<<<<< HEAD
             <div class ="time">
                 {{toMinutes(model.temps)}} / 
                 {{toMinutes(model.totaltime)}} 
             </div>
+=======
+<div class="time">
+            {{toMinutes(model.temps)}} /
+            {{toMinutes(model.totaltime)}}
+</div>
+>>>>>>> 7d2f7348b694e2bdeb70365b76842c896c22bce3
       <!--<div class="range runtime">
+>>>>>>> 3b5b6373f36084384abf8e24c2908fbc022e73c2
             <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
         </div> -->
        <!--<div class="range sound">
