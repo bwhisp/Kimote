@@ -66,10 +66,10 @@
                 <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
                 <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
             </div>
-<div class="time">
-            {{toMinutes(model.temps)}} / 
-            {{toMinutes(model.totaltime)}}
-</div>
+            <div class ="time">
+                {{toMinutes(model.temps)}} / 
+                {{toMinutes(model.totaltime)}} 
+            </div>
       <!--<div class="range runtime">
             <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
         </div> -->
