@@ -7,10 +7,12 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, Sou
     $scope.model.runtime;
     $scope.model.temps;
     $scope.model.totaltime;
+    $scope.model.playeractive;
     $scope.getRuntime = function () {
         $scope.model.runtime=Runtime.GetRuntime().moment2;
         $scope.model.temps=Runtime.GetRuntime().temps;
         $scope.model.totaltime=Runtime.GetRuntime().totaltime;
+        $scope.model.playeractive=Runtime.GetRuntime().playeractive;
     };
 
     setInterval($scope.getRuntime,500);
@@ -37,6 +39,15 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, Sou
 
         var time = hours + ':' + minutes + ':' + seconds;
         return time;
+    };
+
+    $scope.playerisActive = function(id){
+
+        if(id != "undefined")
+            return false;
+        else 
+            return true;
+
     };
 
     $scope.muted = Sounder.getMuted();

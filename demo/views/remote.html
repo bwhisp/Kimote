@@ -50,25 +50,26 @@
                 </div>
             </div>
         </div>
-
-        <div class="media-buttons-wrapper">
-            <div class="media-buttons">
-                <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
-                <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
-                <button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': !played, 'ion-ios-play': played}" ng-click="played=!played; request('pause')"></button>
-                <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
+        <div ng-hide="playerisActive(model.playeractive)" class="ng-hide">
+            <div class="media-buttons-wrapper">
+                <div class="media-buttons">
+                    <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
+                    <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
+                    <button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': !played, 'ion-ios-play': played}" ng-click="played=!played; request('pause')"></button>
+                    <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
+                </div>
+            </div>
+            <div class="range runtime">
+                <button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
+                <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
+                <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
+            </div>
+            <div class="time">
+                {{toMinutes(model.temps)}} /
+                {{toMinutes(model.totaltime)}}
             </div>
         </div>
 
-        <div class="range runtime">
-            <button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
-            <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
-            <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
-        </div>
-        <div class="time">
-            {{toMinutes(model.temps)}} /
-            {{toMinutes(model.totaltime)}}
-        </div>
       <!--  <div class="range sound">
             <button class="icon ion-volume-low" ng-click="request('volumeDown')"></button>
             <input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-click="setVol()">
