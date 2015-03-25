@@ -34,7 +34,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, Sou
             minutes = "0" + minutes;
         }
         if (hours < 10) {
-            horus = "0" + hours;
+            hours = "0" + hours;
         }
 
         var time = hours + ':' + minutes + ':' + seconds;
