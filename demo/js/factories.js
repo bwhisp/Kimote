@@ -187,10 +187,14 @@ app.factory('Manager', function($http) {
 });
 
 app.factory('Runtime', function($http) {
+	
 	var runtime = {};
-
+	var infos = {};
 	var moment;
-	var moment2=0;
+
+	infos.moment2=0;
+	infos.temps=0;
+	infos.totaltime=0;
 
 	runtime.SetRuntime = function (moment) {
 
@@ -209,26 +213,31 @@ app.factory('Runtime', function($http) {
 	};
 
 	runtime.GetRuntime = function () {
-
+						
 		ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
 		var ping_url2;
-
 		$http.jsonp(window.base_url+ping_url)
-		.success(function(data, status){
-			ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":' + data.result[0].playerid + ',"properties":["percentage", "time" ] }}&callback=JSON_CALLBACK';
-
-			$http.jsonp(window.base_url+ping_url2)
 			.success(function(data, status){
-				moment2 = data.result.percentage;
-				console.log(moment2);
+				ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":'+data.result[0].playerid+',"properties":["percentage", "time", "totaltime" ] }}&callback=JSON_CALLBACK';
+				$http.jsonp(window.base_url+ping_url2)
+					.success(function(data, status){
+					
+						infos.moment2=data.result.percentage;
+						infos.temps = data.result.time;
+						infos.totaltime=data.result.totaltime;
+												
+				})
+				.error(function(data, status){
+			
+				});
+							
 			})
-			.error(function(data, status){});
-		})
-		.error(function(data, status){});
-
-		return moment2;
+			.error(function(data, status){
+			});
+			
+		return infos;	
 	};
-
+	
 	return runtime;
 });
 

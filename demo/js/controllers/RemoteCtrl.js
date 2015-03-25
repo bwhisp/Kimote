@@ -5,13 +5,38 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, Sou
     $scope.played = Manager.getPlayed();
 
     $scope.model.runtime;
+    $scope.model.temps;
+    $scope.model.totaltime;
     $scope.getRuntime = function () {
-        $scope.model.runtime=Runtime.GetRuntime();
+        $scope.model.runtime=Runtime.GetRuntime().moment2;
+        $scope.model.temps=Runtime.GetRuntime().temps;
+        $scope.model.totaltime=Runtime.GetRuntime().totaltime;
     };
 
     setInterval($scope.getRuntime,500);
     $scope.setRuntime = function () {
         Runtime.SetRuntime($scope.model.runtime);
+    };
+
+    $scope.toMinutes = function(temps) {
+
+        var seconds = temps.seconds;
+        var minutes = temps.minutes;
+        var hours = temps.hours;
+
+
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+
+        var time = hours + ':' + minutes + ':' + seconds;
+        return time;
     };
 
     $scope.muted = Sounder.getMuted();

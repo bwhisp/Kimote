@@ -113,6 +113,15 @@
     width: 95%;
 }
 
+.time {
+    position: absolute;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0.5%;
+    width: 100%;
+}
+
 /* login.html */
 
 .auth {

@@ -61,7 +61,13 @@
         </div>
 
         <div class="range runtime">
+            <button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
             <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
+            <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
+        </div>
+        <div class="time">
+            {{toMinutes(model.temps)}} /
+            {{toMinutes(model.totaltime)}}
         </div>
       <!--  <div class="range sound">
             <button class="icon ion-volume-low" ng-click="request('volumeDown')"></button>
