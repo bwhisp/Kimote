@@ -145,7 +145,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 controller: 'PicsCtrl'
             }
         }
-    })
+    });
 
     $urlRouterProvider.otherwise("/tab/remote");
 
