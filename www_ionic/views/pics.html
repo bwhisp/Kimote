@@ -7,12 +7,14 @@
       <ion-content>
     <div class="nav-buttons">
                   <div class="row nav-button-up">
-                  <div class="row col-33">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
                   <div class="col col-33">
-                        <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+                    <button class="button-nav-custom button button-icon ion-refresh" ng-click="request('rotate')"></button>
+                  </div>
+                  <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
                   </div>
                   <div class="row">
-                        <button class="button-menu-custom button button-icon ion-ios-plus-outline" ng-click="request('zoom+');"></button>
+                    <button class="button-menu-custom button button-icon ion-ios-plus-outline" ng-click="request('zoom+');"></button>
                   </div>
                   <div class="row">
                         <button class="button-menu-custom button button-icon ion-ios-minus-outline" ng-click="request('zoom-');"></button>
@@ -53,6 +55,18 @@
                   </div>
             </div>
             </div>
+
+             <div class="row">
+      <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    </div>
+
+    <div class="media-buttons-wrapper">
+      <div class="media-buttons">
+        <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
+        <button class="button-media-custom button button-icon ion-ios-play" ng-click="request('playPic')"></button>
+        <button class="button-media-custom button button-icon ion-ios-pause" ng-click="request('pausePic')"></button>
+      </div>
+    </div>
 
       </ion-content>
 </ion-view>
