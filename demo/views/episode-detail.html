@@ -1,0 +1,22 @@
+<ion-view view-title="{{episode_label}}" ng-init="showEpisodeDetails(episode_id)">
+
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="episode-item item item-thumbnail-left">
+                <img class="episode-thumb" ng-src="{{getThumbnailSeries(episodedetails.thumbnail)}}">
+                <h2>{{episodedetails.label}}</h2>
+                <p>Episode {{episodedetails.episode}}, Saison {{episodedetails.season}}</p>
+                <p>Note : {{Math.round(episodedetails.rating * 10) / 10}}/10</p>
+            </div>
+
+            <div class="item item-body">
+                <p>{{episodedetails.plot}}</p>
+            </div>
+
+            <a href="#" class="item item-icon-left positive" ng-click="playEpisode(episodedetails.file)">
+                <i class="icon ion-play"></i>
+                Lancer l'épisode
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

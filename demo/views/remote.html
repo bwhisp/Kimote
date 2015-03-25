@@ -1,0 +1,73 @@
+<ion-view view-title="Komote">
+    <ion-content class="padding" scroll=false>
+        <div class="nav-buttons">
+            <div class="row nav-button-up">
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-volume-mute" ng-click="request('mute'); muted=true" ng-hide="muted"></button>
+					<button class="button-menu-custom button button-icon ion-volume-medium" ng-click="request('unmute'); muted=false" ng-show="muted"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-100">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+
+            <div class="row nav-button-middle">
+                <div class="col col-33">
+                    <button class="button-nav-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
+                </div>
+
+                <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
+                </div>
+
+                <div class="col col-33">
+                    <button class="button-nav-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            </div>
+
+            <div class="row nav-button-down">
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-nav-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
+                </div>
+                <div class="col col-33">
+                    <button class="button-menu-custom button button-icon ion-android-home" ng-click="request('home')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="media-buttons-wrapper">
+            <div class="media-buttons">
+                <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
+                <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
+                <button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': !played, 'ion-ios-play': played}" ng-click="played=!played; request('pause')"></button>
+                <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
+            </div>
+        </div>
+
+        <div class="range runtime">
+            <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
+        </div>
+      <!--  <div class="range sound">
+            <button class="icon ion-volume-low" ng-click="request('volumeDown')"></button>
+            <input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-click="setVol()">
+            <button class="icon ion-volume-high" ng-click="request('volumeUp')"></button>
+        </div> -->
+
+    </ion-content>
+</ion-view>

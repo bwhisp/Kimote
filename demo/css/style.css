@@ -1,0 +1,241 @@
+/* index.html */
+
+.icon-connexion-side, .icon-about-side {
+    margin-right: 15px;
+}
+
+/* remote.html */
+
+.scroll {
+    height: 100% !important;
+    position: relative;
+}
+
+.runtime {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+}
+
+.nav-buttons {
+    position: absolute;
+    width: 95%;
+    height: 100%;
+    bottom: 20%;
+    text-align: center;
+    font-size: 15em;
+}
+
+.nav-button-up {
+    position: absolute;
+    width: 100%;
+    bottom: 225px;
+    text-align: center;
+    font-size: 15em;
+}
+
+.nav-button-middle {
+    position: absolute;
+    width: 100%;
+    bottom: 150px;
+    text-align: center;
+    font-size: 15em;
+}
+
+.nav-button-down {
+    position: absolute;
+    width: 100%;
+    bottom: 75px;
+    text-align: center;
+    font-size: 15em;
+}
+
+.button-nav-left {
+    float: right;
+}
+
+.button-nav-right {
+    float: left;
+}
+
+.button-nav-custom {
+    font-size: 50px;
+}
+
+.ion-arrow-left-c, .ion-android-home, .ion-power, .ion-volume-mute, .ion-volume-medium {
+    font-size: 40px;
+}
+
+.ion-arrow-left-c {
+    float: left;
+}
+
+.ion-android-home {
+    float: right;
+}
+
+.ion-volume-mute {
+    float: left;
+}
+
+.ion-volume-medium {
+    float: left;
+}
+
+.ion-power {
+    float: right;
+}
+
+.media-buttons-wrapper {
+    position: absolute;
+    width: 95%;
+    bottom: 20%;
+}
+
+.media-buttons {
+    text-align: center;
+    font-size: 7em;
+}
+
+.button-media-custom {
+    font-size: 50px;
+}
+
+.sound {
+    position: absolute;
+    bottom: 1%;
+    width: 100%;
+}
+
+.runtime {
+    position: absolute;
+    bottom: 1%;
+    width: 95%;
+}
+
+/* login.html */
+
+.auth {
+    font-size: 16px;
+}
+
+.icon-connexion {
+    margin-right: 15px;
+}
+
+.icon-deconnexion {
+    margin-right: 15px;
+}
+
+.item-checkbox {
+    padding-left: 55px !important;
+}
+
+.checkbox {
+    border:none !important;
+}
+
+.check {
+    padding: 7px 0px;
+}
+
+.removeID {
+    float: right;
+    margin-top: 9px;
+    margin-left: 5px;
+    margin-right: 20px;
+}
+
+.memoriser {
+    float: left;
+    margin-left: 10px;
+}
+
+.icon.ion-volume-low, .icon.ion-volume-high{
+	border: none !important;
+	background: none !important;
+}
+
+.boutons-connect {
+    text-align: center;
+}
+
+/* movie-detail.html */
+
+.movie-media-buttons {
+    text-align: center;
+}
+
+.movie-item {
+    height: 138px !important;
+}
+
+.movie-thumb {
+    max-height: 115px !important;
+}
+
+/* about.html */
+
+.icon-location, .icon-who {
+    margin-right: 5px;
+}
+
+.about-icon-wrapper {
+    position: absolute;
+    top: 12%;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.komote-icon, .about-icon-wrapper {
+    width: 50%;
+}
+
+.about-who {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: 15px;
+}
+
+@font-face {
+    font-family: Intro;
+    src: url(Intro.otf);
+}
+
+.app-name {
+    font-family: Intro;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.projet-mention {
+    font-size: 18px;
+}
+
+.license-mention {
+    font-size: 10px;
+}
+
+/* tvshows.html */
+
+.tvshow-thumb {
+    max-height: 115px !important;
+}
+
+.tvshow-item {
+    height: 138px !important;
+}
+
+/* episode-detail.html */
+
+.episode-thumb {
+    max-width: 140px !important;
+}
+
+.episode-item {
+    padding-left: 160px !important;
+}
