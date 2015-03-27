@@ -16,8 +16,6 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
         $scope.model.playeractive = Runtime.GetRuntime().playeractive;
     };
 
-    $scope.data = {};
-
     setInterval($scope.getRuntime,500);
 
     $scope.setRuntime = function () {
@@ -60,20 +58,6 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
         $scope.model.sound = Sounder.getVolume();
     };
 
-<<<<<<< HEAD
-    $scope.showAlert = function() {
-       var alertPopup = $ionicPopup.alert({
-         title: 'Volume',
-         template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">',
-        // scope = $scope,
-       });
-       alertPopup.then(function(res) {
-         console.log('Thank you for not eating my delicious ice cream cone');
-       });
-    };
-    
-
-=======
     $scope.requestMute = function (muted) {
         method = "Application.SetMute";
 		params = '{"mute":' + muted + '}';
@@ -81,7 +65,18 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 
         Requester.sendRequest($http, method, params);
     };
->>>>>>> 334d69ab0b9848a34660329f33c4b5a28694aa7a
+
+    $scope.showAlert = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Volume',
+            template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">',
+            scope: $scope
+        });
+
+        alertPopup.then(function(res) {
+            console.log('In alertPopup.then');
+        });
+    };
 
     $scope.request = function (input) {
         switch (input) {

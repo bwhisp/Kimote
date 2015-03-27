@@ -1,51 +1,42 @@
 <ion-view view-title="Komote">
     <ion-content class="padding" scroll=false>
-        <div class="nav-buttons">
-            <div class="row nav-button-up">
-                <div class="col col-33">
-                    <button class="button-menu-custom button button-icon" ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}" ng-click="requestMute(muted)"></button>
+
+        <div class="remote-btn">
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button button-icon" ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}" ng-click="requestMute(muted)"></button>
                 </div>
-                <div class="col col-33">
-                    <button class="button-nav-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+                <div class="col center-col">
+                    <button class="btn-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
                 </div>
-                <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-100">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </div>
-            </div>
-
-            <div class="row nav-button-middle">
-                <div class="col col-33">
-                    <button class="button-nav-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
+                <div class="col">
+                    <button class="btn-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
                 </div>
 
-                <div class="col col-33">
-                    <button class="button-nav-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
+                <div class="col center-col col-20">
+                    <button class="btn-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
                 </div>
 
-                <div class="col col-33">
-                    <button class="button-nav-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
+                <div class="col">
+                    <button class="btn-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            </div>
-
-            <div class="row nav-button-down">
-                <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
                 </div>
-                <div class="col col-33">
-                    <button class="button-nav-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
+                <div class="col center-col">
+                    <button class="btn-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
                 </div>
-                <div class="col col-33">
-                    <button class="button-menu-custom button button-icon ion-android-home" ng-click="request('home')"></button>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-android-home" ng-click="request('home')"></button>
                 </div>
             </div>
         </div>
@@ -69,18 +60,5 @@
                 {{toMinutes(model.totaltime)}}
             </div>
         </div>
-<<<<<<< HEAD
-            <button class="button button-positive" ng-click="showAlert()">
-              Volume
-            </button>
-
-    <!--<div class="range sound">
-            <button class="icon ion-volume-low" ng-click="request('volumeDown')"></button>
-            <input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">
-            <button class="icon ion-volume-high" ng-click="request('volumeUp')"></button>
-    </div>--> 
-
-=======
->>>>>>> 334d69ab0b9848a34660329f33c4b5a28694aa7a
     </ion-content>
 </ion-view>

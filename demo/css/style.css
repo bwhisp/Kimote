@@ -6,6 +6,24 @@
 
 /* remote.html */
 
+.btn-custom {
+    font-size: 50px;
+}
+
+.center-col {
+    text-align: center;
+}
+
+.remote-btn {
+    position: absolute;
+    width: 95%;
+    bottom: 40%;
+}
+
+.ion-chevron-left, .ion-power, .ion-android-home {
+    float: right;
+}
+
 .scroll {
     height: 100% !important;
     position: relative;
@@ -15,39 +33,6 @@
     position: absolute;
     bottom: 10%;
     width: 100%;
-}
-
-.nav-buttons {
-    position: absolute;
-    width: 95%;
-    height: 100%;
-    bottom: 20%;
-    text-align: center;
-    font-size: 15em;
-}
-
-.nav-button-up {
-    position: absolute;
-    width: 100%;
-    bottom: 225px;
-    text-align: center;
-    font-size: 15em;
-}
-
-.nav-button-middle {
-    position: absolute;
-    width: 100%;
-    bottom: 150px;
-    text-align: center;
-    font-size: 15em;
-}
-
-.nav-button-down {
-    position: absolute;
-    width: 100%;
-    bottom: 75px;
-    text-align: center;
-    font-size: 15em;
 }
 
 .button-nav-left {
@@ -60,30 +45,6 @@
 
 .button-nav-custom {
     font-size: 50px;
-}
-
-.ion-arrow-left-c, .ion-android-home, .ion-power, .ion-volume-mute, .ion-volume-medium {
-    font-size: 40px;
-}
-
-.ion-arrow-left-c {
-    float: left;
-}
-
-.ion-android-home {
-    float: right;
-}
-
-.ion-volume-mute {
-    float: left;
-}
-
-.ion-volume-medium {
-    float: left;
-}
-
-.ion-power {
-    float: right;
 }
 
 .media-buttons-wrapper {

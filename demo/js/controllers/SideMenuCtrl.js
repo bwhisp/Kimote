@@ -1,4 +1,29 @@
-app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, Logger) {
+app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder) {
+
+    /*************** bouton son ******************/
+
+    $scope.soundbar = {};
+    $scope.sound = Sounder.getVolume();
+
+    $scope.setVol = function () {
+        Sounder.SetVol($scope.soundbar.sound);
+        $scope.soundbar.sound = Sounder.getVolume();
+    };
+
+    $scope.showAlert = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Volume',
+            template: '<input type="range" name="volume" ng-model="soundbar.sound" min="0" max="100" ng-change="setVol()">',
+            scope: $scope
+        });
+
+        alertPopup.then(function(res) {
+            console.log('In alertPopup.then');
+        });
+    };
+
+    /*********************************************/
+
 
     /* Vue modal pour about.html */
     $ionicModal.fromTemplateUrl('views/about.html', {
