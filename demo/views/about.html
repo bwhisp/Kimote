@@ -1,4 +1,10 @@
-<ion-view view-title="A propos">
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">Connexion</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeAbout()">Fermer</button>
+        </div>
+    </ion-header-bar>
     <ion-content class="padding">
         <div class="about-icon-wrapper">
             <div class="app-name">Komote</div>
@@ -10,8 +16,6 @@
                 <p class="license-mention">Application développée par le groupe 8 - T2 - sous licence GNU LGPL 3.0</p>
                 <i class="icon ion-location icon-location"></i>ENSEIRB-MATMECA, Bordeaux
             </div>
-
         </div>
-
     </ion-content>
-</ion-view>
+</ion-modal-view>

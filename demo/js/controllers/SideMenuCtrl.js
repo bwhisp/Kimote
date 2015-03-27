@@ -1,5 +1,20 @@
 app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, Logger) {
 
+    /* Vue modal pour about.html */
+    $ionicModal.fromTemplateUrl('views/about.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalAbout = modal;
+    });
+
+    $scope.openAbout = function() {
+        $scope.modalAbout.show();
+    };
+
+    $scope.closeAbout = function() {
+        $scope.modalAbout.hide();
+    };
+
     /* Vue modal pour la connexion*/
     $ionicModal.fromTemplateUrl('views/login.html', {
         scope: $scope
@@ -8,7 +23,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
     });
 
     /* Ouvre le modal */
-    $scope.login = function() {
+    $scope.openLogin = function() {
         $scope.modal.show();
     };
 

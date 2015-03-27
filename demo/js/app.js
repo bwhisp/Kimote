@@ -30,10 +30,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 
     //about
-    .state('tabs.about', {
+    .state('about', {
         url: "/about",
         views: {
-            'about-tab': {
+            'about': {
                 templateUrl: "views/about.html"
             }
         }
@@ -145,7 +145,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 controller: 'PicsCtrl'
             }
         }
-    })
+    });
 
     $urlRouterProvider.otherwise("/tab/remote");
 

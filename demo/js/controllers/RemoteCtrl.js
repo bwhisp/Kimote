@@ -8,26 +8,26 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
     $scope.model.temps;
     $scope.model.totaltime;
     $scope.model.playeractive;
+
     $scope.getRuntime = function () {
-        $scope.model.runtime=Runtime.GetRuntime().moment2;
-        $scope.model.temps=Runtime.GetRuntime().temps;
-        $scope.model.totaltime=Runtime.GetRuntime().totaltime;
-        $scope.model.playeractive=Runtime.GetRuntime().playeractive;
+        $scope.model.runtime = Runtime.GetRuntime().moment2;
+        $scope.model.temps = Runtime.GetRuntime().temps;
+        $scope.model.totaltime = Runtime.GetRuntime().totaltime;
+        $scope.model.playeractive = Runtime.GetRuntime().playeractive;
     };
 
     $scope.data = {};
 
     setInterval($scope.getRuntime,500);
+
     $scope.setRuntime = function () {
         Runtime.SetRuntime($scope.model.runtime);
     };
 
     $scope.toMinutes = function(temps) {
-
         var seconds = temps.seconds;
         var minutes = temps.minutes;
         var hours = temps.hours;
-
 
         if (seconds < 10) {
             seconds = "0" + seconds;
@@ -40,16 +40,15 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
         }
 
         var time = hours + ':' + minutes + ':' + seconds;
+
         return time;
     };
 
-    $scope.playerisActive = function(id){
-
-        if(id != "undefined")
+    $scope.playerisActive = function(id) {
+        if (id != "undefined")
             return false;
-        else 
+        else
             return true;
-
     };
 
     $scope.muted = Sounder.getMuted();
@@ -61,6 +60,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
         $scope.model.sound = Sounder.getVolume();
     };
 
+<<<<<<< HEAD
     $scope.showAlert = function() {
        var alertPopup = $ionicPopup.alert({
          title: 'Volume',
@@ -73,6 +73,15 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
     };
     
 
+=======
+    $scope.requestMute = function (muted) {
+        method = "Application.SetMute";
+		params = '{"mute":' + muted + '}';
+        $scope.muted = !muted;
+
+        Requester.sendRequest($http, method, params);
+    };
+>>>>>>> 334d69ab0b9848a34660329f33c4b5a28694aa7a
 
     $scope.request = function (input) {
         switch (input) {

@@ -51,12 +51,12 @@ app.factory('Logger', function($http) {
 app.factory('Sounder', function($http) {
 	var sounder = {};
 
-	var muted = false;
+	var muted = true;
 	var errMute = false;
 	var errUnmute = false;
 	var volume = 50;
 
-	sounder.SetMute = function() {
+	/*sounder.SetMute = function() {
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":true}}&callback=JSON_CALLBACK';
 
 		$http.jsonp(window.base_url + ping_url)
@@ -68,7 +68,7 @@ app.factory('Sounder', function($http) {
 		});
 	};
 
-	sounder.SetUnMute = function() {
+	/*sounder.SetUnMute = function() {
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.SetMute", "params":{"mute":false}}&callback=JSON_CALLBACK';
 
 		$http.jsonp(window.base_url + ping_url)
@@ -78,7 +78,7 @@ app.factory('Sounder', function($http) {
 		.error(function(data, status) {
 			errUnMute = true;
 		});
-	};
+	};*/
 
 	sounder.VolUp = function(vol) {
 		if (vol < 100)
@@ -140,8 +140,8 @@ app.factory('Sounder', function($http) {
 app.factory('Manager', function($http) {
 	var manager = {};
 
-	var played = true;
-	var paused = false;
+	var played = false;
+	var paused = true;
 	var errPlay = false;
 	var errPause = false;
 
@@ -187,15 +187,14 @@ app.factory('Manager', function($http) {
 });
 
 app.factory('Runtime', function($http) {
-	
 	var runtime = {};
 	var infos = {};
 	var moment;
 
-	infos.moment2=0;
-	infos.temps=0;
-	infos.totaltime=0;
-	infos.playeractive="undefined";
+	infos.moment2 = 0;
+	infos.temps = 0;
+	infos.totaltime = 0;
+	infos.playeractive = "undefined";
 
 	runtime.SetRuntime = function (moment) {
 
@@ -203,7 +202,7 @@ app.factory('Runtime', function($http) {
 		var ping_url2;
 
 		$http.jsonp(window.base_url+ping_url)
-		.success(function(data, status){
+		.success(function(data, status) {
 			ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.Seek","params":{"playerid":' + data.result[0].playerid + ',"value":' + moment + '}}&callback=JSON_CALLBACK';
 
 			$http.jsonp(window.base_url+ping_url2)
@@ -214,37 +213,34 @@ app.factory('Runtime', function($http) {
 	};
 
 	runtime.GetRuntime = function () {
-						
-		ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
+
+		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method": "Player.GetActivePlayers","id":1}&callback=JSON_CALLBACK';
 		var ping_url2;
-		$http.jsonp(window.base_url+ping_url)
-			.success(function(data, status){
-				if(data.result.length!=0){
-					infos.playeractive=data.result[0].playerid;
-					ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":'+data.result[0].playerid+',"properties":["percentage", "time", "totaltime" ] }}&callback=JSON_CALLBACK';
-					$http.jsonp(window.base_url+ping_url2)
-						.success(function(data, status){
-						
-							infos.moment2=data.result.percentage;
-							infos.temps = data.result.time;
-							infos.totaltime=data.result.totaltime;
-													
-					})
-					.error(function(data, status){
-				
-					});
-								
+
+		$http.jsonp(window.base_url + ping_url)
+		.success(function(data, status) {
+
+			if (data.result.length != 0) {
+				infos.playeractive = data.result[0].playerid;
+				ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":' + data.result[0].playerid + ',"properties":["percentage","time","totaltime"] }}&callback=JSON_CALLBACK';
+
+				$http.jsonp(window.base_url + ping_url2)
+				.success(function(data, status){
+					infos.moment2 = data.result.percentage;
+					infos.temps = data.result.time;
+					infos.totaltime = data.result.totaltime;
+				})
+				.error(function(data, status){});
 			}
-			else{
+			else {
 				infos.playeractive = "undefined";
 			}
-			})
-			.error(function(data, status){
-			});
-			
-		return infos;	
+		})
+		.error(function(data, status){});
+
+		return infos;
 	};
-	
+
 	return runtime;
 });
 
@@ -305,7 +301,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				break;
 		}
 
-		sendRequest($http, method, params);
+		requester.sendRequest($http, method, params);
 	};
 
     requester.requestApplication = function (input, volume) {
@@ -332,7 +328,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				break;
 		}
 
-		sendRequest($http, method, params);
+		requester.sendRequest($http, method, params);
 	};
 
 	requester.requestGUI = function (input) {
@@ -353,7 +349,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				break;
 		}
 
-		sendRequest($http, method, params);
+		requester.sendRequest($http, method, params);
 	};
 
 	requester.requestPlayer = function (input){
@@ -369,10 +365,10 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				break;
 		}
 
-		sendRequest($http,method,params);
+		requester.sendRequest($http,method,params);
 	};
 
-	function sendRequest($http, method, params) {
+	requester.sendRequest = function($http, method, params) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": '+ params +', "id": 1}';
 		complete_url = window.base_url + param_url;
 
@@ -380,7 +376,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 		.error(function() {
 			alert("Vous n'êtes pas connecté");
 		});
-	}
+	};
 
 	return requester;
 });
