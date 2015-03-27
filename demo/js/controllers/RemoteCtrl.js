@@ -15,6 +15,8 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
         $scope.model.playeractive=Runtime.GetRuntime().playeractive;
     };
 
+    $scope.data = {};
+
     setInterval($scope.getRuntime,500);
     $scope.setRuntime = function () {
         Runtime.SetRuntime($scope.model.runtime);
@@ -62,7 +64,8 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
     $scope.showAlert = function() {
        var alertPopup = $ionicPopup.alert({
          title: 'Volume',
-         template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">'
+         template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">',
+        // scope = $scope,
        });
        alertPopup.then(function(res) {
          console.log('Thank you for not eating my delicious ice cream cone');
