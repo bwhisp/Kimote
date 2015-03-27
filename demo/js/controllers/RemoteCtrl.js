@@ -1,4 +1,4 @@
-app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, Sounder, Manager, Runtime, Requester) {
+app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
 
     $scope.model = {};
     $scope.paused = Manager.getPaused();
@@ -58,6 +58,18 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, Sou
         Sounder.SetVol($scope.model.sound);
         $scope.model.sound = Sounder.getVolume();
     };
+
+    $scope.showAlert = function() {
+       var alertPopup = $ionicPopup.alert({
+         title: 'Volume',
+         template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">'
+       });
+       alertPopup.then(function(res) {
+         console.log('Thank you for not eating my delicious ice cream cone');
+       });
+    };
+    
+
 
     $scope.request = function (input) {
         switch (input) {
