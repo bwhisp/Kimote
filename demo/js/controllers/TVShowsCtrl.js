@@ -29,10 +29,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer les séries TV");
 		});
 	}
 
@@ -57,10 +54,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer les saisons");
 		});
 	}
 
@@ -85,10 +79,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer les épisodes");
 		});
 	}
 
@@ -112,10 +103,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer l'épisode");
 		});
 	}
 

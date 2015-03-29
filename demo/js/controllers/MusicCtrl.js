@@ -26,10 +26,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer les artistes");
 		});
 	}
 
@@ -53,10 +50,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer les albums");
 		});
 	}
 
@@ -80,10 +74,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-			console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
+            alert("Impossible de récupérer les titres");
 		});
 	}
 
@@ -101,7 +92,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 			//$location.path("/remote"); // fixer le tab actif
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire la piste musicale");
+			alert("Impossible de lire le titre");
 		});
 	};
 

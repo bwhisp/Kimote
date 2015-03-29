@@ -1,7 +1,7 @@
 document.addEventListener('deviceready', function() {
     if (navigator.notification) {
         window.alert = function (message) {
-            navigator.notification.alert(message,null,"Komote",'OK');
+            navigator.notification.alert(message,null,"Kimote",'OK');
         };
     }
 }, false);
