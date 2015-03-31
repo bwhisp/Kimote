@@ -145,30 +145,34 @@ app.factory('Manager', function($http) {
 	var errPlay = false;
 	var errPause = false;
 
-	manager.SetPlay = function() {
+	manager.SetPlay = function(isPics) {
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Input.ExecuteAction", "params":{"action":"play"}}&callback=JSON_CALLBACK';
 
 		$http.jsonp(window.base_url + ping_url)
 		.success(function(data, status) {
 			paused = false;
 			played = true;
-			window.location = "#/settings";
-			window.location = "#/remote";
+			if (!isPics) {
+				window.location = "#/settings";
+				window.location = "#/remote";
+			}
 		})
 		.error(function(data, status) {
 			errPlay = true;
 		});
 	};
 
-	manager.SetPause = function() {
+	manager.SetPause = function(isPics) {
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Input.ExecuteAction", "params":{"action":"pause"}}&callback=JSON_CALLBACK';
 
 		$http.jsonp(window.base_url + ping_url)
 		.success(function(data, status) {
 			played = false;
 			paused = true;
-			window.location = "#/settings";
-			window.location = "#/remote";
+			if (!isPics) {
+				window.location = "#/settings";
+				window.location = "#/remote";
+			}
 		})
 		.error(function(data, status) {
 			errPause = true;
@@ -273,11 +277,17 @@ app.factory('Requester', function($http, Manager, Sounder) {
 			case "back" :
 				method = method + 'Back';
 				break;
+			case "playPic" :
+				Manager.SetPlay(1);
+				break;
 			case "play" :
-				Manager.SetPlay();
+				Manager.SetPlay(0);
+				break;
+			case "pausePic" :
+				Manager.SetPause(1);
 				break;
 			case "pause" :
-				Manager.SetPause();
+				Manager.SetPause(0);
 				break;
 			case "stop" :
 				method = method + 'ExecuteAction';
@@ -298,6 +308,16 @@ app.factory('Requester', function($http, Manager, Sounder) {
 			case "rewind" :
 				method = method + 'ExecuteAction';
 				params = '{"action":"rewind"}';
+				break;
+			case "zoom+" :
+				method = method + 'ExecuteAction';
+				params = '{"action":"zoomin"}';
+				break;
+			case "zoom-" :
+				method = method + 'ExecuteAction';
+				params = '{"action":"zoomout"}';
+				break;
+			default :
 				break;
 		}
 
