@@ -6,7 +6,15 @@ document.addEventListener('deviceready', function() {
     }
 }, false);
 
-var app = angular.module('app', ['ionic','ngCookies']);
+var app = angular.module('app', [
+    'ionic',
+    'ngCookies',
+    'ngSanitize',
+    'com.2fdevs.videogular',
+	'com.2fdevs.videogular.plugins.controls',
+	'com.2fdevs.videogular.plugins.overlayplay',
+	'com.2fdevs.videogular.plugins.poster'
+]);
 
 app.run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

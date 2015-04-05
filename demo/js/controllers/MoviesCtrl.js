@@ -1,4 +1,4 @@
-app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading) {
+app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce) {
 
     $scope.movie_label = $stateParams.movieLabel;
 
@@ -28,8 +28,8 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		});
 	}
 
-    //joue le film et redirection vers remote
-	$scope.playMovie = function(file) {
+    //lire le film sur Kodi et redirection vers remote
+	$scope.playMovieOnKodi = function(file) {
 
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
@@ -44,6 +44,27 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 			alert("Impossible de lire le film");
 		});
 	};
+
+    $scope.getStreamUrl = function(file, poster) {
+        $scope.moviePath = encodeURIComponent(file);
+        $scope.streamUrl = window.base_url + '/vfs/' + $scope.moviePath;
+
+        poster = poster.replace("image://","");
+		$scope.thumbnailUriDecoded = decodeURIComponent(poster);
+
+        $scope.config = {
+            sources: [{
+                src: $sce.trustAsResourceUrl($scope.streamUrl),
+                type: "video/mp4"
+            }],
+            theme: "lib/videogular-themes-default/videogular.min.css",
+            plugins: {
+                poster: $scope.thumbnailUriDecoded
+            }
+        };
+
+        return $scope.config;
+    };
 
     //conversion du champ movie.runtime en heures
 	$scope.toHours = function(duration) {
