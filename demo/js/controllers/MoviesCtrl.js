@@ -45,12 +45,14 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		});
 	};
 
-    $scope.getStreamUrl = function(file, poster) {
+    $scope.getStreamInfo = function(file, poster) {
         $scope.moviePath = encodeURIComponent(file);
         $scope.streamUrl = window.base_url + '/vfs/' + $scope.moviePath;
 
         poster = poster.replace("image://","");
-		$scope.thumbnailUriDecoded = decodeURIComponent(poster);
+		$scope.posterUriDecoded = decodeURIComponent(poster);
+
+        console.log("streamUrl : " + $scope.streamUrl);
 
         $scope.config = {
             sources: [{
@@ -59,7 +61,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
             }],
             theme: "lib/videogular-themes-default/videogular.min.css",
             plugins: {
-                poster: $scope.thumbnailUriDecoded
+                poster: $scope.posterUriDecoded
             }
         };
 

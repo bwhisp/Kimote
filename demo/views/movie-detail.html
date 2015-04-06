@@ -9,7 +9,7 @@
                 <p>Note : {{Math.round(movie.rating * 10) / 10}}/10</p>
             </div>
 
-            <div class="item item-body" ng-init="getStreamUrl(movie.file, movie.art.fanart)">
+            <div class="item item-body" ng-init="getStreamInfo(movie.file, movie.art.fanart)">
 
                 <videogular vg-theme="config.theme">
         			<vg-media vg-src="config.sources" vg-dash>
