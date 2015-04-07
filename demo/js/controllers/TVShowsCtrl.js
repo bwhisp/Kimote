@@ -1,4 +1,4 @@
-app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $ionicLoading) {
+app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $ionicLoading, $sce) {
     $scope.series_id = $stateParams.seriesId;
     $scope.series_label = $stateParams.seriesLabel;
 
@@ -100,6 +100,8 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		.success(function(data, status, headers, config) {
             $ionicLoading.hide();
 			$scope.episodedetails = data.result.episodedetails;
+
+            $scope.getStreamInfo($scope.episodedetails.file);
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
@@ -107,8 +109,25 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		});
 	}
 
+    $scope.getStreamInfo = function(file) {
+
+        $scope.episodePath = encodeURIComponent(file);
+        $scope.streamUrl = window.base_url + '/vfs/' + $scope.episodePath;
+
+        $scope.config = {
+            sources: [{
+                src: $sce.trustAsResourceUrl($scope.streamUrl),
+                type: "video/mp4"
+            }],
+            theme: "lib/videogular-themes-default/videogular.min.css",
+        };
+
+        return $scope.config;
+    };
+
+
     //lancer l'épisode cliqué
-	$scope.playEpisode = function(file) {
+	$scope.playEpisodeOnKodi = function(file) {
 
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
