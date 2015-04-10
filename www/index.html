@@ -1,82 +1,75 @@
 <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title></title>
 
-<html ng-app="app"> 
-	<head>
-		<title>Komote - The Kodi Remote Controller</title>
+        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link href="lib/videogular-themes-default/videogular.min.css" rel="stylesheet">
 
-		<meta charset="utf-8">
-		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <!-- ionic/angularjs js -->
+        <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-        <link rel="stylesheet" type="text/css" href="stylesheets/css/style.css" />
-	</head>
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="cordova.js"></script>
 
-	<body ng-controller="GlobalCtrl">
+        <!-- external libs-->
+        <script src="lib/angular-cookies/angular-cookies.min.js"></script>
+        <script src="lib/videogular/videogular.min.js"></script>
+        <script src="lib/videogular-controls/vg-controls.min.js"></script>
+        <script src="lib/videogular-overlay-play/vg-overlay-play.min.js"></script>
+        <script src="lib/videogular-poster/vg-poster.min.js"></script>
+        <script src="lib/videogular-buffering/vg-buffering.min.js"></script>
+        <script src="lib/videogular-dash/vg-dash.min.js"></script>
 
-		<!-- Header -->
-		<div class="toolbar">
-			<md-toolbar>
-				<h1 class="md-toolbar-tools">
-					<span class="apptitle">Kodi Remote</span>
-					<div class="toolbar-icons" ng-controller="AboutCtrl">
-						
-						<div class="searchBar" ng-hide="showSearch">
-							<input ng-model="global.search" class="search-input" placeholder="Rechercher">
-						</div>
-						<span ng-show="showSearch"></span>
-						
-						<md-button class="md-primary search" ng-click="showSearch=!showSearch">
-							<img class="icon-search" src="img/ic_search_24px.svg" /img>
-						</md-button>
+        <!-- your app's js -->
+        <script src="js/app.js"></script>
+        <script src="js/controllers/SideMenuCtrl.js"></script>
+        <script src="js/controllers/RemoteCtrl.js"></script>
+        <script src="js/controllers/MoviesCtrl.js"></script>
+        <script src="js/controllers/TVShowsCtrl.js"></script>
+        <script src="js/controllers/MusicCtrl.js"></script>
+        <script src="js/controllers/PicsCtrl.js"></script>
+        <script src="js/factories.js"></script>
+    </head>
 
-						<md-button class="md-primary about" ng-click="showAbout($event)">
-							<img class="icon-about" src="img/ic_more_vert_24px.svg" width="24" /img>
-						</md-button>
-					</div>
-				</h1>
+    <body ng-app="app" ng-controller="SideMenuCtrl">
 
-				<md-tabs md-stretch-tabs>
-					<md-tab id="remote-tab" aria-controls="remote-content">
-						<a href="#remote" class="nav-remote"><img class="icon-remote" src="img/ic_gamepad_black_48dp.png"/img></a>
-					</md-tab>
-					<md-tab id="movies-tab" aria-controls="movies-content">
-						<a href="#movies" class="nav-movies"><img class="icon-movies" src="img/ic_video_collection_black_48dp.png"/img></a>
-					</md-tab>
-					<md-tab id="music-tab" aria-controls="music-content">
-						<a href="#music" class="nav-music"><img class="icon-music" src="img/ic_my_library_music_black_48dp.png"/img></a>
-					</md-tab>
-					<md-tab id="pics-tab" aria-controls="pics-content">
-						<a href="#pics" class="nav-pics"><img class="icon-pics" src="img/ic_photo_library_black_48dp.png"/img></a>
-					</md-tab>
-					<md-tab id="settings-tab" aria-controls="settings-content">
-						<a href="#settings" class="nav-settings"><img class="icon-settings" src="img/ic_settings_black_48dp.png"/img></a>
-					</md-tab>
-				</md-tabs>
-			</md-toolbar>
-		</div>
+        <ion-side-menus>
+            <ion-side-menu-content>
+                <ion-nav-bar class="bar-positive">
+                    <ion-nav-back-button class="button-icon ion-arrow-left-c">
+                    </ion-nav-back-button>
 
-		<!-- Vues (Remote, films, musique, photos, réglages) -->
-		<section class="view" ng-view></section>
-		
-		<script src="js/framework/hammerjs/hammer.min.js"></script>
-		<script src="js/framework/angular/angular.min.js"></script>
-		<script src="js/framework/angular-route/angular-route.min.js"></script>
-		<script src="js/framework/angular-aria/angular-aria.min.js"></script>
-		<script src="js/framework/angular-animate/angular-animate.min.js"></script>
-		<script src="js/framework/angular-resource/angular-resource.min.js"></script>
-		<script src="js/framework/angular-material/angular-material.min.js"></script>
-		<script src="js/framework/angular-cookies/angular-cookies.min.js"></script>
-		<script src="js/framework/jquery/jquery.js"></script>
-		
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()">
+                        </button>
+                    </ion-nav-buttons>
+                    <ion-nav-buttons side="right">
+                        <button class="button button-icon ion-volume-medium" ng-click="showAlert()"></button>
+                    </ion-nav-buttons>
+                </ion-nav-bar>
+                <ion-nav-view animation="slide-left"></ion-nav-view>
+            </ion-side-menu-content>
 
-		<script src="js/app.js"></script>
-		<script src="js/controllers/GlobalCtrl.js"></script>
-		<script src="js/controllers/AboutCtrl.js"></script>
-		<script src="js/controllers/RemoteCtrl.js"></script>
-		<script src="js/controllers/MoviesCtrl.js"></script>
-		<script src="js/controllers/MusicCtrl.js"></script>
-		<script src="js/controllers/PicsCtrl.js"></script>
-		<script src="js/controllers/SettingsCtrl.js"></script>
-		<script src="js/factories.js"></script>
-		
-	</body>
+            <ion-side-menu side="left">
+                <ion-header-bar class="bar bar-header bar-assertive">
+                    <h1 class="title">Kimote</h1>
+                </ion-header-bar>
+                <ion-content has-header="true">
+                    <ion-list>
+                        <ion-item nav-clear menu-close ng-click="openLogin()">
+                            <i class="icon ion-wifi icon-connexion-side"></i>Connexion
+                        </ion-item>
+                        <ion-item nav-clear menu-close ng-click="openAbout()">
+                            <i class="icon ion-information-circled icon-about-side"></i>A propos
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-side-menu>
+        </ion-side-menus>
+
+    </body>
 </html>

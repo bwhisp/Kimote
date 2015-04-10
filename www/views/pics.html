@@ -1,5 +1,52 @@
-<section ng-controller="PicsCtrl">
-	<section class="panel right">
-		Pictures
-	</section>
-</section>
+<ion-view view-title="Photos">
+    <ion-content class="padding" scroll=false>
+
+        <button class="button button-block button-positive" ng-click="request('pictures')">Aller dans le menu Photos</button>
+
+		<div class="remote-btn">
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-ios-minus-outline" ng-click="request('zoom-')"></button>
+                </div>
+                <div class="col center-col">
+                    <button class="btn-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-ios-plus-outline" ng-click="request('zoom+')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-chevron-left" ng-click="request('left')"></button>
+                </div>
+                <div class="col center-col col-25">
+                    <button class="btn-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
+                </div>
+                <div class="col center-col">
+                    <button class="btn-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
+                </div>
+                <div class="col">
+                    <button class="btn-custom button button-icon ion-android-home" ng-click="request('home')"></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="media-buttons-wrapper">
+            <div class="media-buttons">
+                <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
+                <button class="button-media-custom button button-icon ion-ios-pause" ng-click="request('pausePic')"></button>
+                <button class="button-media-custom button button-icon ion-ios-play" ng-click="request('playPic')"></button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

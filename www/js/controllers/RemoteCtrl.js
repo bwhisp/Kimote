@@ -1,178 +1,112 @@
-	//var vol = 50;
+app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
 
-	app.controller('RemoteCtrl', function($scope,$http, Sounder, Manager, Runtime) {
-		
-		$scope.runtime;
-		$scope.getRuntime = function () {
-		$scope.runtime=Runtime.GetRuntime();
-		};
+    $scope.model = {};
+    $scope.paused = Manager.getPaused();
+    $scope.played = Manager.getPlayed();
 
-		setInterval($scope.getRuntime,500);
-		$scope.setRuntime = function () {
-			Runtime.SetRuntime($scope.runtime);	
-		};
-		
+    $scope.model.runtime;
+    $scope.model.temps;
+    $scope.model.totaltime;
+    $scope.model.playeractive;
 
-		$scope.muted = Sounder.getMuted();
-		$scope.volume = Sounder.getVolume();
-		$scope.sound = Sounder.getVolume();	
-		
-		$scope.paused=Manager.getPaused();
-		$scope.played=Manager.getPlayed();
-		
-		$scope.setVol = function () {
-			Sounder.SetVol($scope.sound);
-			$scope.sound = Sounder.getVolume();
-		};
+    $scope.getRuntime = function () {
+        $scope.model.runtime = Runtime.GetRuntime().moment2;
+        $scope.model.temps = Runtime.GetRuntime().temps;
+        $scope.model.totaltime = Runtime.GetRuntime().totaltime;
+        $scope.model.playeractive = Runtime.GetRuntime().playeractive;
+    };
 
-		$scope.requestInput = function requestInput(input) {
-			method = 'Input.';
+    setInterval($scope.getRuntime,500);
 
-			if (input === 'left') {
-				method = method + 'Left';
-				params = '{}';
-			}
-			else if (input === 'right') {
-				method = method + 'Right';
-				params = '{}';
-			}
-			else if (input === 'up') {
-				method = method + 'Up';
-				params = '{}';
-			}
-			else if (input === 'down') {
-				method = method + 'Down';
-				params = '{}';
-			}
-			else if (input === 'select') {
-				method = method + 'Select';
-				params = '{}';
-			}
-			else if (input === 'home') {
-				method = method + 'Home';
-				params = '{}';
-			}
-			else if (input === 'back') {
-				method = method + 'Back';
-				params = '{}';
-			}
-			else if (input === 'play') {
-				
-				Manager.SetPlay();
-				$scope.played=Manager.getPlayed();
-				$scope.paused=Manager.getPaused();
-				params = '{}';
-				
-			}
-			else if (input === 'pause') {
-				Manager.SetPause();
-				$scope.played=Manager.getPlayed();
-				$scope.paused=Manager.getPaused();
-				params = '{}';
-			}
-			else if (input === 'stop') {
-				method = method + 'ExecuteAction';
-				params = '{"action":"stop"}';
-			}
-			else if (input === 'next') {
-				method = method + 'ExecuteAction';
-				params = '{"action":"skipnext"}';
-			}
-			else if (input === 'previous') {
-				method = method + 'ExecuteAction';
-				params = '{"action":"skipprevious"}';
-			}
-			else if (input === 'fastforward') {
-				method = method + 'ExecuteAction';
-				params = '{"action":"fastforward"}';
-			}
-			else if (input === 'rewind') {
-				method = method + 'ExecuteAction';
-				params = '{"action":"rewind"}';
-			}
+    $scope.setRuntime = function () {
+        Runtime.SetRuntime($scope.model.runtime);
+    };
 
-			sendRequestWithParams($http, method, params);
-		};
+    $scope.toMinutes = function(temps) {
+        var seconds = temps.seconds;
+        var minutes = temps.minutes;
+        var hours = temps.hours;
 
-		$scope.requestApplication = function requestApplication(input) {
-			method = 'Application.';
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
 
-			if (input === 'shutdown') {
-				method = method + 'Quit';
-				params = '{}';
-			}
-			else if (input === 'mute') {
-				Sounder.SetMute();
-				$scope.muted = Sounder.getMuted();	
-			}
-			else if (input === 'unmute') {
-				Sounder.SetUnMute();
-				$scope.muted = Sounder.getMuted();
-			}
-			else if (input === 'volumeUp') {
-				Sounder.VolUp($scope.volume);
-				$scope.volume = Sounder.getVolume();
-			}
-			else if (input === 'volumeDown') {
-				Sounder.VolDown($scope.volume);
-				$scope.volume = Sounder.getVolume();
-			}
+        var time = hours + ':' + minutes + ':' + seconds;
 
-			sendRequestWithParams($http, method, params);
-		};
+        return time;
+    };
 
-		$scope.requestGUI = function requestGUI(input) {
-			
-			method = 'GUI.';
+    $scope.playerisActive = function(id) {
+        if (id != "undefined")
+            return false;
+        else
+            return true;
+    };
 
-			if (input === 'fullscreen') {
-				method = method + 'SetFullscreen';
-				params = '{"fullscreen":true}';
-			}
+    $scope.muted = Sounder.getMuted();
+    $scope.volume = Sounder.getVolume();
+    $scope.sound = Sounder.getVolume();
 
-			sendRequestWithParams($http, method, params);
-		};
+    $scope.setVol = function () {
+        Sounder.SetVol($scope.model.sound);
+        $scope.model.sound = Sounder.getVolume();
+    };
 
-		$scope.requestPlayer = function requestPlayer(input) {
+    $scope.requestMute = function (muted) {
+        method = "Application.SetMute";
+		params = '{"mute":' + muted + '}';
+        $scope.muted = !muted;
 
-		if (input === 'shuffle') {
+        Requester.sendRequest($http, method, params);
+    };
 
-				method = 'Player.SetShuffle';
-				params = '"shuffle": true ';
-			}
+    $scope.showAlert = function() {
+        var alertPopup = $ionicPopup.alert({
+            title: 'Volume',
+            template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">',
+            scope: $scope
+        });
 
-		sendRequestWithParamsForPlayer($http, method, params);
-		};
+        alertPopup.then(function(res) {
+            console.log('In alertPopup.then');
+        });
+    };
 
-		function sendRequest($http, method) {
-			param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "id": 1}';
-			complete_url = window.base_url + param_url;
+    $scope.request = function (input) {
+        switch (input) {
 
-			$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}}).error(function() {
-				alert("Vous n'êtes pas connecté");
-			});
-		}
+            case "fullscreen" :
+                Requester.requestGUI(input);
+                break;
 
-		function sendRequestWithParams($http, method, params) {
-			param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": '+ params +', "id": 1}';
-			complete_url = window.base_url + param_url;
+            case "shutdown" :
+                Requester.requestApplication(input, 0);
+                break;
+            case "mute" :
+                Requester.requestApplication(input, 0);
+                break;
+            case "unmute" :
+                Requester.requestApplication(input, 0);
+                break;
+            case "volumeUp" :
+                Requester.requestApplication(input, $scope.volume);
+                break;
+            case "volumeDown" :
+                Requester.requestApplication(input, $scope.volume);
+                break;
 
-			$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-			.error(function() {
-				alert("Vous n'êtes pas connecté");
-			});
-		}
+            default :
+                Requester.requestInput(input);
+                break;
+        }
 
-			function sendRequestWithParamsForPlayer($http, method, params) {
-			ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
-			$http.jsonp(window.base_url+ping_url)
-			.success(function(data, status){
-				param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": {"playerid":'+data.result[0].playerid+', '+ params +'}, "id": 1}';
-				complete_url = window.base_url + param_url;
-				$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-					.error(function() {
-					alert("Vous n'êtes pas connecté");
-					});	
-			});
-		}
-	});
+        $scope.muted = Sounder.getMuted();
+        $scope.volume = Sounder.getVolume();
+    };
+});
