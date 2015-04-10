@@ -1,31 +1,55 @@
-# Projet S8 - Contrôle à distance du media-center Kodi sur Raspberry pi à l’aide d’un smartphone
+#Kimote
 
-## Description
+Kimote is a multi-platform remote application for [Kodi][], developed by 8 telecommunications students from ENSEIRB-MATMECA, a French Engineering School.
 
-http://www.labri.fr/perso/falleri/dist/ens/projets/s8/sujets/8.pdf
+It is available for all platforms supported by the [Apache Cordova][] framework but actually only tested on iOS and Android.
 
-### Structure
+On top of Cordova, it is built with [AngularJS][] and the [Ionic][] framework.
 
-projetS8/
- ├ beta: version de test
- ├ webinterface.komote : interface web de Komote (add-on sur Kodi)
- └ www: interface app mobile
+##Installation
 
-## Liens utiles
+First, you need to get Cordova and Ionic, with npm : `npm install -g cordova` or download it from the website. 
 
-* <https://cordova.apache.org/>
-* <http://kodi.tv/>
+Same thing for Ionic : `npm install -g cordova ionic`
 
-## Contacts
+Create a new project with :
 
-* Jean-Rémy Falleri - <falleri@labri.fr>
-* Laurent Réveillère - <reveillere@enseirb-matmeca.fr>
+	ionic start Kimote blank
+	cd Kimote
+	rm -r www
 
-* DIEP PHILIPPE - <Philippe.Diep@enseirb-matmeca.fr>
-* DOUMBIA MORIBA - <Moriba.Doumbia@enseirb-matmeca.fr>
-* EL FADIL AKRAM - <Akram.El_Fadil@enseirb-matmeca.fr>
-* FOVET BENJAMIN - <Benjamin.Fovet@enseirb-matmeca.fr>
-* GASQUE MAXIME - <Maxime.Gasque@enseirb-matmeca.fr>
-* PLANCHAMP AUDE - <Aude.Planchamp@enseirb-matmeca.fr>
-* ROSTAN HELOISE - <Heloise.Rostan@enseirb-matmeca.fr>
-* SEDDIKI ANASS - <Anass.Seddiki@enseirb-matmeca.fr>
+Get Kimote with `git clone https://github.com/eftov/Kimote.git` and move the www and resources folders to the app folder.
+
+Add the platforms you need, for example iOS and Android :
+
+	ionic platform add ios
+	ionic platform add android
+	
+and other supported platforms if you want.
+
+Build it with `ionic build` or just run it on your device  with `ionic run android` and/or `ionic run ios`.
+
+
+##Contacts
+
+###Supervisors
+
+- Jean-Rémy Falleri - falleri@labri.fr
+- Laurent Réveillère - reveillere@enseirb-matmeca.fr
+
+###Students
+
+- Philippe DIEP - Philippe.Diep@enseirb-matmeca.fr
+- Moriba DOUMBIA - Moriba.Doumbia@enseirb-matmeca.fr
+- Akram EL FADIL - Akram.El_Fadil@enseirb-matmeca.fr
+- Benjamin FOVET - Benjamin.Fovet@enseirb-matmeca.fr
+- Maxime GASQUE - Maxime.Gasque@enseirb-matmeca.fr
+- Aude PLANCHAMP - Aude.Planchamp@enseirb-matmeca.fr
+- Héloïse ROSTAN - Heloise.Rostan@enseirb-matmeca.fr
+- Anass SEDDIKI - Anass.Seddiki@enseirb-matmeca.fr
+
+
+[Kodi]: http://kodi.tv/
+[Apache Cordova]: https://cordova.apache.org
+[AngularJS]: https://angularjs.org/
+[Ionic]: http://ionicframework.com/
