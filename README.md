@@ -29,6 +29,17 @@ and other supported platforms if you want.
 
 Build it with `ionic build` or just run it on your device  with `ionic run android` and/or `ionic run ios`.
 
+##Get Kodi/OpenELEC
+
+###Kodi
+
+Kimote is only compatible with Kodi v15 and +. You can download nightly versions from here : <http://mirrors.kodi.tv/nightlies/>
+
+###OpenELEC
+
+If you want Kodi on your RaspberryPi, [OpenELEC][] is the way to go. Clone it from here : <https://github.com/OpenELEC/OpenELEC.tv/tree/openelec-next> and build it yourself.
+
+Or you can just download our compiled version (11 April 2015) available here : https://www.dropbox.com/s/2n7k1jonscizfl6/OpenELEC-RPi.arm-devel-20150411091720-r20584-g254b69d.img?dl=0
 
 ##Contacts
 
@@ -53,3 +64,4 @@ Build it with `ionic build` or just run it on your device  with `ionic run andro
 [Apache Cordova]: https://cordova.apache.org
 [AngularJS]: https://angularjs.org/
 [Ionic]: http://ionicframework.com/
+[OpenELEC]: http://openelec.tv/
