@@ -1,0 +1,14 @@
+Grunt installé et foctionnel
+
+Il vous faut le client grunt sur votre pc, pour l'installer :
+
+	sudo npm install -g grunt-cli
+
+Une fois ceci effectué, à chaque modification d'un fichier en .js taper dans un terminal dans le dossier js: 
+
+	grunt
+
+Nouvelle factory, Loader. Pas encore fonctionnelle :
+Utilisée pour charger les listes de films, musiques, séries. 
+Les fonctions n'arrivent pas à renvoyer les données que Kodi envoit.
+J'ai vérifié dans l'onglet network du débugger chrome, les données sont bien récupérées.

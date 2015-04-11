@@ -147,6 +147,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
+    // tab files
+    .state('tabs.files', {
+        url : '/files',
+        views : {
+            'files-tab' : {
+                templateUrl : 'views/files.html',
+                controller : 'FilesCtrl'
+            }
+        }
+    })
+    // tab pictures
     .state('tabs.pics', {
         url : '/pics',
         views : {

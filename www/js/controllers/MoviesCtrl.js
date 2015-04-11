@@ -1,4 +1,4 @@
-app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce) {
+app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce, Loader) {
 
     $scope.movie_label = $stateParams.movieLabel;
 
@@ -6,14 +6,18 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 	$scope.showMovies = function() {
 		method = "VideoLibrary.GetMovies";
 		params = '{"limits":{"start":0,"end":9999},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
-
 		getMovies($http, method, params);
 	};
 
+/* On est censés récuperer la liste des films en passant par la factory de la manière suivante
+	$scope.showMovies = function() {
+		$scope.movies = Loader.getMovies();
+	};
+  */
     //récupération des films
     function getMovies($http, method, params) {
 
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ', "id" : 1}';
 		complete_url = window.base_url + param_url;
 
         $ionicLoading.show();
