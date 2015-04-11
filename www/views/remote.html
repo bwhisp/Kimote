@@ -1,64 +1,64 @@
 <ion-view view-title="Kimote">
-    <ion-content class="padding" scroll=false>
+	<ion-content class="padding" scroll=false>
 
-        <div class="remote-btn">
-            <div class="row">
-                <div class="col">
-                    <button class="btn-custom button button-icon" ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}" ng-click="requestMute(muted)"></button>
-                </div>
-                <div class="col center-col">
-                    <button class="btn-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
-                </div>
-                <div class="col">
-                    <button class="btn-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
-                </div>
-            </div>
+		<div class="remote-btn">
+			<div class="row">
+				<div class="col">
+					<button class="btn-custom button button-icon" ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}" ng-click="requestMute(muted)"></button>
+				</div>
+				<div class="col center-col">
+					<button class="btn-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
+				</div>
+				<div class="col">
+					<button class="btn-custom button button-icon ion-power" ng-click="request('shutdown')"></button>
+				</div>
+			</div>
 
-            <div class="row">
-                <div class="col">
-                    <button class="btn-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
-                </div>
+			<div class="row">
+				<div class="col">
+					<button class="btn-custom button-nav-left button button-icon ion-chevron-left" ng-click="request('left')"></button>
+				</div>
 
-                <div class="col center-col col-25">
-                    <button class="btn-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
-                </div>
+				<div class="col center-col col-25">
+					<button class="btn-custom button button-icon ion-checkmark-circled" ng-click="request('select')"></button>
+				</div>
 
-                <div class="col">
-                    <button class="btn-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
-                </div>
-            </div>
+				<div class="col">
+					<button class="btn-custom button-nav-right button button-icon ion-chevron-right" ng-click="request('right')"></button>
+				</div>
+			</div>
 
-            <div class="row">
-                <div class="col">
-                    <button class="btn-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
-                </div>
-                <div class="col center-col">
-                    <button class="btn-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
-                </div>
-                <div class="col">
-                    <button class="btn-custom button button-icon ion-android-home" ng-click="request('home')"></button>
-                </div>
-            </div>
-        </div>
+			<div class="row">
+				<div class="col">
+					<button class="btn-custom button button-icon ion-arrow-left-c" ng-click="request('back')"></button>
+				</div>
+				<div class="col center-col">
+					<button class="btn-custom button button-icon ion-chevron-down" ng-click="request('down')"></button>
+				</div>
+				<div class="col">
+					<button class="btn-custom button button-icon ion-android-home" ng-click="request('home')"></button>
+				</div>
+			</div>
+		</div>
 
-        <div ng-hide="playerisActive(model.playeractive)" class="ng-hide time-element">
-            <div class="media-buttons-wrapper">
-                <div class="media-buttons">
-                    <button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
-                    <button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
-                    <button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': !played, 'ion-ios-play': played}" ng-click="played=!played; request('pause')"></button>
-                    <button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
-                </div>
-            </div>
-            <div class="range runtime">
-                <button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
-                <input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
-                <button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
-            </div>
-            <div class="time">
-                {{toMinutes(model.temps)}} /
-                {{toMinutes(model.totaltime)}}
-            </div>
-        </div>
-    </ion-content>
+		<div ng-hide="playerisActive(model.playeractive)" class="ng-hide time-element">
+			<div class="media-buttons-wrapper">
+				<div class="media-buttons">
+					<button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
+					<button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
+					<button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': !played, 'ion-ios-play': played}" ng-click="played=!played; request('pause')"></button>
+					<button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
+				</div>
+			</div>
+			<div class="range runtime">
+				<button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
+				<input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
+				<button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
+			</div>
+			<div class="time">
+				{{toMinutes(model.temps)}} /
+				{{toMinutes(model.totaltime)}}
+			</div>
+		</div>
+	</ion-content>
 </ion-view>

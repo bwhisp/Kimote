@@ -1,43 +1,43 @@
 <ion-view view-title="{{episode_label}}" ng-init="showEpisodeDetails(episode_id)">
-    <ion-content class="padding">
-        <div class="card">
-            <div class="episode-item item item-thumbnail-left">
-                <img class="episode-thumb" ng-src="{{getThumbnailSeries(episodedetails.thumbnail)}}">
-                <h2>{{episodedetails.label}}</h2>
-                <p>Episode {{episodedetails.episode}}, Saison {{episodedetails.season}}</p>
-                <p>Note : {{Math.round(episodedetails.rating * 10) / 10}}/10</p>
-            </div>
+	<ion-content class="padding">
+		<div class="card">
+			<div class="episode-item item item-thumbnail-left">
+				<img class="episode-thumb" ng-src="{{getThumbnailSeries(episodedetails.thumbnail)}}">
+				<h2>{{episodedetails.label}}</h2>
+				<p>Episode {{episodedetails.episode}}, Saison {{episodedetails.season}}</p>
+				<p>Note : {{Math.round(episodedetails.rating * 10) / 10}}/10</p>
+			</div>
 
-            <div class="item item-body">
-                <videogular vg-theme="config.theme">
-        			<vg-media vg-src="config.sources"></vg-media>
+			<div class="item item-body videogular-container">
+				<videogular vg-theme="config.theme">
+					<vg-media vg-src="config.sources"></vg-media>
 
-        			<vg-controls>
-        				<vg-play-pause-button></vg-play-pause-button>
-        				<vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
-        				<vg-scrub-bar>
-        					<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-        				</vg-scrub-bar>
-        				<vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-        				<vg-volume>
-        					<vg-mute-button></vg-mute-button>
-        					<vg-volume-bar></vg-volume-bar>
-        				</vg-volume>
-        				<vg-fullscreen-button></vg-fullscreen-button>
-        			</vg-controls>
+					<vg-controls>
+						<vg-play-pause-button></vg-play-pause-button>
+						<vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+						<vg-scrub-bar>
+							<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+						</vg-scrub-bar>
+						<vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+						<vg-volume>
+							<vg-mute-button></vg-mute-button>
+							<vg-volume-bar></vg-volume-bar>
+						</vg-volume>
+						<vg-fullscreen-button></vg-fullscreen-button>
+					</vg-controls>
 
-        			<vg-overlay-play></vg-overlay-play>
-                </videogular>
+					<vg-overlay-play></vg-overlay-play>
+				</videogular>
 
-                <p>{{episodedetails.plot}}</p>
-            </div>
+				<p>{{episodedetails.plot}}</p>
+			</div>
 
-            <a href="#" class="item item-icon-left positive" ng-click="playEpisodeOnKodi(episodedetails.file)">
-                <i class="icon ion-play"></i>
-                Lancer l'épisode sur Kodi
-            </a>
-            <br>
-            <br>
-        </div>
-    </ion-content>
+			<a href="#" class="item item-icon-left positive" ng-click="playEpisodeOnKodi(episodedetails.file)">
+				<i class="icon ion-play"></i>
+				Lancer l'épisode sur Kodi
+			</a>
+			<br>
+			<br>
+		</div>
+	</ion-content>
 </ion-view>

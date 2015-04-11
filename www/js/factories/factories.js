@@ -94,7 +94,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	}
+	};
 
 	sounder.VolDown = function(vol) {
 		if (vol < 100)
@@ -110,7 +110,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	}
+	};
 
 	sounder.SetVol = function (sound) {
 
@@ -124,7 +124,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	}
+	};
 
 	sounder.getMuted = function() {
 		return muted;
@@ -224,7 +224,7 @@ app.factory('Runtime', function($http) {
 		$http.jsonp(window.base_url + ping_url)
 		.success(function(data, status) {
 
-			if (data.result.length != 0) {
+			if (data.result.length !== 0) {
 				infos.playeractive = data.result[0].playerid;
 				ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":' + data.result[0].playerid + ',"properties":["percentage","time","totaltime"] }}&callback=JSON_CALLBACK';
 
@@ -361,7 +361,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				break;
 			case "pictures" :
 				window.location = "#/tab/pics";
-				method = method + "ActivateWindow"
+				method = method + "ActivateWindow";
 				params = '{"window" : "pictures"}';
 				break;
 
@@ -414,15 +414,15 @@ app.factory('Loader', function($http, $ionicLoading) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.artists;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les artistes");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les artistes");
 		});
 
 		return res;
@@ -431,23 +431,23 @@ app.factory('Loader', function($http, $ionicLoading) {
 	loader.getAlbums = function (artistid) {
 		var res;
 		method = "AudioLibrary.GetAlbums";
-		if (artistid == undefined)
+		if (artistid === undefined)
 			params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true}},"id":"libAlbums"}';
 		else
-        	params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"artistid":' + artistid + '}},"id":"libAlbums"}';
+			params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"artistid":' + artistid + '}},"id":"libAlbums"}';
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.albums;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les albums");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les albums");
 		});
 
 		return res;
@@ -456,24 +456,23 @@ app.factory('Loader', function($http, $ionicLoading) {
 	loader.getSongs = function(albumid) {
 		var res;
 		method = "AudioLibrary.GetSongs";
-		if (albumid == undefined)
+		if (albumid === undefined)
 			params = '{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true},"id":"libSongs"}';
-		else 
+		else
 			params = '{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true},"filter":{"albumid":' + albumid + '}},"id":"libSongs"}';
-
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.songs;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les titres");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les titres");
 		});
 
 		return res;
@@ -488,16 +487,16 @@ app.factory('Loader', function($http, $ionicLoading) {
 		
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ', "id" : 1}';
 		complete_url = window.base_url + param_url;
-        
-        $ionicLoading.show();
+
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.movies;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les films");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les films");
 		});
 
 		return res;
@@ -512,15 +511,15 @@ app.factory('Loader', function($http, $ionicLoading) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.tvshows;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les séries TV");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les séries TV");
 		});
 
 		return res;
@@ -537,15 +536,15 @@ app.factory('Loader', function($http, $ionicLoading) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-	    $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-	        $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.seasons;
 		})
 		.error(function(data, status, headers, config) {
-	        $ionicLoading.hide();
-	        alert("Impossible de récupérer les saisons");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les saisons");
 		});
 
 		return res;
@@ -554,7 +553,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 	loader.getEpisodes =function (tvshowid, seasonid) {
 		var res;
 		method = "VideoLibrary.GetEpisodes";
-		if (tvshowid == undefined || seasonid == undefined)
+		if (tvshowid === undefined || seasonid === undefined)
 			params = '{"limits": { "start" : 0, "end": 100}, "properties": ["title","runtime","season","episode","tvshowid","file"], "sort": { "order": "ascending", "method": "label" } }, "id": "libTvShows"';
 		else
 			params = '{"tvshowid":' + tvshowid + ',"season":' + seasonid + ',"limits": { "start" : 0, "end": 100}, "properties": ["title","runtime","season","episode","tvshowid","file"], "sort": { "order": "ascending", "method": "label" } }, "id": "libTvShows"';
@@ -562,15 +561,15 @@ app.factory('Loader', function($http, $ionicLoading) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			res = data.result.episodes;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les épisodes");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les épisodes");
 		});
 
 		return res;

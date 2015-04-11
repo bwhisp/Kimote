@@ -1,13 +1,13 @@
 <ion-view view-title="Musique">
-    <div ng-init="showArtists()"></div>
-    <ion-content>
-        <ion-list>
-            <a class="item item-thumbnail-left item-icon-right" ng-repeat="artist in artists" href="#/tab/albums/{{artist.label}}/{{artist.artistid}}">
-                <img ng-src="{{getThumbnailArtist(artist.thumbnail)}}">
-                <h2>{{artist.label}}</h2>
-                <p ng-repeat="genre in artist.genre">{{genre}}{{$last ? '' : ', '}}</p>
-                <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
-        </ion-list>
-    </ion-content>
+	<div ng-init="showArtists()"></div>
+	<ion-content>
+		<ion-list>
+			<a class="item item-thumbnail-left item-icon-right" ng-repeat="artist in artists" href="#/tab/albums/{{artist.label}}/{{artist.artistid}}">
+				<img ng-src="{{getThumbnailArtist(artist.thumbnail)}}">
+				<h2>{{artist.label}}</h2>
+				<p ng-repeat="genre in artist.genre">{{genre}}{{$last ? '' : ', '}}</p>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</a>
+		</ion-list>
+	</ion-content>
 </ion-view>
