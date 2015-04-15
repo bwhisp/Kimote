@@ -61,82 +61,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 	$scope.requestMute = function (muted) {
 		method = "Application.SetMute";
 		params = '{"mute":' + muted + '}';
-<<<<<<< HEAD
-        $scope.muted = !muted;
 
-        Requester.sendRequest($http, method, params);
-    };
-
-    $scope.showAlert = function() {
-        var alertPopup = $ionicPopup.alert({
-            title: 'Volume',
-            template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">',
-            scope: $scope
-        });
-
-        alertPopup.then(function(res) {
-            console.log('In alertPopup.then');
-        });
-    };
-
-    $scope.request = function (input) {
-        switch (input) {
-
-            case "fullscreen" :
-                Requester.requestGUI(input);
-                break;
-
-            case "shutdown" :
-                Requester.requestApplication(input, 0);
-                break;
-            case "mute" :
-                Requester.requestApplication(input, 0);
-                break;
-            case "unmute" :
-                Requester.requestApplication(input, 0);
-                break;
-            case "volumeUp" :
-                Requester.requestApplication(input, $scope.volume);
-                break;
-            case "volumeDown" :
-                Requester.requestApplication(input, $scope.volume);
-                break;
-
-            default :
-                Requester.requestInput(input);
-                break;
-        }
-
-        $scope.muted = Sounder.getMuted();
-        $scope.volume = Sounder.getVolume();
-    };
-
-	// search Hélo
-	
-	    //récupération des films
-    function getDatas($http, method, params) {
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-            $scope.datas = data.result.datas;
-		})
-		.error(function(data, status, headers, config) {
-            
-            alert("Impossible de récupérer les datas");
-		});
-	}
-	
-	
-	
-	
-	});
-
-
-
-=======
 		$scope.muted = !muted;
 
 		Requester.sendRequest($http, method, params);
@@ -185,4 +110,4 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 		$scope.volume = Sounder.getVolume();
 	};
 });
->>>>>>> 3c7a0cc44fbcb0496e0bb2dff76cccba2d569aa1
+
