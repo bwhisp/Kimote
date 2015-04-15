@@ -109,4 +109,29 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
         $scope.muted = Sounder.getMuted();
         $scope.volume = Sounder.getVolume();
     };
-});
+
+	// search Hélo
+	
+	    //récupération des films
+    function getDatas($http, method, params) {
+
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		complete_url = window.base_url + param_url;
+
+		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+		.success(function(data, status, headers, config) {
+            $scope.datas = data.result.datas;
+		})
+		.error(function(data, status, headers, config) {
+            
+            alert("Impossible de récupérer les datas");
+		});
+	}
+	
+	
+	
+	
+	});
+
+
+
