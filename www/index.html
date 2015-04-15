@@ -44,9 +44,9 @@
 						                    </ion-nav-buttons>
                     <ion-nav-buttons side="right">
                         <button class="button button-icon ion-volume-medium" ng-click="showAlert()"></button>
-						<button class="button button-icon icon ion-android-search" ng-click="dosearch()"></button>
-						<div class="bar bar-header item-input-inset">
- 
+						<button class="button button-icon icon ion-android-search" ng-click="setLoader()" ng-hide ="search"></button>
+						<div class="bar bar-header item-input-inset" ng-show = "search" ng-model = "filter">
+ --
  <div class="bar bar-header item-input-inset" ng-hide="false">
   <label class="item-input-wrapper" >
     <i class="icon ion-ios7-search placeholder-icon" ></i>

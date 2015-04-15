@@ -106,8 +106,13 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 				break;
 		}
 
-		$scope.muted = Sounder.getMuted();
+
+	$scope.muted = Sounder.getMuted();
 		$scope.volume = Sounder.getVolume();
-	};
+}
+
+	
+
+
 });
 

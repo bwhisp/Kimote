@@ -539,6 +539,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 	$scope.requestMute = function (muted) {
 		method = "Application.SetMute";
 		params = '{"mute":' + muted + '}';
+
 		$scope.muted = !muted;
 
 		Requester.sendRequest($http, method, params);
@@ -583,17 +584,24 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 				break;
 		}
 
-		$scope.muted = Sounder.getMuted();
+
+	$scope.muted = Sounder.getMuted();
 		$scope.volume = Sounder.getVolume();
-	};
+}
+
+	
+
+
 });
 
-app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder) {
+
+app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder, Loader) {
 
 	/*************** bouton son ******************/
 
 	$scope.soundbar = {};
 	$scope.sound = Sounder.getVolume();
+
 
 	$scope.setVol = function () {
 		Sounder.SetVol($scope.soundbar.sound);
@@ -698,6 +706,62 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.loginData.port = parseInt($cookieStore.get('port'));
 	$scope.loginData.username = $cookieStore.get('username');
 	$scope.loginData.password = $cookieStore.get('password');
+
+
+
+
+$scope.search = false;
+	$scope.setLoader= function () {
+		Loader.getArtists(function (data){
+			$scope.data.artists= data.result.artists;
+		
+	});
+
+
+	Loader.getAlbums(function (data){
+			$scope.data.albums= data.result.albums;
+			console.log(albums);
+	
+	});
+		Loader.getSongs(function (data){
+			$scope.data.songs= data.result.song;
+			console.log(songs);
+	
+	});
+
+			Loader.getMovies(function (data){
+			$scope.data.movies= data.result.Movies;
+			console.log(movies);
+	
+	});
+
+	Loader.getSeries(function (data){
+			$scope.data.series= data.result.series;
+			console.log(series);
+	
+	});
+
+
+	Loader.getSeasons(function (data){
+			$scope.data.seasons= data.result.seasons;
+			console.log(seasons);
+	
+	});
+
+
+		Loader.getEpisodes(function (data){
+			$scope.data.episodes= data.result.episodes;
+			console.log(episodes);
+	
+	});
+
+	$scope.search =true;
+
+
+};
+
+
+
 });
 
 app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $ionicLoading, $sce, Loader) {
