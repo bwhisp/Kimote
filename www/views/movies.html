@@ -1,15 +1,15 @@
 <ion-view view-title="Films">
-    <ion-nav-buttons side="right">
-        <button class="button button-icon ion-volume-medium"></button>
-    </ion-nav-buttons>
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-volume-medium"></button>
+	</ion-nav-buttons>
 
-    <div ng-init="showMovies()"></div>
-    <ion-content>
-        <ion-list>
-            <a class="item item-icon-right" ng-repeat="movie in movies" href="#/tab/movies/{{movie.label}}">
-                <h2>{{movie.label}}</h2>
-                <i class="icon ion-chevron-right icon-accessory"></i>
-            </a>
-        </ion-list>
-    </ion-content>
+	<div ng-init="showMovies()"></div>
+	<ion-content>
+		<ion-list>
+			<a class="item item-icon-right" ng-repeat="movie in movies" href="#/tab/movies/{{movie.label}}">
+				<h2>{{movie.label}}</h2>
+				<i class="icon ion-chevron-right icon-accessory"></i>
+			</a>
+		</ion-list>
+	</ion-content>
 </ion-view>

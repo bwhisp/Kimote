@@ -1,13 +1,13 @@
 app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $ionicLoading, $sce) {
-    $scope.series_id = $stateParams.seriesId;
-    $scope.series_label = $stateParams.seriesLabel;
+	$scope.series_id = $stateParams.seriesId;
+	$scope.series_label = $stateParams.seriesLabel;
 
-    $scope.season_id = $stateParams.seasonId;
+	$scope.season_id = $stateParams.seasonId;
 
-    $scope.episode_id = $stateParams.episodeId;
-    $scope.episode_label = $stateParams.episodeLabel;
+	$scope.episode_id = $stateParams.episodeId;
+	$scope.episode_label = $stateParams.episodeLabel;
 
-    //préparation de la requête http pour afficher la liste des séries
+	//préparation de la requête http pour afficher la liste des séries
 	$scope.showSeries = function() {
 		method = "VideoLibrary.GetTVShows";
 		params = '{"limits": { "start" : 0, "end": 100}, "properties": ["art", "genre", "plot", "title", "originaltitle", "year", "rating", "thumbnail", "playcount", "file","season"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
@@ -21,19 +21,19 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			$scope.tvshows = data.result.tvshows;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les séries TV");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les séries TV");
 		});
 	}
 
-    //préparation de la requête http pour afficher la liste des saisons d'une série
+	//préparation de la requête http pour afficher la liste des saisons d'une série
 	$scope.showSeasons = function(tvshowid) {
 		method = "VideoLibrary.GetSeasons";
 		params = '{"tvshowid":' + tvshowid + ',"limits": { "start" : 0, "end": 100}, "properties": ["season","showtitle","thumbnail","episode","tvshowid"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
@@ -46,19 +46,19 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			$scope.seasons = data.result.seasons;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les saisons");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les saisons");
 		});
 	}
 
-    //préparation de la requête http pour afficher la liste des épisodes d'une saison
+	//préparation de la requête http pour afficher la liste des épisodes d'une saison
 	$scope.showEpisodes = function (tvshowid,seasonid) {
 		method = "VideoLibrary.GetEpisodes";
 		params = '{"tvshowid":' + tvshowid + ',"season":' + seasonid + ',"limits": { "start" : 0, "end": 100}, "properties": ["title","runtime","season","episode","tvshowid","file"], "sort": { "order": "ascending", "method": "label" } }, "id": "libTvShows"';
@@ -71,62 +71,62 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			$scope.episodes = data.result.episodes;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les épisodes");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les épisodes");
 		});
 	}
 
-    $scope.showEpisodeDetails = function(episodeid) {
-        method = "VideoLibrary.GetEpisodeDetails";
-        params = '{"episodeid":' + episodeid + ', "properties": ["title","runtime","rating","plot","season","episode","tvshowid","file","showtitle","thumbnail","fanart"]}, "id": "libTvShows"';
+	$scope.showEpisodeDetails = function(episodeid) {
+		method = "VideoLibrary.GetEpisodeDetails";
+		params = '{"episodeid":' + episodeid + ', "properties": ["title","runtime","rating","plot","season","episode","tvshowid","file","showtitle","thumbnail","fanart"]}, "id": "libTvShows"';
 
-        getEpisodeDetails($http, method, params);
-    };
+		getEpisodeDetails($http, method, params);
+	};
 
-    function getEpisodeDetails($http, method, params) {
+	function getEpisodeDetails($http, method, params) {
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			$scope.episodedetails = data.result.episodedetails;
 
-            $scope.getStreamInfo($scope.episodedetails.file);
+			$scope.getStreamInfo($scope.episodedetails.file);
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer l'épisode");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer l'épisode");
 		});
 	}
 
-    $scope.getStreamInfo = function(file) {
+	$scope.getStreamInfo = function(file) {
 
-        $scope.episodePath = encodeURIComponent(file);
-        $scope.streamUrl = window.base_url + '/vfs/' + $scope.episodePath;
+		$scope.episodePath = encodeURIComponent(file);
+		$scope.streamUrl = window.base_url + '/vfs/' + $scope.episodePath;
 
-        $scope.config = {
-            sources: [{
-                src: $sce.trustAsResourceUrl($scope.streamUrl),
-                type: "video/mp4"
-            }],
-            theme: "lib/videogular-themes-default/videogular.min.css",
-        };
+		$scope.config = {
+			sources: [{
+				src: $sce.trustAsResourceUrl($scope.streamUrl),
+				type: "video/mp4"
+			}],
+			theme: "lib/videogular-themes-default/videogular.min.css",
+		};
 
-        return $scope.config;
-    };
+		return $scope.config;
+	};
 
 
-    //lancer l'épisode cliqué
+	//lancer l'épisode cliqué
 	$scope.playEpisodeOnKodi = function(file) {
 
 		method = "Player.Open";
@@ -145,7 +145,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		});
 	};
 
-    $scope.Math = window.Math;
+	$scope.Math = window.Math;
 
 	//conversion de la durée d'un épisode
 	$scope.toHours = function(duration) {
@@ -161,7 +161,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		return time;
 	};
 
-    //récupération du thumbnail de la série
+	//récupération du thumbnail de la série
 	$scope.getThumbnailSeries = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
@@ -169,7 +169,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		return $scope.thumbnailUriDecoded;
 	};
 
-    //récupération du thumbnail d'une saison
+	//récupération du thumbnail d'une saison
 	$scope.getThumbnailSeason = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);

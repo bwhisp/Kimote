@@ -1,0 +1,15 @@
+<ion-view view-title="Files">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-volume-medium"></button>
+    </ion-nav-buttons>
+
+    <div ng-init='getDir("/home/bwhisp/")'></div>
+    <ion-content>
+        <ion-list>
+            <a class="item item-icon-right" ng-repeat="file in files" ng-click="getDir(file)">
+                <h2>{{file.file}}</h2>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </a>
+        </ion-list>
+    </ion-content>
+</ion-view>

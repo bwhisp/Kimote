@@ -1,8 +1,8 @@
 app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce) {
 
-    $scope.movie_label = $stateParams.movieLabel;
+	$scope.movie_label = $stateParams.movieLabel;
 
-    //préparation de la requête http pour afficher la liste des films
+	//préparation de la requête http pour afficher la liste des films
 	$scope.showMovies = function() {
 		method = "VideoLibrary.GetMovies";
 		params = '{"limits":{"start":0,"end":9999},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
@@ -10,25 +10,25 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		getMovies($http, method, params);
 	};
 
-    //récupération des films
-    function getMovies($http, method, params) {
+	//récupération des films
+	function getMovies($http, method, params) {
 
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ',"id":1}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 			$scope.movies = data.result.movies;
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            alert("Impossible de récupérer les films");
+			$ionicLoading.hide();
+			alert("Impossible de récupérer les films");
 		});
 	}
 
-    //lire le film sur Kodi et redirection vers remote
+	//lire le film sur Kodi et redirection vers remote
 	$scope.playMovieOnKodi = function(file) {
 
 		method = "Player.Open";
@@ -45,30 +45,30 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		});
 	};
 
-    $scope.getStreamInfo = function(file, poster) {
-        $scope.moviePath = encodeURIComponent(file);
-        $scope.streamUrl = window.base_url + '/vfs/' + $scope.moviePath;
+	$scope.getStreamInfo = function(file, poster) {
+		$scope.moviePath = encodeURIComponent(file);
+		$scope.streamUrl = window.base_url + '/vfs/' + $scope.moviePath;
 
-        poster = poster.replace("image://","");
+		poster = poster.replace("image://","");
 		$scope.posterUriDecoded = decodeURIComponent(poster);
 
-        console.log("streamUrl : " + $scope.streamUrl);
+		console.log("streamUrl : " + $scope.streamUrl);
 
-        $scope.config = {
-            sources: [{
-                src: $sce.trustAsResourceUrl($scope.streamUrl),
-                type: "video/mp4"
-            }],
-            theme: "lib/videogular-themes-default/videogular.min.css",
-            plugins: {
-                poster: $scope.posterUriDecoded
-            }
-        };
+		$scope.config = {
+			sources: [{
+				src: $sce.trustAsResourceUrl($scope.streamUrl),
+				type: "video/mp4"
+			}],
+			theme: "lib/videogular-themes-default/videogular.min.css",
+			plugins: {
+				poster: $scope.posterUriDecoded
+			}
+		};
 
-        return $scope.config;
-    };
+		return $scope.config;
+	};
 
-    //conversion du champ movie.runtime en heures
+	//conversion du champ movie.runtime en heures
 	$scope.toHours = function(duration) {
 		var hours = Math.floor(duration/3600);
 		var minutes = Math.floor((duration - (hours*3600))/60);
@@ -81,7 +81,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		return time;
 	};
 
-    //téléchargement l'image de présentation du film
+	//téléchargement l'image de présentation du film
 	$scope.getThumbnail = function(thumbnailUri) {
 		thumbnailUri = thumbnailUri.replace("image://","");
 		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
@@ -89,5 +89,5 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		return $scope.thumbnailUriDecoded;
 	};
 
-    $scope.Math = window.Math;
+	$scope.Math = window.Math;
 });

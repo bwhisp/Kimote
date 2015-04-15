@@ -1,47 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <title></title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+		<title></title>
 
-        <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-        <link href="css/style.css" rel="stylesheet">
-        <link href="lib/videogular-themes-default/videogular.min.css" rel="stylesheet">
+		<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+		<link href="lib/videogular-themes-default/videogular.min.css" rel="stylesheet">
 
-        <!-- ionic/angularjs js -->
-        <script src="lib/ionic/js/ionic.bundle.js"></script>
+		<!-- ionic/angularjs js -->
+		<script src="lib/ionic/js/ionic.bundle.js"></script>
 
-        <!-- cordova script (this will be a 404 during development) -->
-        <script src="cordova.js"></script>
+		<!-- cordova script (this will be a 404 during development) -->
+		<script src="cordova.js"></script>
 
-        <!-- external libs-->
-        <script src="lib/angular-cookies/angular-cookies.min.js"></script>
-        <script src="lib/videogular/videogular.min.js"></script>
-        <script src="lib/videogular-controls/vg-controls.min.js"></script>
-        <script src="lib/videogular-overlay-play/vg-overlay-play.min.js"></script>
-        <script src="lib/videogular-poster/vg-poster.min.js"></script>
-        <script src="lib/videogular-buffering/vg-buffering.min.js"></script>
-        <script src="lib/videogular-dash/vg-dash.min.js"></script>
+		<!-- external libs-->
+		<script src="lib/angular-cookies/angular-cookies.min.js"></script>
+		<script src="lib/videogular/videogular.min.js"></script>
+		<script src="lib/videogular-controls/vg-controls.min.js"></script>
+		<script src="lib/videogular-overlay-play/vg-overlay-play.min.js"></script>
+		<script src="lib/videogular-poster/vg-poster.min.js"></script>
+		<script src="lib/videogular-buffering/vg-buffering.min.js"></script>
+		<script src="lib/videogular-dash/vg-dash.min.js"></script>
 
-        <!-- your app's js -->
-        <script src="js/app.js"></script>
-        <script src="js/controllers/SideMenuCtrl.js"></script>
-        <script src="js/controllers/RemoteCtrl.js"></script>
-        <script src="js/controllers/MoviesCtrl.js"></script>
-        <script src="js/controllers/TVShowsCtrl.js"></script>
-        <script src="js/controllers/MusicCtrl.js"></script>
-        <script src="js/controllers/PicsCtrl.js"></script>
-        <script src="js/factories.js"></script>
-    </head>
+		<!-- your app's js -->
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/factories.js"></script>
+	</head>
 
-    <body ng-app="app" ng-controller="SideMenuCtrl">
+	<body ng-app="app" ng-controller="SideMenuCtrl">
 
-        <ion-side-menus>
-            <ion-side-menu-content>
-                <ion-nav-bar class="bar-positive">
-                    <ion-nav-back-button class="button-icon ion-arrow-left-c">
-                    </ion-nav-back-button>
+		<ion-side-menus>
+			<ion-side-menu-content>
+				<ion-nav-bar class="bar-positive">
+					<ion-nav-back-button class="button-icon ion-arrow-left-c">
+					</ion-nav-back-button>
 
                     <ion-nav-buttons side="left">
                         <button class="button button-icon button-clear ion-navicon" ng-click="showMenu()">
@@ -87,5 +82,7 @@
             </ion-side-menu>
         </ion-side-menus>
 
-    </body>
+				
+
+	</body>
 </html>
