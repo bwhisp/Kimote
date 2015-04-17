@@ -94,7 +94,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	};
+	}
 
 	sounder.VolDown = function(vol) {
 		if (vol < 100)
@@ -110,7 +110,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	};
+	}
 
 	sounder.SetVol = function (sound) {
 
@@ -124,7 +124,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	};
+	}
 
 	sounder.getMuted = function() {
 		return muted;
@@ -179,14 +179,6 @@ app.factory('Manager', function($http) {
 		});
 	};
 
-	manager.getPaused = function() {
-		return paused;
-	};
-
-	manager.getPlayed = function() {
-		return played;
-	};
-
 	return manager;
 });
 
@@ -199,6 +191,7 @@ app.factory('Runtime', function($http) {
 	infos.temps = 0;
 	infos.totaltime = 0;
 	infos.playeractive = "undefined";
+	infos.shuffled = false;
 
 	runtime.SetRuntime = function (moment) {
 
@@ -224,15 +217,18 @@ app.factory('Runtime', function($http) {
 		$http.jsonp(window.base_url + ping_url)
 		.success(function(data, status) {
 
-			if (data.result.length !== 0) {
+			if (data.result.length != 0) {
 				infos.playeractive = data.result[0].playerid;
-				ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":' + data.result[0].playerid + ',"properties":["percentage","time","totaltime"] }}&callback=JSON_CALLBACK';
+				ping_url2 = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"Player.GetProperties","params":{"playerid":' + data.result[0].playerid + ',"properties":["percentage","time","totaltime", "repeat","shuffled","speed"] }}&callback=JSON_CALLBACK';
 
 				$http.jsonp(window.base_url + ping_url2)
 				.success(function(data, status){
 					infos.moment2 = data.result.percentage;
 					infos.temps = data.result.time;
 					infos.totaltime = data.result.totaltime;
+					infos.shuffled = data.result.shuffled; 
+					infos.repeat = data.result.repeat;
+					infos.speed = data.result.speed;
 				})
 				.error(function(data, status){});
 			}
@@ -361,7 +357,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 				break;
 			case "pictures" :
 				window.location = "#/tab/pics";
-				method = method + "ActivateWindow";
+				method = method + "ActivateWindow"
 				params = '{"window" : "pictures"}';
 				break;
 
@@ -398,182 +394,18 @@ app.factory('Requester', function($http, Manager, Sounder) {
 		});
 	};
 
+	requester.sendRequestWithParamsForPlayer = function($http, method, params) {
+			ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
+			$http.jsonp(window.base_url+ping_url)
+			.success(function(data, status){
+				param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": {"playerid":'+data.result[0].playerid+', '+ params +'}, "id": 1}';
+				complete_url = window.base_url + param_url;
+				$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+					.error(function() {
+					alert("Vous n'êtes pas connecté");
+					});	
+			});
+	};
+
 	return requester;
-});
-
-
-app.factory('Loader', function($http, $ionicLoading) {
-	var loader = {};
-
-	// Fonctions pour la vue musique
-	loader.getArtists = function () {
-		var res;
-		method = "AudioLibrary.GetArtists";
-		params =  '{"properties":["style","description","born","yearsactive","died","thumbnail","genre","fanart"],"limits":{"start":1,"end":2000}},"id":"libMusic"';
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.artists;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les artistes");
-		});
-
-		return res;
-	};
-
-	loader.getAlbums = function (artistid) {
-		var res;
-		method = "AudioLibrary.GetAlbums";
-		if (artistid === undefined)
-			params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true}},"id":"libAlbums"}';
-		else
-			params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"artistid":' + artistid + '}},"id":"libAlbums"}';
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.albums;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les albums");
-		});
-
-		return res;
-	};
-
-	loader.getSongs = function(albumid) {
-		var res;
-		method = "AudioLibrary.GetSongs";
-		if (albumid === undefined)
-			params = '{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true},"id":"libSongs"}';
-		else
-			params = '{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true},"filter":{"albumid":' + albumid + '}},"id":"libSongs"}';
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.songs;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les titres");
-		});
-
-		return res;
-	};
-
-	// Fonctions pour la vue films
-	loader.getMovies = function () {
-		var res;
-
-		method = "VideoLibrary.GetMovies";
-		params = '{"limits":{"start":0,"end":9999},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
-		
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ', "id" : 1}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.movies;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les films");
-		});
-
-		return res;
-	};
-
-	// Fonctions pour la vue séries
-	loader.getSeries = function () {
-		var res;
-		method = "VideoLibrary.GetTVShows";
-		params = '{"limits": { "start" : 0, "end": 100}, "properties": ["art", "genre", "plot", "title", "originaltitle", "year", "rating", "thumbnail", "playcount", "file","season"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.tvshows;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les séries TV");
-		});
-
-		return res;
-	};
-
-	loader.getSeasons = function (tvshowid) {
-		var res;
-		method = "VideoLibrary.GetSeasons";
-		if (tvshowid == undefined)
-			params = '{"limits": { "start" : 0, "end": 100}, "properties": ["season","showtitle","thumbnail","episode","tvshowid"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
-		else
-			params = '{"tvshowid":' + tvshowid + ',"limits": { "start" : 0, "end": 100}, "properties": ["season","showtitle","thumbnail","episode","tvshowid"], "sort": { "order": "ascending", "method": "label" }}, "id": "libTvShows"';
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.seasons;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les saisons");
-		});
-
-		return res;
-	};
-
-	loader.getEpisodes =function (tvshowid, seasonid) {
-		var res;
-		method = "VideoLibrary.GetEpisodes";
-		if (tvshowid === undefined || seasonid === undefined)
-			params = '{"limits": { "start" : 0, "end": 100}, "properties": ["title","runtime","season","episode","tvshowid","file"], "sort": { "order": "ascending", "method": "label" } }, "id": "libTvShows"';
-		else
-			params = '{"tvshowid":' + tvshowid + ',"season":' + seasonid + ',"limits": { "start" : 0, "end": 100}, "properties": ["title","runtime","season","episode","tvshowid","file"], "sort": { "order": "ascending", "method": "label" } }, "id": "libTvShows"';
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			res = data.result.episodes;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Impossible de récupérer les épisodes");
-		});
-
-		return res;
-	};
-
-	return loader;
 });
