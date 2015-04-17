@@ -36,5 +36,6 @@ after_script:
     - echo "Done"
 branches:
     only:
+        - master
         - release
 sudo: required
