@@ -1,5 +1,16 @@
 app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
 
+$scope.scanAuto= function (){
+   
+        ZeroConf.watch("_http._tcp.local.", function(users){
+            $scope.users=users;
+        alert(users.service.name);
+     
+    }) 
+    });
+
+
+
 	$scope.model = {};
 	$scope.paused = Manager.getPaused();
 	$scope.played = Manager.getPlayed();

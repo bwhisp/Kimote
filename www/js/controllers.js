@@ -637,7 +637,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 		$scope.modalAbout.hide();
 	};
 
-	/* Vue modal pour la connexion*/
+	/* Vue modal pour la connexion Manuelle*/
 	$ionicModal.fromTemplateUrl('views/login.html', {
 		scope: $scope
 	}).then(function(modal) {
@@ -653,6 +653,24 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.closeLogin = function() {
 		$scope.modal.hide();
 	};
+
+		/* Vue modal pour la connexion Auto*/
+	$ionicModal.fromTemplateUrl('views/autologin.html', {
+		scope: $scope
+	}).then(function(modal) {
+		$scope.modalAuto = modal;
+	});
+
+	/* Ouvre le modal */
+	$scope.openAuto = function() {
+		$scope.modalAuto.show();
+	};
+
+	/* Ferme le modal */
+	$scope.closeAuto = function() {
+		$scope.modalAuto.hide();
+	};
+
 
 	/* Ouvre le menu */
 	$scope.showMenu = function () {
