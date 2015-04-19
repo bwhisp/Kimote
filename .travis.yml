@@ -3,8 +3,8 @@ android:
 components:
 - platform-tools
 - tools
-- build-tools-21.1.1
-- android-21
+- build-tools-22.0.1
+- android-22
 before_install:
 - echo "Before install stage"
 - sudo add-apt-repository -y ppa:chris-lea/node.js
