@@ -29,6 +29,9 @@ script:
 - cordova plugin add com.ionic.keyboard
 - cordova plugin add org.apache.cordova.dialogs
 - ionic platform add android
+- cordova platform update android@4.0.0
+- cordova plugin add https://github.com/apache/cordova-plugin-whitelist.git#r1.0.0
+- cordova plugin add https://github.com/apache/cordova-plugin-splashscreen.git
 - ionic build android
 after_success:
 - echo "Build succeeded"
