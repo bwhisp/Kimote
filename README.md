@@ -1,4 +1,4 @@
-#Kimote
+#Kimote [![Build Status](https://travis-ci.org/eftov/Kimote.svg?branch=master)](https://travis-ci.org/eftov/Kimote)
 
 Kimote is a multi-platform remote application for [Kodi][], developed by 8 telecommunications students from ENSEIRB-MATMECA, a French Engineering School.
 
@@ -8,9 +8,7 @@ On top of Cordova, it is built with [AngularJS][] and the [Ionic][] framework.
 
 ##Installation
 
-First, you need to get Cordova and Ionic, with npm : `npm install -g cordova` or download it from the website. 
-
-Same thing for Ionic : `npm install -g cordova ionic`
+First, you need to get Cordova and Ionic, with npm : `npm install -g cordova ionic` or download it from the website. 
 
 Create a new project with :
 
