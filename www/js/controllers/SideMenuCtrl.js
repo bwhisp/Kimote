@@ -131,56 +131,5 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 
 
 
-$scope.search = false;
-	$scope.setLoader= function () {
-		Loader.getArtists(function (data){
-			$scope.data.artists= data.result.artists;
-		
-	});
-
-
-	Loader.getAlbums(function (data){
-			$scope.data.albums= data.result.albums;
-			console.log(albums);
-	
-	});
-		Loader.getSongs(function (data){
-			$scope.data.songs= data.result.song;
-			console.log(songs);
-	
-	});
-
-			Loader.getMovies(function (data){
-			$scope.data.movies= data.result.Movies;
-			console.log(movies);
-	
-	});
-
-	Loader.getSeries(function (data){
-			$scope.data.series= data.result.series;
-			console.log(series);
-	
-	});
-
-
-	Loader.getSeasons(function (data){
-			$scope.data.seasons= data.result.seasons;
-			console.log(seasons);
-	
-	});
-
-
-		Loader.getEpisodes(function (data){
-			$scope.data.episodes= data.result.episodes;
-			console.log(episodes);
-	
-	});
-
-	$scope.search =true;
-
-
-};
-
-
 
 });

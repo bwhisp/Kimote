@@ -1,7 +1,7 @@
-app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
+app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 
-	$scope.path = "";
-
+	$scope.path = "/files";
+/*
 	$scope.getDir = function(dir) {
 		method = "Files.GetDirectory";
 		params = '{"directory":"'+dir+'","limits":{"start":1,"end":2000}},"sort":{"method":"file"}}';
@@ -45,7 +45,61 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 					break;
 			}
 		}
-	};
+	};*/
+
+
+
+
+	$scope.setLoader= function () {
+alert("toto");
+
+		Loader.getArtists(function (data){
+			$scope.data.artists= data.result.artists;
+		
+	});
+
+
+	Loader.getAlbums(function (data){
+			$scope.data.albums= data.result.albums;
+			alert(albums);
+	
+	});
+		Loader.getSongs(function (data){
+			$scope.data.songs= data.result.song;
+			alert(songs);
+	
+	});
+
+			Loader.getMovies(function (data){
+			$scope.data.movies= data.result.Movies;
+			alert(movies);
+	
+	});
+
+	Loader.getSeries(function (data){
+			$scope.data.series= data.result.series;
+			alert(series);
+	
+	});
+
+
+	Loader.getSeasons(function (data){
+			$scope.data.seasons= data.result.seasons;
+			alert(seasons);
+	
+	});
+
+
+		Loader.getEpisodes(function (data){
+			$scope.data.episodes= data.result.episodes;
+			alert(episodes);
+	
+	});
+
+
+};
+
+
 });
 app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce, Loader) {
 
@@ -478,6 +532,16 @@ app.controller('PicsCtrl', function($scope, $http, Requester) {
 
 app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
 
+$scope.scanAuto= function (){
+   
+        ZeroConf.watch("_http._tcp.local.", function(users){
+            $scope.users=users;
+        alert(users.service.name);
+     
+    });
+}
+
+
 	$scope.model = {};
 	$scope.paused = Manager.getPaused();
 	$scope.played = Manager.getPlayed();
@@ -654,7 +718,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 		$scope.modal.hide();
 	};
 
-		/* Vue modal pour la connexion Auto*/
+		/* Vue modal pour la connexion*/
 	$ionicModal.fromTemplateUrl('views/autologin.html', {
 		scope: $scope
 	}).then(function(modal) {
@@ -726,57 +790,6 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.loginData.password = $cookieStore.get('password');
 
 
-
-
-$scope.search = false;
-	$scope.setLoader= function () {
-		Loader.getArtists(function (data){
-			$scope.data.artists= data.result.artists;
-		
-	});
-
-
-	Loader.getAlbums(function (data){
-			$scope.data.albums= data.result.albums;
-			console.log(albums);
-	
-	});
-		Loader.getSongs(function (data){
-			$scope.data.songs= data.result.song;
-			console.log(songs);
-	
-	});
-
-			Loader.getMovies(function (data){
-			$scope.data.movies= data.result.Movies;
-			console.log(movies);
-	
-	});
-
-	Loader.getSeries(function (data){
-			$scope.data.series= data.result.series;
-			console.log(series);
-	
-	});
-
-
-	Loader.getSeasons(function (data){
-			$scope.data.seasons= data.result.seasons;
-			console.log(seasons);
-	
-	});
-
-
-		Loader.getEpisodes(function (data){
-			$scope.data.episodes= data.result.episodes;
-			console.log(episodes);
-	
-	});
-
-	$scope.search =true;
-
-
-};
 
 
 

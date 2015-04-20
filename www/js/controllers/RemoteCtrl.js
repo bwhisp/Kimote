@@ -6,9 +6,8 @@ $scope.scanAuto= function (){
             $scope.users=users;
         alert(users.service.name);
      
-    }) 
     });
-
+}
 
 
 	$scope.model = {};
