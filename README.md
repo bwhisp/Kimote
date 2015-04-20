@@ -6,6 +6,8 @@ It is available for all platforms supported by the [Apache Cordova][] framework 
 
 On top of Cordova, it is built with [AngularJS][] and the [Ionic][] framework.
 
+[![Kimote logo](https://github.com/eftov/Kimote/blob/master/resources/kimote_logo.png)](Kimote)
+
 ##Installation
 
 First, you need to get Cordova and Ionic, with npm : `npm install -g cordova ionic` or download it from the website. 
