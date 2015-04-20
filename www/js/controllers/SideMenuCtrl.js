@@ -1,10 +1,9 @@
-app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder, Loader) {
+app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder) {
 
 	/*************** bouton son ******************/
 
 	$scope.soundbar = {};
 	$scope.sound = Sounder.getVolume();
-
 
 	$scope.setVol = function () {
 		Sounder.SetVol($scope.soundbar.sound);
@@ -40,7 +39,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 		$scope.modalAbout.hide();
 	};
 
-	/* Vue modal pour la connexion Manuelle*/
+	/* Vue modal pour la connexion*/
 	$ionicModal.fromTemplateUrl('views/login.html', {
 		scope: $scope
 	}).then(function(modal) {
@@ -109,9 +108,4 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.loginData.port = parseInt($cookieStore.get('port'));
 	$scope.loginData.username = $cookieStore.get('username');
 	$scope.loginData.password = $cookieStore.get('password');
-
-
-
-
-
 });

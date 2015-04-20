@@ -1,7 +1,7 @@
-app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
+app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 
-	$scope.path = "/files";
-/*
+	$scope.path = "";
+
 	$scope.getDir = function(dir) {
 		method = "Files.GetDirectory";
 		params = '{"directory":"'+dir+'","limits":{"start":1,"end":2000}},"sort":{"method":"file"}}';
@@ -45,61 +45,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 					break;
 			}
 		}
-	};*/
-
-
-
-
-	$scope.setLoader= function () {
-alert("toto");
-
-		Loader.getArtists(function (data){
-			$scope.data.artists= data.result.artists;
-		
-	});
-
-
-	Loader.getAlbums(function (data){
-			$scope.data.albums= data.result.albums;
-			alert(albums);
-	
-	});
-		Loader.getSongs(function (data){
-			$scope.data.songs= data.result.song;
-			alert(songs);
-	
-	});
-
-			Loader.getMovies(function (data){
-			$scope.data.movies= data.result.Movies;
-			alert(movies);
-	
-	});
-
-	Loader.getSeries(function (data){
-			$scope.data.series= data.result.series;
-			alert(series);
-	
-	});
-
-
-	Loader.getSeasons(function (data){
-			$scope.data.seasons= data.result.seasons;
-			alert(seasons);
-	
-	});
-
-
-		Loader.getEpisodes(function (data){
-			$scope.data.episodes= data.result.episodes;
-			alert(episodes);
-	
-	});
-
-
-};
-
-
+	};
 });
 app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce) {
 
@@ -388,18 +334,7 @@ app.controller('PicsCtrl', function($scope, $http, Requester) {
 	};
 });
 
-<<<<<<< HEAD
 app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
-
-$scope.scanAuto= function (){
-   
-        ZeroConf.watch("_http._tcp.local.", function(users){
-            $scope.users=users;
-        alert(users.service.name);
-     
-    });
-}
-
 
 	$scope.model = {};
 	$scope.paused = Manager.getPaused();
@@ -462,7 +397,6 @@ $scope.scanAuto= function (){
 	$scope.requestMute = function (muted) {
 		method = "Application.SetMute";
 		params = '{"mute":' + muted + '}';
-
 		$scope.muted = !muted;
 
 		Requester.sendRequest($http, method, params);
@@ -507,171 +441,17 @@ $scope.scanAuto= function (){
 				break;
 		}
 
-
-	$scope.muted = Sounder.getMuted();
+		$scope.muted = Sounder.getMuted();
 		$scope.volume = Sounder.getVolume();
-}
-
-	
-
-
+	};
 });
-=======
-app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
 
-    $scope.model = {};
-    
-    $scope.model.runtime;
-    $scope.model.temps;
-    $scope.model.totaltime;
-    $scope.model.playeractive;
-
-
-    $scope.getRuntime = function () {
-    	var infos = Runtime.GetRuntime();
-        $scope.model.runtime = infos.moment2;
-        $scope.model.temps = infos.temps;
-        $scope.model.totaltime = infos.totaltime;
-        $scope.model.playeractive = infos.playeractive;
-        $scope.shuffled = infos.shuffled;	
-        if(infos.speed==0)
-        	$scope.played = false;
-        else 
-        	$scope.played = true;
-    };
-
-    setInterval($scope.getRuntime,500);
-
-    $scope.setRuntime = function () {
-        Runtime.SetRuntime($scope.model.runtime);
-    };
-
-    $scope.toMinutes = function(temps) {
-        var seconds = temps.seconds;
-        var minutes = temps.minutes;
-        var hours = temps.hours;
-
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-
-        var time = hours + ':' + minutes + ':' + seconds;
-
-        return time;
-    };
-
-    $scope.playerisActive = function(id) {
-        if (id != "undefined")
-            return false;
-        else
-            return true;
-    };
-
-    $scope.muted = Sounder.getMuted();
-    $scope.volume = Sounder.getVolume();
-    $scope.sound = Sounder.getVolume();
-
-    $scope.setVol = function () {
-        Sounder.SetVol($scope.model.sound);
-        $scope.model.sound = Sounder.getVolume();
-    };
-
-    $scope.requestMute = function (muted) {
-        method = "Application.SetMute";
-		params = '{"mute":' + muted + '}';
-        $scope.muted = !muted;
-
-        Requester.sendRequest($http, method, params);
-    };
-
-    $scope.showAlert = function() {
-        var alertPopup = $ionicPopup.alert({
-            title: 'Volume',
-            template: '<input type="range" name="volume" ng-model="model.sound" min="0" max="100" ng-change="setVol()">',
-            scope: $scope
-        });
-
-        alertPopup.then(function(res) {
-            console.log('In alertPopup.then');
-        });
-    };
-
-	$scope.requestPlayer = function(input) {
-
-		switch(input){
-			case "shuffle" :
-			method = 'Player.SetShuffle';
-			params = '"shuffle":' + !Runtime.GetRuntime().shuffled;
-			break;
-
-			case "repeat" :
-			method = 'Player.SetRepeat';
-			if(Runtime.GetRuntime().repeat == "off")
-			params = '"repeat": "one"';
-			else if(Runtime.GetRuntime().repeat == "one")
-				params = '"repeat" : "all"';
-				else 
-					params = '"repeat" : "off"';
-			break;
-			
-			default :
-			method="";
-			params="";
-			break;
-
-		}
-
-		Requester.sendRequestWithParamsForPlayer($http, method, params);
-		};
-
-    $scope.request = function (input) {
-        switch (input) {
-
-            case "fullscreen" :
-                Requester.requestGUI(input);
-                break;
-
-            case "shutdown" :
-                Requester.requestApplication(input, 0);
-                break;
-            case "mute" :
-                Requester.requestApplication(input, 0);
-                break;
-            case "unmute" :
-                Requester.requestApplication(input, 0);
-                break;
-            case "volumeUp" :
-                Requester.requestApplication(input, $scope.volume);
-                break;
-            case "volumeDown" :
-                Requester.requestApplication(input, $scope.volume);
-                break;
-
-            default :
-                Requester.requestInput(input);
-                break;
-        }
-
-        $scope.muted = Sounder.getMuted();
-        $scope.volume = Sounder.getVolume();
-    };
-});
->>>>>>> 588b4612299af9a0b15e0504b7ebb683d1845988
-
-
-app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder, Loader) {
+app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder) {
 
 	/*************** bouton son ******************/
 
 	$scope.soundbar = {};
 	$scope.sound = Sounder.getVolume();
-
 
 	$scope.setVol = function () {
 		Sounder.SetVol($scope.soundbar.sound);
@@ -707,7 +487,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 		$scope.modalAbout.hide();
 	};
 
-	/* Vue modal pour la connexion Manuelle*/
+	/* Vue modal pour la connexion*/
 	$ionicModal.fromTemplateUrl('views/login.html', {
 		scope: $scope
 	}).then(function(modal) {
@@ -724,27 +504,6 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 		$scope.modal.hide();
 	};
 
-<<<<<<< HEAD
-		/* Vue modal pour la connexion*/
-	$ionicModal.fromTemplateUrl('views/autologin.html', {
-		scope: $scope
-	}).then(function(modal) {
-		$scope.modalAuto = modal;
-	});
-
-	/* Ouvre le modal */
-	$scope.openAuto = function() {
-		$scope.modalAuto.show();
-	};
-
-	/* Ferme le modal */
-	$scope.closeAuto = function() {
-		$scope.modalAuto.hide();
-	};
-
-
-=======
->>>>>>> 588b4612299af9a0b15e0504b7ebb683d1845988
 	/* Ouvre le menu */
 	$scope.showMenu = function () {
 		$ionicSideMenuDelegate.toggleLeft();
@@ -797,11 +556,6 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.loginData.port = parseInt($cookieStore.get('port'));
 	$scope.loginData.username = $cookieStore.get('username');
 	$scope.loginData.password = $cookieStore.get('password');
-
-
-
-
-
 });
 
 app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $ionicLoading, $sce) {

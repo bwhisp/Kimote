@@ -1,7 +1,7 @@
-app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
+app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 
-	$scope.path = "/files";
-/*
+	$scope.path = "";
+
 	$scope.getDir = function(dir) {
 		method = "Files.GetDirectory";
 		params = '{"directory":"'+dir+'","limits":{"start":1,"end":2000}},"sort":{"method":"file"}}';
@@ -45,56 +45,5 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 					break;
 			}
 		}
-	};*/
-
-	$scope.setLoader= function () {
-	alert("toto");
-
-		Loader.getArtists(function (data){
-			$scope.data.artists= data.result.artists;
-		
-	});
-
-
-	Loader.getAlbums(function (data){
-			$scope.data.albums= data.result.albums;
-			alert(albums);
-	
-	});
-		Loader.getSongs(function (data){
-			$scope.data.songs= data.result.song;
-			alert(songs);
-	
-	});
-
-			Loader.getMovies(function (data){
-			$scope.data.movies= data.result.Movies;
-			alert(movies);
-	
-	});
-
-	Loader.getSeries(function (data){
-			$scope.data.series= data.result.series;
-			alert(series);
-	
-	});
-
-
-	Loader.getSeasons(function (data){
-			$scope.data.seasons= data.result.seasons;
-			alert(seasons);
-	
-	});
-
-
-		Loader.getEpisodes(function (data){
-			$scope.data.episodes= data.result.episodes;
-			alert(episodes);
-	
-	});
-
-
-};
-
-
+	};
 });
