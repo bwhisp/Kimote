@@ -6,7 +6,7 @@ It is available for all platforms supported by the [Apache Cordova][] framework 
 
 On top of Cordova, it is built with [AngularJS][] and the [Ionic][] framework.
 
-[![Kimote logo](https://github.com/eftov/Kimote/blob/master/resources/kimote_logo.png)](Kimote)
+[![Kimote logo](http://46.101.162.21/index.php/s/4Q15tQGV50KuSch)](Kimote)
 
 ##Installation
 
