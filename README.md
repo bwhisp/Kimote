@@ -29,6 +29,10 @@ and other supported platforms if you want.
 
 Build it with `ionic build` or just run it on your device  with `ionic run android` and/or `ionic run ios`.
 
+#####Support for ZeroConf on Android
+
+You need to add the ZeroConf plugin to the app directory : `cordova plugins add https://github.com/vstirbu/ZeroConf` to detect Kodi Media Centers automatically.
+
 ##Get Kodi/OpenELEC
 
 ###Kodi
