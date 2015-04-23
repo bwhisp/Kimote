@@ -1,4 +1,4 @@
-<ion-view ng-init="showSeasons(series_id)" view-title="{{series_label}}">
+<ion-view ng-init="showSeasons(series_id)" view-title="{{series_label}}" cache-view="true">
 	<ion-content>
 		<ion-list>
 			<a class="item item-icon-right" ng-repeat="season in seasons" href="#/tab/season-detail/{{season.tvshowid}}/{{season.season}}">

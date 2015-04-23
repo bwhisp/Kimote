@@ -1,4 +1,4 @@
-<ion-view view-title="{{movie_label}}" ng-init="showMovies()">
+<ion-view view-title="{{movie_label}}" ng-init="showMovies()" cache-view="true">
 	<ion-content ng-repeat="movie in movies | filter: movie_label" class="padding">
 		<div class="card">
 			<div class="movie-item item item-thumbnail-left">
