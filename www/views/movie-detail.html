@@ -6,7 +6,7 @@
 				<h2>{{movie.label}}</h2>
 				<p>{{movie.year}} - {{toHours(movie.runtime)}}</p>
 				<p><span ng-repeat="genre in movie.genre">{{genre}}{{$last ? '' : ', '}}</span></p>
-				<p>Note : {{Math.round(movie.rating * 10) / 10}}/10</p>
+				<p>Rating : {{Math.round(movie.rating * 10) / 10}}/10</p>
 			</div>
 
 			<div class="item item-body" ng-init="getStreamInfo(movie.file, movie.art.fanart)">
@@ -38,7 +38,7 @@
 
 			<a href="#/tab/remote" class="item item-icon-left positive" ng-click="playMovieOnKodi(movie.file)">
 				<i class="icon ion-play"></i>
-				Lancer le film sur Kodi
+				Play on Kodi
 			</a>
 			<br>
 			<br>

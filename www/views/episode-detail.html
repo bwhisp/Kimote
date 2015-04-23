@@ -5,7 +5,7 @@
 				<img class="episode-thumb" ng-src="{{getThumbnailSeries(episodedetails.thumbnail)}}">
 				<h2>{{episodedetails.label}}</h2>
 				<p>Episode {{episodedetails.episode}}, Saison {{episodedetails.season}}</p>
-				<p>Note : {{Math.round(episodedetails.rating * 10) / 10}}/10</p>
+				<p>Rating : {{Math.round(episodedetails.rating * 10) / 10}}/10</p>
 			</div>
 
 			<div class="item item-body videogular-container">
@@ -34,7 +34,7 @@
 
 			<a href="#" class="item item-icon-left positive" ng-click="playEpisodeOnKodi(episodedetails.file)">
 				<i class="icon ion-play"></i>
-				Lancer l'épisode sur Kodi
+				Play on Kodi
 			</a>
 			<br>
 			<br>

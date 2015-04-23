@@ -1,6 +1,6 @@
 <ion-modal-view>
 	<ion-header-bar class="bar bar-header bar-positive">
-		<h1 class="title">Connexion</h1>
+		<h1 class="title">Connection</h1>
 		<div class="buttons">
 			<button class="button button-clear" ng-click="closeLogin()">Fermer</button>
 		</div>
@@ -9,7 +9,7 @@
 		<form ng-submit="doLogin()">
 			<div class="list">
 				<label class="item item-input item-floating-label">
-					<span class="input-label">Adresse IP du Media Center</span>
+					<span class="input-label">IP address</span>
 					<input type="text" placeholder="Adresse IP du Media Center" ng-model="loginData.ip" ng-pattern=IPMODEL required>
 				</label>
 				<label class="item item-input item-floating-label">
@@ -21,34 +21,34 @@
 				<div class="padding auth">&nbsp;Authentification</div>
 
 				<label class="item item-input item-floating-label">
-					<span class="input-label">Nom d'utilisateur</span>
+					<span class="input-label">Username</span>
 					<input type="text" placeholder="Nom d'utilisateur" ng-model="loginData.username" required>
 				</label>
 				<label class="item item-input item-floating-label">
-					<span class="input-label">Mot de passe</span>
+					<span class="input-label">Password</span>
 					<input type="password" placeholder="Mot de passe" ng-model="loginData.password" required>
 				</label>
 
 				<div class="padding">
 					<button type="submit" class="button button-block button-positive connexion" ng-click="connected=true" ng-hide="connected">
-						<i class="icon ion-checkmark icon-connexion"></i>Connexion
+						<i class="icon ion-checkmark icon-connexion"></i>Connect
 					</button>
 
 					<button class="button button-block button-assertive" ng-click="logout(); connected=false" ng-show="connected">
-						<i class="icon ion-close icon-deconnexion"></i>Déconnecter
+						<i class="icon ion-close icon-deconnexion"></i>Disconnect
 					</button>
 
 					<div class="boutons-connect">
 						<div class="memoriser">
 							<div class="check">
 								<ion-checkbox type="checkbox" ng-model="loginData.StoreID" class="checkbox">
-									Mémoriser
+									Remember
 								</ion-checkbox>
 							</div>
 						</div>
 						<div class="removeID">
 							<button class="button button-small button-energized" ng-click="removeID()">
-								Effacer les identifiants
+								Delete all fields
 							</button>
 						</div>
 					</div>
