@@ -150,6 +150,21 @@
 
 /* about.html */
 
+.wrapper-bottom {
+	position: relative;
+	margin-top: 10%;
+	text-align: center;
+}
+
+.ion-ionic {
+	color: #387ef5;
+}
+
+.ion-ionic, .ion-social-github {
+	font-size: 30px;
+	vertical-align: middle;
+}
+
 .icon-location, .icon-who {
 	margin-right: 5px;
 }
