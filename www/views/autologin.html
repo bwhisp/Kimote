@@ -1,0 +1,68 @@
+<ion-modal-view>
+	<ion-header-bar class="bar bar-header bar-positive">
+		<div class="buttons">
+			<div ng-hide="!hideAuto">
+				<button class="button button-icon ion-arrow-left-c" ng-click="showChoices()"></button>
+			</div>
+		</div>
+		<div class="buttons">
+			<div ng-hide="hideAuto">
+				<button class="button button-icon ion-refresh" ng-click="scanAuto();loadingScanAuto()"></button>
+			</div>
+		</div>
+
+		<h1 class="title">Discover Media Centers</h1>
+
+		<div class="buttons">
+			<div ng-hide="hideAuto">
+				<button class="button button-clear" ng-click="closeAuto()">Close</button>
+			</div>
+		</div>
+	</ion-header-bar>
+
+	<ion-content>
+		<div class="list" ng-hide="hideAuto">
+			<a ng-repeat="user in users" href="#/{{user.name}}"
+			class="item item-thumbnail-left" ng-click="hideChoices(user)">
+				<img src="img/kodi.png">
+				<h2>{{user.name}}</h2>
+				<h4>{{user.addresses[0]}} : {{user.port}}</h4>
+			</a>
+		</div>
+		<div ng-hide="!hideAuto" class="row">
+			<div class="col">
+				<div class="list">
+					<a class="item item-thumbnail-left" href="#">
+						<img src="img/kodi.png">
+						<h2>{{loginData.username2}}</h2>
+						<h4>{{loginData.ip}}: {{loginData.port}}</h4>
+					</a>
+				</div>
+			</div>
+			
+			<div class="col"></div>
+			
+			<form ng-submit="doLogin()">
+				<div class ="col">
+					<label class="item item-input item-floating-label">
+						<span class="input-label">Username</span>
+						<input type="text" placeholder="Username" ng-model="loginData.username" required>
+					</label>
+					<label class="item item-input item-floating-label">
+						<span class="input-label">Password</span>
+						<input type="password" placeholder="Password" ng-model="loginData.password" required>
+					</label>
+					<div class="padding">
+						<button type="submit" class="button button-block button-positive connexion" ng-click="connected=true" ng-hide="connected">
+							<i class="icon ion-checkmark icon-connexion"></i>Connect
+						</button>
+
+						<button class="button button-block button-assertive" ng-click="logout(); connected=false" ng-show="connected">
+							<i class="icon ion-close icon-deconnexion"></i>Disconnect
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</ion-content>
+</ion-modal-view>

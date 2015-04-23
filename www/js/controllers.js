@@ -448,7 +448,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 
 app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder) {
 
-	/*************** bouton son ******************/
+	/*************** sound button ******************/
 
 	$scope.soundbar = {};
 	$scope.sound = Sounder.getVolume();
@@ -472,7 +472,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 
 	/*********************************************/
 
-	/* Vue modal pour about.html */
+	/* modal view for about.html */
 	$ionicModal.fromTemplateUrl('views/about.html', {
 		scope: $scope
 	}).then(function(modal) {
@@ -487,29 +487,44 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 		$scope.modalAbout.hide();
 	};
 
-	/* Vue modal pour la connexion*/
+	/* modal view for login.html */
 	$ionicModal.fromTemplateUrl('views/login.html', {
 		scope: $scope
 	}).then(function(modal) {
 		$scope.modal = modal;
 	});
 
-	/* Ouvre le modal */
+	/* Open modal view */
 	$scope.openLogin = function() {
 		$scope.modal.show();
 	};
 
-	/* Ferme le modal */
+	/* Close modal view */
 	$scope.closeLogin = function() {
 		$scope.modal.hide();
 	};
 
-	/* Ouvre le menu */
+	/* Open menu */
 	$scope.showMenu = function () {
 		$ionicSideMenuDelegate.toggleLeft();
 	};
 
-	/* Fonctions login */
+	/* modal view for autologin.html */
+	$ionicModal.fromTemplateUrl('views/autologin.html', {
+		scope: $scope
+	}).then(function(modal) {
+		$scope.modalAuto = modal;
+	});
+
+	$scope.openAuto = function() {
+		$scope.modalAuto.show();
+	};
+
+	$scope.closeAuto = function() {
+		$scope.modalAuto.hide();
+	};
+
+	/* Functions for login */
 
 	$scope.loginData = {};
 	$scope.IPMODEL = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
@@ -556,6 +571,36 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.loginData.port = parseInt($cookieStore.get('port'));
 	$scope.loginData.username = $cookieStore.get('username');
 	$scope.loginData.password = $cookieStore.get('password');
+
+	/* Functions for autologin */
+
+	$scope.hideAuto = false;
+
+	$scope.scanAuto = function() {
+		$scope.hideAuto = false;
+		ZeroConf.list("_http._tcp.local.", 5000, function(users) {
+			$scope.users = users.service;
+		}, function(users) {
+			alert("No Media Center discovered");
+		});
+	};
+
+	$scope.loadingScanAuto = function() {
+		$ionicLoading.show({
+			duration: 5000
+		});
+	};
+
+	$scope.hideChoices = function(user) {
+		$scope.hideAuto = !$scope.hideAuto;
+		$scope.loginData.ip = user.addresses[0];
+		$scope.loginData.port = user.port;
+		$scope.loginData.username2 = user.name;
+	};
+
+	$scope.showChoices = function(user){
+		$scope.hideAuto = !$scope.hideAuto;
+	};
 });
 
 app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $ionicLoading, $sce) {
