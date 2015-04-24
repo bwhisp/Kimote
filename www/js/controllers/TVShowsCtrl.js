@@ -29,7 +29,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les séries TV");
+			alert("Error fetching TV Shows");
 		});
 	}
 
@@ -54,7 +54,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les saisons");
+			alert("Error fetching seasons");
 		});
 	}
 
@@ -79,7 +79,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les épisodes");
+			alert("Error fetching episodes");
 		});
 	}
 
@@ -105,7 +105,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer l'épisode");
+			alert("Error fetching this episode");
 		});
 	}
 
@@ -141,7 +141,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 			//$location.path("/remote"); // fixer le tab actif
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire l'épisode");
+			alert("Cannot play this episode");
 		});
 	};
 

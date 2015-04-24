@@ -19,7 +19,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les fichiers");
+			alert("Error fetching files");
 		});
 	};
 
@@ -73,7 +73,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les films");
+			alert("Error fetching movies");
 		});
 	}
 
@@ -90,7 +90,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		.success(function(data, status, headers, config) {
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire le film");
+			alert("Cannot play this movie");
 		});
 	};
 
@@ -172,7 +172,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les artistes");
+			alert("Error fetching music");
 		});
 	}
 
@@ -196,7 +196,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les albums");
+			alert("Error fetching albums");
 		});
 	}
 
@@ -220,7 +220,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les titres");
+			alert("Error fetching tracks");
 		});
 	}
 
@@ -246,7 +246,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer l'épisode");
+			alert("Error fetching this track");
 		});
 	}
 
@@ -263,7 +263,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 			console.log("musique ok");
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire le titre");
+			alert("Cannot play this track");
 		});
 	};
 
@@ -634,7 +634,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les séries TV");
+			alert("Error fetching TV Shows");
 		});
 	}
 
@@ -659,7 +659,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les saisons");
+			alert("Error fetching seasons");
 		});
 	}
 
@@ -684,7 +684,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les épisodes");
+			alert("Error fetching episodes");
 		});
 	}
 
@@ -710,7 +710,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer l'épisode");
+			alert("Error fetching this episode");
 		});
 	}
 
@@ -746,7 +746,7 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 			//$location.path("/remote"); // fixer le tab actif
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire l'épisode");
+			alert("Cannot play this episode");
 		});
 	};
 

@@ -10,7 +10,7 @@ app.factory('Logger', function($http) {
 		connected = false;
 		errCon = false;
 		bouton = "Connecter";
-		alert("Déconnecté");
+		alert("Disconnected");
 	};
 
 	logger.login = function(username, password, ip, port) {
@@ -394,7 +394,7 @@ app.factory('Requester', function($http, Manager, Sounder) {
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.error(function() {
-			alert("Vous n'êtes pas connecté");
+			alert("You are not connected");
 		});
 	};
 
@@ -422,7 +422,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les artistes");
+			alert("Error fetching music");
 		});
 
 		return res;
@@ -447,7 +447,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les albums");
+			alert("Error fetching albums");
 		});
 
 		return res;
@@ -472,7 +472,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les titres");
+			alert("Error fetching tracks");
 		});
 
 		return res;
@@ -496,7 +496,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les films");
+			alert("Error fetching movies");
 		});
 
 		return res;
@@ -519,7 +519,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les séries TV");
+			alert("Error fetching TV Shows");
 		});
 
 		return res;
@@ -544,7 +544,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les saisons");
+			alert("Error fetching seasons");
 		});
 
 		return res;
@@ -569,7 +569,7 @@ app.factory('Loader', function($http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les épisodes");
+			alert("Error fetching episodes");
 		});
 
 		return res;

@@ -24,7 +24,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les films");
+			alert("Error fetching movies");
 		});
 	}
 
@@ -41,7 +41,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		.success(function(data, status, headers, config) {
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire le film");
+			alert("Cannot play this movie");
 		});
 	};
 

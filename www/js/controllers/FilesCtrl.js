@@ -19,7 +19,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
-			alert("Impossible de récupérer les fichiers");
+			alert("Error fetching files");
 		});
 	};
 
