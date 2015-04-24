@@ -446,7 +446,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 	};
 });
 
-app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder) {
+app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ionicSideMenuDelegate, $ionicPopup, Logger, Sounder, $ionicLoading) {
 
 	/*************** sound button ******************/
 
