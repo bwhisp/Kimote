@@ -18,12 +18,14 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
             $scope.files = data.result.sources;
 			$scope.title = "Fichiers";
             $ionicLoading.hide();
+            $scope.$broadcast('scroll.refreshComplete');
 		})
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
-            alert("Impossible de récupérer les sources");
+            $scope.$broadcast('scroll.refreshComplete');
+            alert("Error fetching sources");
 		});
-	}
+	};
 
 	$scope.getDir = function(dir) {
 		method = "Files.GetDirectory";
@@ -38,8 +40,8 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
             $ionicLoading.hide();
             
             if ( !('result' in data)) {
-	            // La destination est trop proche de / : accès interdit. Revenir au début
-	            $scope.getStart();
+				// La destination est trop proche de / : accès interdit. Revenir au début
+				$scope.getStart();
             } else {
 				$scope.files = data.result.files;
 				path = dir;
@@ -49,7 +51,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		.error(function(data, status, headers, config) {
             $ionicLoading.hide();
 		});
-	}
+	};
 
 	$scope.getFile = function(fileObj) {
 		var file = fileObj.file;
@@ -59,12 +61,10 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 			} else {
 				console.log("we can't play it");
 			}
-
 		} else {
 			$scope.getDir(file);
 		}
-
-	}
+	};
 
 	// Reconstruit le chemin du parent puis lance getDirectory
 	$scope.getParent = function() {
@@ -75,7 +75,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 			dir = dir+'/'+tmp[i];
 		}
 		$scope.getDir(dir+"/");
-	}
+	};
 
 	var getFileType = function (file) {
 		// Liste des extensions supportées par Kodi
@@ -93,7 +93,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		}
 		
 		return 0;
-	}
+	};
 
 	var play = function(file) {
 		method = "Player.Open";
@@ -109,6 +109,4 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 			alert("Impossible de lire le titre");
 		});
 	};
-
-
 });

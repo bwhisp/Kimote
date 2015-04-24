@@ -26,9 +26,11 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 		.success(function(data, status, headers, config) {
 			$ionicLoading.hide();
 			$scope.tvshows = data.result.tvshows;
+			$scope.$broadcast('scroll.refreshComplete');
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
+			$scope.$broadcast('scroll.refreshComplete');
 			alert("Error fetching TV Shows");
 		});
 	}

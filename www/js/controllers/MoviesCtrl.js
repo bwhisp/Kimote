@@ -6,7 +6,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 	$scope.showMovies = function() {
 		method = "VideoLibrary.GetMovies";
 		params = '{"limits":{"start":0,"end":9999},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
-
+		
 		getMovies($http, method, params);
 	};
 
@@ -21,9 +21,11 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		.success(function(data, status, headers, config) {
 			$ionicLoading.hide();
 			$scope.movies = data.result.movies;
+			$scope.$broadcast('scroll.refreshComplete');
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
+			$scope.$broadcast('scroll.refreshComplete');
 			alert("Error fetching movies");
 		});
 	}

@@ -26,9 +26,11 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		.success(function(data, status, headers, config) {
 			$ionicLoading.hide();
 			$scope.artists = data.result.artists;
+			$scope.$broadcast('scroll.refreshComplete');
 		})
 		.error(function(data, status, headers, config) {
 			$ionicLoading.hide();
+			$scope.$broadcast('scroll.refreshComplete');
 			alert("Error fetching music");
 		});
 	}

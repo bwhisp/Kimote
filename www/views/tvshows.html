@@ -1,6 +1,8 @@
 <ion-view view-title="TV Shows" cache-view="true">
 	<div ng-init="showSeries()"></div>
 	<ion-content>
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showSeries()">
+		</ion-refresher>
 		<ion-list>
 			<a class="tvshow-item item item-thumbnail-left item-icon-right" ng-repeat="tvshow in tvshows" href="#/tab/tvshows/{{tvshow.label}}/{{tvshow.tvshowid}}">
 				<img class="tvshow-thumb" ng-src="{{getThumbnailSeries(tvshow.thumbnail)}}">

@@ -5,6 +5,8 @@
 
 	<div ng-init="showMovies()"></div>
 	<ion-content>
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showMovies()">
+		</ion-refresher>
 		<ion-list>
 			<a class="item item-icon-right" ng-repeat="movie in movies" href="#/tab/movies/{{movie.label}}">
 				<h2>{{movie.label}}</h2>

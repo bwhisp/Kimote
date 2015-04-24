@@ -5,6 +5,8 @@
 
     <div ng-init='getStart()'></div>
     <ion-content>
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="getStart()">
+        </ion-refresher>
         <ion-list>
             <a class="item item-icon-right" ng-repeat="file in files" ng-click="getFile(file)">
                 <h2>{{file.label}}</h2>
