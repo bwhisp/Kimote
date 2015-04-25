@@ -16,7 +16,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
             $scope.files = data.result.sources;
-			$scope.title = "Fichiers";
+			$scope.title = "Files";
             $ionicLoading.hide();
             $scope.$broadcast('scroll.refreshComplete');
 		})
