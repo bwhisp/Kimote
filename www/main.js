@@ -1,4 +1,4 @@
-//basket.clear();
+basket.clear();
 basket.require(
 	/*	Loading libraries	*/
 	{url:'lib/ionic/js/ionic.bundle.js'},
