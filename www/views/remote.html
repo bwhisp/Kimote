@@ -1,10 +1,19 @@
 <ion-view view-title="Kimote">
 	<ion-content class="padding" scroll=false>
+		<div class="truc">
+			<div class="movie-item-remote item item-avatar" ng-hide="playerisActive(model.playeractive)">
+				<img class="remote-thumbnail" ng-src="{{getThumbnail(model.getDetails.thumbnail, model.playeractive)}}">
+				<h2>{{model.getDetails.title}}</h2>
+				<p>{{model.getDetails.artist[0]}}</p>
+				<p>{{model.getDetails.year}}</p>
+				<h3>{{toMinutes(model.temps)}} / {{toMinutes(model.totaltime)}}</h3>
+			</div>
+		</div>
 
 		<div class="remote-btn">
 			<div class="row">
 				<div class="col">
-					<button class="btn-custom button button-icon" ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}" ng-click="requestMute(muted)"></button>
+					<button class="btn-custom button button-icon" ng-class="{'ion-volume-mute':muted,'ion-volume-medium':!muted}" ng-click="requestMute()"></button>
 				</div>
 				<div class="col center-col">
 					<button class="btn-custom button button-icon ion-chevron-up" ng-click="request('up')"></button>
@@ -46,19 +55,32 @@
 				<div class="media-buttons">
 					<button class="button-media-custom button button-icon ion-ios-skipbackward" ng-click="request('previous')"></button>
 					<button class="button-media-custom button button-icon ion-stop" ng-click="request('stop')"></button>
-					<button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': !played, 'ion-ios-play': played}" ng-click="played=!played; request('pause')"></button>
-					<button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>
+					<button class="button-media-custom button button-icon" ng-class="{'ion-ios-pause': played, 'ion-ios-play': !played}" ng-click="request('pause')"></button>
+					<button class="button-media-custom button button-icon ion-ios-skipforward" ng-click="request('next')"></button>     
 				</div>
 			</div>
+			
+			<!-- inverted div "media-buttons-bottom and div "range runtime" to solve a problem for small screen devices where runtime bar was not usable anymore-->
+			<div class="media-buttons-bottom">
+				<div class="media-buttons">
+					<button class="button-settings-custom button button-icon" ng-hide="!whichPlayer(model.playeractive)" ng-class="{'ion-ios-shuffle-strong' : shuffledImg == true, 'ion-ios-shuffle' : shuffledImg == false}" ng-click="requestPlayer('shuffle')"></button>
+
+					<button class="button-settings-custom button button-icon" ng-hide="!whichPlayer(model.playeractive)" ng-class="{'ion-ios-loop': repeatImg == 0, 'ion-ios-loop-strong': repeatImg == 1, 'ion-ios-infinite': repeatImg == 2}"  ng-click="requestPlayer('repeat')"></button>
+
+					<button class="button-settings-custom button button-icon ion-ios-information-outline" ng-click="requestOSD()"></button>
+
+					<button class="button-settings-custom button button-icon ion-closed-captioning" ng-hide="whichPlayer(model.playeractive)" ng-click="requestPlayer('subtitles')"></button>
+
+					<button class="button-settings-custom button button-icon ion-arrow-expand" ng-click="request('fullscreen')"></button>
+				</div>
+			</div>
+
 			<div class="range runtime">
 				<button class="button-media-custom button button-icon ion-ios-rewind" ng-click="request('rewind')"></button>
 				<input type="range" name="runtime" ng-model="model.runtime" min="0" max="100" ng-change="setRuntime()">
 				<button class="button-media-custom button button-icon ion-ios-fastforward" ng-click="request('fastforward')"></button>
 			</div>
-			<div class="time">
-				{{toMinutes(model.temps)}} /
-				{{toMinutes(model.totaltime)}}
-			</div>
+
 		</div>
 	</ion-content>
 </ion-view>

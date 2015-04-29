@@ -22,8 +22,9 @@
 
 .remote-btn {
 	position: absolute;
+	z-index: 3;
 	width: 95%;
-	bottom: 40%;
+	bottom: 38%;
 }
 
 .ion-chevron-left, .ion-power, .ion-android-home, .ion-ios-plus-outline {
@@ -38,7 +39,7 @@
 .runtime {
 	position: absolute;
 	bottom: 10%;
-	width: 100%;
+	width: 95%;
 }
 
 .button-nav-left {
@@ -56,7 +57,7 @@
 .media-buttons-wrapper {
 	position: absolute;
 	width: 95%;
-	bottom: 20%;
+	bottom: 25%;
 }
 
 .media-buttons {
@@ -68,25 +69,22 @@
 	font-size: 50px;
 }
 
+.button-settings-custom {
+	font-size: 30px;
+}
+
 .sound {
 	position: absolute;
 	bottom: 1%;
 	width: 100%;
 }
 
-.runtime {
-	position: absolute;
-	bottom: 3%;
-	width: 95%;
-}
-
 .time {
 	position: absolute;
 	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-	bottom: 2%;
-	width: 100%;
+	left: -20px;
+	bottom: 1%;
+	width: 105%;
 }
 
 .time-element {
@@ -150,6 +148,26 @@
 	height: 138px !important;
 }
 
+.movie-item-remote {
+	border-color: transparent;
+	background-color: transparent;
+	height: 80px !important;
+	padding-top: 5px;
+	padding-right: 0;
+	padding-left: 75px;
+	margin: 0 auto !important;
+	width: 400px;
+}
+
+.remote-thumbnail {
+	max-width: 60px !important;
+	max-height: 60px !important;
+	width: 60px !important;
+	height: 60px !important;
+	top: 5px !important;
+	left: 5px !important;
+}
+
 .movie-thumb {
 	max-height: 115px !important;
 }
@@ -183,7 +201,7 @@
 	text-align: center;
 }
 
-.komote-icon, .about-icon-wrapper {
+.kimote-icon, .about-icon-wrapper {
 	width: 50%;
 }
 
@@ -233,4 +251,17 @@
 
 .episode-item {
 	padding-left: 160px !important;
+}
+
+.media-buttons-bottom {
+	position: absolute;
+	width: 95%;
+	bottom: 1%;
+}
+
+.media-time {
+	position: absolute;
+	width: 95%;
+	bottom: 18%;
+	text-align: center;
 }

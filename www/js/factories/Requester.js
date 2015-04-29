@@ -9,113 +9,125 @@ app.factory('Requester', function($http, Manager, Sounder) {
 			case "left":
 				method = method + 'Left';
 				break;
-			case "right" :
+			case "right":
 				method = method + 'Right';
 				break;
-			case "up" :
+			case "up":
 				method = method + 'Up';
 				break;
-			case "down" :
+			case "down":
 				method = method + 'Down';
 				break;
-			case "select" :
+			case "select":
 				method = method + 'Select';
 				break;
-			case "home" :
+			case "home":
 				method = method + 'Home';
 				break;
-			case "back" :
+			case "back":
 				method = method + 'Back';
 				break;
-			case "playPic" :
+			case "playPic":
 				Manager.SetPlay(1);
 				break;
-			case "play" :
+			case "play":
 				Manager.SetPlay(0);
 				break;
-			case "pausePic" :
+			case "pausePic":
 				Manager.SetPause(1);
 				break;
-			case "pause" :
+			case "pause":
 				Manager.SetPause(0);
 				break;
-			case "stop" :
+			case "stop":
 				method = method + 'ExecuteAction';
 				params = '{"action":"stop"}';
 				break;
-			case "next" :
+			case "next":
 				method = method + 'ExecuteAction';
 				params = '{"action":"skipnext"}';
 				break;
-			case "previous" :
+			case "previous":
 				method = method + 'ExecuteAction';
 				params = '{"action":"skipprevious"}';
 				break;
-			case "fastforward" :
+			case "fastforward":
 				method = method + 'ExecuteAction';
 				params = '{"action":"fastforward"}';
 				break;
-			case "rewind" :
+			case "rewind":
 				method = method + 'ExecuteAction';
 				params = '{"action":"rewind"}';
 				break;
-			case "zoom+" :
+			case "zoom+":
 				method = method + 'ExecuteAction';
 				params = '{"action":"zoomin"}';
 				break;
-			case "zoom-" :
+			case "zoom-":
 				method = method + 'ExecuteAction';
 				params = '{"action":"zoomout"}';
 				break;
-			default :
+			default:
 				break;
 		}
 
 		requester.sendRequest($http, method, params);
 	};
 
-    requester.requestApplication = function (input, volume) {
+	requester.requestApplication = function (input, volume) {
 		method = 'Application.';
 		params = '{}';
 
 		switch (input) {
-			case "shutdown" :
+			case "shutdown":
 				method = method + 'Quit';
 				break;
-			case "mute" :
+			case "mute":
 				Sounder.SetMute();
 				break;
-			case "unmute" :
+			case "unmute":
 				Sounder.SetUnMute();
 				break;
-			case "volumeUp" :
+			case "volumeUp":
 				Sounder.VolUp(volume);
 				break;
-			case "volumeDown" :
+			case "volumeDown":
 				Sounder.VolDown(volume);
 				break;
-			default :
+			default:
 				break;
 		}
 
 		requester.sendRequest($http, method, params);
 	};
+	
 
+	requester.GetApplicationProperties = function (callback) {
+		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"Application.GetProperties","params":{"properties":["muted","volume"]},"id":1}&callback=JSON_CALLBACK';
+		complete_url =  window.base_url + param_url;
+
+		$http.jsonp(complete_url)
+			.success(function(data, status){
+				callback(data);
+			})
+			.error(function(data, status){});
+	};
+	
 	requester.requestGUI = function (input) {
 		method = 'GUI.';
 
 		switch (input) {
-			case "fullscreen" :
+			case "fullscreen":
 				method = method + 'SetFullscreen';
 				params = '{"fullscreen":true}';
 				break;
-			case "pictures" :
+			case "pictures":
 				window.location = "#/tab/pics";
-				method = method + "ActivateWindow"
+				method = method + "ActivateWindow";
 				params = '{"window" : "pictures"}';
 				break;
 
-			default :
+			default:
 				break;
 		}
 
@@ -126,12 +138,11 @@ app.factory('Requester', function($http, Manager, Sounder) {
 		method = 'Player.';
 
 		switch (input) {
-			case "zoom" :
+			case "zoom":
 				method = method + 'Zoom';
 				params = '{"playerid":0,"zoom":"in"}';
 				break;
-
-			default :
+			default:
 				break;
 		}
 
@@ -144,8 +155,22 @@ app.factory('Requester', function($http, Manager, Sounder) {
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.error(function() {
-			alert("Vous n'êtes pas connecté");
+			alert("You are not connected");
 		});
+	};
+
+	requester.sendRequestWithParamsForPlayer = function($http, method, params) {
+		ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
+		
+		$http.jsonp(window.base_url + ping_url)
+			.success(function(data, status){
+				param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '","params": {"playerid":'+data.result[0].playerid+', '+ params +'}, "id": 1}';
+				complete_url = window.base_url + param_url;
+				$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
+					.error(function() {
+						alert("You are not connected");
+					});
+			});
 	};
 
 	return requester;

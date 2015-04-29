@@ -44,7 +44,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	}
+	};
 
 	sounder.VolDown = function(vol) {
 		if (vol < 100)
@@ -60,7 +60,7 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	}
+	};
 
 	sounder.SetVol = function (sound) {
 
@@ -74,14 +74,14 @@ app.factory('Sounder', function($http) {
 		})
 		.error(function(data, status) {
 		});
-	}
+	};
 
 	sounder.getMuted = function() {
 		return muted;
 	};
 
 	sounder.getVolume = function() {
-			return volume;
+		return volume;
 	};
 
 	return sounder;

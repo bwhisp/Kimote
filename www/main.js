@@ -9,6 +9,7 @@ basket.require(
 	{url:'lib/videogular-poster/vg-poster.min.js'},
 	{url:'lib/videogular-buffering/vg-buffering.min.js'},
 	{url:'lib/videogular-dash/vg-dash.min.js'},
+	{url:'lib/ZeroConf.js'},
 
 	/*	Loading app.js	*/
 	{url:'js/app.js'},

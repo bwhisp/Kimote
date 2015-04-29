@@ -1,22 +1,55 @@
-app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester) {
+app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester, Logger) {
 
-	$scope.model = {};
-	$scope.paused = Manager.getPaused();
-	$scope.played = Manager.getPlayed();
+    $scope.model = {};
+    /*$scope.model.runtime;
+    $scope.model.temps;
+    $scope.model.totaltime;
+    $scope.model.playeractive;*/
 
-	$scope.model.runtime;
-	$scope.model.temps;
-	$scope.model.totaltime;
-	$scope.model.playeractive;
+	$scope.getSync = function() {
+		var playerInfos = Runtime.GetRuntime();
 
-	$scope.getRuntime = function () {
-		$scope.model.runtime = Runtime.GetRuntime().moment2;
-		$scope.model.temps = Runtime.GetRuntime().temps;
-		$scope.model.totaltime = Runtime.GetRuntime().totaltime;
-		$scope.model.playeractive = Runtime.GetRuntime().playeractive;
+		if (playerInfos.shuffled === true)
+			$scope.shuffledImg = true;
+		else
+			$scope.shuffledImg = false;
+
+		if (playerInfos.speed === 0)
+			$scope.played = false;
+		else
+			$scope.played = true;
+
+		if (playerInfos.repeat === "off")
+			$scope.repeatImg = 0; //"ion-ios-loop";
+		else if (playerInfos.repeat === "one")
+			$scope.repeatImg = 1; //"ion-ios-loop-strong";
+		else
+			$scope.repeatImg = 2; //"ion-ios-loop-strong";
+
+		/*if (playerInfos.subtitles === true)
+			$scope.subtitlesImg = "subtitlesOn_32.png";
+		else
+			$scope.subtitlesImg = "subtitlesOff_32.png";*/
+
+		if (Logger.getConn() === true) {
+			Requester.GetApplicationProperties(function(data) {
+				$scope.muted = data.result.muted;
+			});
+		}
 	};
 
-	setInterval($scope.getRuntime,500);
+	setInterval($scope.getSync, 200);
+
+	$scope.getRuntime = function () {
+		var infos = Runtime.GetRuntime();
+		$scope.model.runtime = infos.moment2;
+		$scope.model.temps = infos.temps;
+		$scope.model.totaltime = infos.totaltime;
+		$scope.model.playeractive = infos.playeractive;
+		$scope.model.getDetails = infos.getDetails;
+	};
+
+	setInterval($scope.getRuntime, 500);
 
 	$scope.setRuntime = function () {
 		Runtime.SetRuntime($scope.model.runtime);
@@ -42,27 +75,23 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 		return time;
 	};
 
-	$scope.playerisActive = function(id) {
+	$scope.playerisActive = function(id) {
 		if (id != "undefined")
 			return false;
 		else
 			return true;
 	};
 
-	$scope.muted = Sounder.getMuted();
-	$scope.volume = Sounder.getVolume();
-	$scope.sound = Sounder.getVolume();
-
-	$scope.setVol = function () {
-		Sounder.SetVol($scope.model.sound);
-		$scope.model.sound = Sounder.getVolume();
+	$scope.whichPlayer = function(id) {
+		if (id === 0)
+			return true;
+		else if(id === 1)
+			return false;
 	};
 
-	$scope.requestMute = function (muted) {
+	$scope.requestMute = function() {
 		method = "Application.SetMute";
-		params = '{"mute":' + muted + '}';
-		$scope.muted = !muted;
-
+		params = '{"mute":"toggle"}';
 		Requester.sendRequest($http, method, params);
 	};
 
@@ -78,34 +107,92 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 		});
 	};
 
-	$scope.request = function (input) {
-		switch (input) {
+	$scope.requestPlayer = function(input) {
 
-			case "fullscreen" :
-				Requester.requestGUI(input);
-				break;
-			case "shutdown" :
-				Requester.requestApplication(input, 0);
-				break;
-			case "mute" :
-				Requester.requestApplication(input, 0);
-				break;
-			case "unmute" :
-				Requester.requestApplication(input, 0);
-				break;
-			case "volumeUp" :
-				Requester.requestApplication(input, $scope.volume);
-				break;
-			case "volumeDown" :
-				Requester.requestApplication(input, $scope.volume);
+		switch(input){
+			case "shuffle":
+				method = 'Player.SetShuffle';
+				params = '"shuffle":' + !Runtime.GetRuntime().shuffled;
 				break;
 
-			default :
-				Requester.requestInput(input);
+			case "repeat":
+				method = 'Player.SetRepeat';
+				if (Runtime.GetRuntime().repeat === "off")
+					params = '"repeat": "one"';
+				else if(Runtime.GetRuntime().repeat === "one")
+					params = '"repeat" : "all"';
+				else
+					params = '"repeat" : "off"';
+				break;
+
+			case "subtitles":
+				method = 'Player.SetSubtitle';
+				if (Runtime.GetRuntime().subtitles === true)
+					params = '"subtitle": "off"';
+				else if (Runtime.GetRuntime().subtitles === false)
+					params = '"subtitle" : "on"';
+				break;
+			
+			default:
+				method = "";
+				params = "";
 				break;
 		}
 
-		$scope.muted = Sounder.getMuted();
-		$scope.volume = Sounder.getVolume();
+		Requester.sendRequestWithParamsForPlayer($http, method, params);
 	};
+
+	$scope.requestOSD = function () {
+		method = "Input.ShowOSD";
+		params = "{}";
+		Requester.sendRequest($http, method, params);
+	};
+	
+	$scope.getThumbnail = function(thumbnailUri, id) {
+
+		if (id === 1) {
+			thumbnailUri = thumbnailUri.replace("image://","");
+			$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
+			
+			return $scope.thumbnailUriDecoded;
+
+		} else if (id === 0) {
+			/*thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
+			$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
+			return $scope.thumbnailUriDecoded;*/
+
+			thumbnailUri = thumbnailUri.replace("image://","");
+			thumbnailURIencoded = encodeURIComponent(thumbnailUri);
+			$scope.thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
+
+			return $scope.thumbnailUriComplete;
+		}
+	};
+
+    $scope.request = function (input) {
+        switch (input) {
+
+            case "fullscreen" :
+                Requester.requestGUI(input);
+                break;
+            case "shutdown" :
+                Requester.requestApplication(input, 0);
+                break;
+            case "mute" :
+                Requester.requestApplication(input, 0);
+                break;
+            case "unmute" :
+                Requester.requestApplication(input, 0);
+                break;
+            case "volumeUp" :
+                Requester.requestApplication(input, $scope.volume);
+                break;
+            case "volumeDown" :
+                Requester.requestApplication(input, $scope.volume);
+                break;
+            default :
+                Requester.requestInput(input);
+                break;
+        }
+    };
 });
