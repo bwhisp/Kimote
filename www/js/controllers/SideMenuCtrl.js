@@ -13,7 +13,7 @@ app.controller('SideMenuCtrl', function($scope, $cookieStore, $ionicModal, $ioni
 	$scope.showAlert = function() {
 		var alertPopup = $ionicPopup.alert({
 			title: 'Volume',
-			template: '<input type="range" name="volume" ng-model="soundbar.sound" min="0" max="100" ng-change="setVol()">',
+			template: '<div class="range"><i class="icon ion-volume-low"></i><input type="range" name="volume" ng-model="soundbar.sound" min="0" max="100" ng-change="setVol()"><i class="icon ion-volume-high"></i></div>',
 			scope: $scope
 		});
 
