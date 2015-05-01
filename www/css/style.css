@@ -6,6 +6,20 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.search-box {
+	margin-top: 5px !important;
+	margin-bottom: 5px !important;
+	margin-right: 5px !important;
+	margin-left: 5px !important;
+}
+
+.search-input {
+	padding-left: 10px !important;
+	padding-top: 5px !important;
+	height: 35px !important;
+	border-color: transparent;
+}
+
 /* volume popup */
 
 .popup {

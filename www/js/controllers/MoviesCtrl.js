@@ -2,6 +2,12 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 
 	$scope.movie_label = $stateParams.movieLabel;
 
+	$scope.showSearch = false;
+
+	$scope.searchBox = function() {
+		$scope.showSearch = !$scope.showSearch;
+	};
+
 	//préparation de la requête http pour afficher la liste des films
 	$scope.showMovies = function() {
 		method = "VideoLibrary.GetMovies";

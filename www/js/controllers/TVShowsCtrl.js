@@ -7,6 +7,12 @@ app.controller('TVShowsCtrl', function($scope, $http, $location, $stateParams, $
 	$scope.episode_id = $stateParams.episodeId;
 	$scope.episode_label = $stateParams.episodeLabel;
 
+	$scope.showSearch = false;
+
+	$scope.searchBox = function() {
+		$scope.showSearch = !$scope.showSearch;
+	};
+
 	//préparation de la requête http pour afficher la liste des séries
 	$scope.showSeries = function() {
 		method = "VideoLibrary.GetTVShows";

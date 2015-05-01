@@ -9,6 +9,12 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 	$scope.song_label = $stateParams.songLabel;
 	$scope.song_id = $stateParams.songId;
 
+	$scope.showSearch = false;
+
+	$scope.searchBox = function() {
+		$scope.showSearch = !$scope.showSearch;
+	};
+
 	$scope.showArtists = function() {
 		method = "AudioLibrary.GetArtists";
 		params =  '{"properties":["style","description","born","yearsactive","died","thumbnail","genre","fanart"],"limits":{"start":1,"end":2000}},"id":"libMusic"';

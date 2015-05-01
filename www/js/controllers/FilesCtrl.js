@@ -1,4 +1,4 @@
-app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
+app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 
 	var path = "";
 	$scope.title = "Sources";
@@ -12,44 +12,44 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ',"id":2}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $scope.files = data.result.sources;
+			$scope.files = data.result.sources;
 			$scope.title = "Files";
-            $ionicLoading.hide();
-            $scope.$broadcast('scroll.refreshComplete');
+			$ionicLoading.hide();
+			$scope.$broadcast('scroll.refreshComplete');
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            $scope.$broadcast('scroll.refreshComplete');
-            alert("Error fetching sources");
+			$ionicLoading.hide();
+			$scope.$broadcast('scroll.refreshComplete');
+			alert("Error fetching sources");
 		});
 	};
 
 	$scope.getDir = function(dir) {
 		method = "Files.GetDirectory";
-		params = '{"directory":"'+dir+'","media":"files"}}';
+		params = '{"directory":"' + dir + '","media":"files"}}';
 
 		param_url = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"' + method + '", "params":' + params + ',"id":1}';
 		complete_url = window.base_url + param_url;
 
-        $ionicLoading.show();
+		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-            $ionicLoading.hide();
-            
-            if ( !('result' in data)) {
+			$ionicLoading.hide();
+
+			if (!('result' in data)) {
 				// La destination est trop proche de / : accès interdit. Revenir au début
 				$scope.getStart();
-            } else {
+			} else {
 				$scope.files = data.result.files;
 				path = dir;
 				$scope.title = path;
 			}
 		})
 		.error(function(data, status, headers, config) {
-            $ionicLoading.hide();
+			$ionicLoading.hide();
 		});
 	};
 
@@ -71,8 +71,8 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 		var reg = new RegExp("/", "g");
 		var tmp = path.split(reg);
 		var dir = "";
-		for (var i = 1; i < tmp.length -2; i++) {
-			dir = dir+'/'+tmp[i];
+		for (var i = 1; i < tmp.length - 2; i++) {
+			dir = dir + '/' + tmp[i];
 		}
 		$scope.getDir(dir+"/");
 	};
@@ -109,4 +109,35 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading) {
 			alert("Impossible de lire le titre");
 		});
 	};
+
+	$scope.data = {
+		artists : {},
+		albums : {},
+		songs : {},
+
+		movies : {},
+
+		series : {},
+		seasons : {},
+		episodes : {}
+	}
+
+	$scope.setLoader = function () {
+		Loader.getSongs(0, function(data) {
+			$scope.data.songs = data.result.songs;
+			Loader.getSeries(function(data){
+				$scope.data.series = data.result.series;
+				Loader.getMovies(function(data){
+					$scope.data.movies=data.result.movies;
+					Loader.getAlbums(0, function(data){
+						$scope.data.albums=data.result.albums;
+						Loader.getArtists(function(data){
+							$scope.data.artists=data.result.artists;
+						})
+					})
+				})
+			})		
+		});
+	};
+
 });

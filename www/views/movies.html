@@ -1,14 +1,20 @@
-<ion-view view-title="Movies">
+<ion-view view-title="Movies" ng-init="showMovies()">
 	<ion-nav-buttons side="right">
-		<button class="button button-icon ion-volume-medium"></button>
+		<button class="button button-icon ion-android-search" ng-click="searchBox()"></button>
 	</ion-nav-buttons>
 
-	<div ng-init="showMovies()"></div>
 	<ion-content>
 		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showMovies()">
 		</ion-refresher>
+		<div class="list list-inset search-box" ng-show="showSearch">
+			<label class="item item-input search-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" placeholder="Search" ng-model="search">
+			</label>
+		</div>
+
 		<ion-list>
-			<a class="item item-icon-right" ng-repeat="movie in movies" href="#/tab/movies/{{movie.label}}">
+			<a class="item item-icon-right" collection-repeat="movie in movies | filter:search" href="#/tab/movies/{{movie.label}}">
 				<h2>{{movie.label}}</h2>
 				<i class="icon ion-chevron-right icon-accessory"></i>
 			</a>

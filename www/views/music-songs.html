@@ -1,8 +1,20 @@
-<ion-view view-title="{{album_label}}" cache-view="true">
-	<div ng-init="showSongs(album_id)"></div>
+<ion-view view-title="{{album_label}}" ng-init="showSongs(album_id)" cache-view="true">
+	<ion-nav-buttons side="right">
+		<button class="button button-icon ion-android-search" ng-click="searchBox()"></button>
+	</ion-nav-buttons>
+
 	<ion-content>
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showMovies()">
+		</ion-refresher>
+		<div class="list list-inset search-box" ng-show="showSearch">
+			<label class="item item-input search-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" placeholder="Search" ng-model="search">
+			</label>
+		</div>
+
 		<ion-list>
-			<a class="item item-icon-right" ng-repeat="song in songs" href="#/tab/track-detail/{{song.songid}}/{{song.label}}">
+			<a class="item item-icon-right" collection-repeat="song in songs | filter:search" href="#/tab/track-detail/{{song.songid}}/{{song.label}}">
 				{{song.track}}&nbsp;&nbsp;&nbsp; <b>{{song.label}}</b>
 				<span class="item-note">{{toMinutes(song.duration)}}</span>
 				<i class="icon ion-chevron-right icon-accessory"></i>
