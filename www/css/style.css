@@ -1,3 +1,11 @@
+.platform-ios {
+	font-family: 'Helvetica Neue', sans-serif !important;
+}
+
+.platform-android * {
+	font-family: 'Roboto', sans-serif;
+}
+
 /* volume popup */
 
 .popup {
