@@ -10,6 +10,7 @@ basket.require(
 	{url:'lib/videogular-buffering/vg-buffering.min.js'},
 	{url:'lib/videogular-dash/vg-dash.min.js'},
 	{url:'lib/ZeroConf.js'},
+	{url:'lib/angular-duration-format/dist/angular-duration-format.js'},
 
 	/*	Loading app.js	*/
 	{url:'js/app.js'},

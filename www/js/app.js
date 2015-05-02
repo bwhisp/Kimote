@@ -10,6 +10,7 @@ var app = angular.module('app', [
 	'ionic',
 	'ngCookies',
 	'ngSanitize',
+	'angular-duration-format',
 	'com.2fdevs.videogular',
 	'com.2fdevs.videogular.plugins.controls',
 	'com.2fdevs.videogular.plugins.overlayplay',
