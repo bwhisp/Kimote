@@ -36,7 +36,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		var streamUrl = window.base_url + '/vfs/' + moviePath;
 
 		// Get movie fanart to display on video player
-		var poster = poster.replace("image://","");
+		poster = poster.replace("image://","");
 		var posterUriDecoded = decodeURIComponent(poster);
 
 		// Configuration for Videogular
@@ -78,7 +78,7 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 
 	// Get thumbnail image to display in movie-detail
 	$scope.getThumbnail = function(thumbnailUri) {
-		var thumbnailUri = thumbnailUri.replace("image://","");
+		thumbnailUri = thumbnailUri.replace("image://","");
 		var thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
 
 		return thumbnailUriDecoded;

@@ -100,7 +100,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 
 	// Get artist thumbnail to display on list
 	$scope.getThumbnailArtist = function(thumbnailUri) {
-		var thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
+		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
 		var thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
 
 		return thumbnailUriDecoded;
@@ -108,7 +108,7 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 
 	// Get album thumbnail, encoded differently from artist thumbnails
 	$scope.getThumbnailAlbum = function(thumbnailUri) {
-		var thumbnailUri = thumbnailUri.replace("image://","");
+		thumbnailUri = thumbnailUri.replace("image://","");
 		var thumbnailURIencoded = encodeURIComponent(thumbnailUri);
 		var thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
 
