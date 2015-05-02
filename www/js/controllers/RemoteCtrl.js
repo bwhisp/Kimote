@@ -1,10 +1,6 @@
 app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $ionicPopup, $timeout, Sounder, Manager, Runtime, Requester, Logger) {
 
     $scope.model = {};
-    /*$scope.model.runtime;
-    $scope.model.temps;
-    $scope.model.totaltime;
-    $scope.model.playeractive;*/
 
 	$scope.getSync = function() {
 		var playerInfos = Runtime.GetRuntime();
@@ -20,16 +16,11 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 			$scope.played = true;
 
 		if (playerInfos.repeat === "off")
-			$scope.repeatImg = 0; //"ion-ios-loop";
+			$scope.repeatImg = 0;
 		else if (playerInfos.repeat === "one")
-			$scope.repeatImg = 1; //"ion-ios-loop-strong";
+			$scope.repeatImg = 1;
 		else
-			$scope.repeatImg = 2; //"ion-ios-loop-strong";
-
-		/*if (playerInfos.subtitles === true)
-			$scope.subtitlesImg = "subtitlesOn_32.png";
-		else
-			$scope.subtitlesImg = "subtitlesOff_32.png";*/
+			$scope.repeatImg = 2;
 
 		if (Logger.getConn() === true) {
 			Requester.GetApplicationProperties(function(data) {
@@ -76,7 +67,7 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 	};
 
 	$scope.playerisActive = function(id) {
-		if (id != "undefined")
+		if (id !== "undefined")
 			return false;
 		else
 			return true;
@@ -102,14 +93,11 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 			scope: $scope
 		});
 
-		alertPopup.then(function(res) {
-			console.log('In alertPopup.then');
-		});
+		alertPopup;
 	};
 
 	$scope.requestPlayer = function(input) {
-
-		switch(input){
+		switch(input) {
 			case "shuffle":
 				method = 'Player.SetShuffle';
 				params = '"shuffle":' + !Runtime.GetRuntime().shuffled;
@@ -149,7 +137,6 @@ app.controller('RemoteCtrl', function($scope,$http, $stateParams, $location, $io
 	};
 	
 	$scope.getThumbnail = function(thumbnailUri, id) {
-
 		if (id === 1) {
 			thumbnailUri = thumbnailUri.replace("image://","");
 			$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);

@@ -154,9 +154,9 @@ app.factory('Requester', function($http, Manager, Sounder) {
 		complete_url = window.base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.error(function() {
-			alert("You are not connected");
-		});
+			.error(function() {
+				alert("You are not connected");
+			});
 	};
 
 	requester.sendRequestWithParamsForPlayer = function($http, method, params) {

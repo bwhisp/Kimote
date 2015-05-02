@@ -12,7 +12,6 @@ app.factory('Runtime', function($http) {
 	var moment;
 
 	runtime.SetRuntime = function (moment) {
-
 		ping_url = '/jsonrpc?request={ "jsonrpc": "2.0", "method": "Player.GetActivePlayers", "id": 1 }&callback=JSON_CALLBACK';
 		var ping_url2;
 
@@ -38,7 +37,6 @@ app.factory('Runtime', function($http) {
 	};
 
 	runtime.GetRuntime = function () {
-
 		ping_url = '/jsonrpc?request={"jsonrpc":"2.0","method": "Player.GetActivePlayers","id":1}&callback=JSON_CALLBACK';
 		var ping_url2;
 

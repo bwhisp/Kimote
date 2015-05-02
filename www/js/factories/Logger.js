@@ -3,14 +3,14 @@ app.factory('Logger', function($http) {
 
 	var connected = false;
 	var errCon = false;
-	var bouton = "Connecter";
+	var bouton = "Connect";
 
 	logger.logout = function() {
 		window.base_url = "";
 		connected = false;
 		errCon = false;
-		bouton = "Connecter";
-		alert("Déconnecté");
+		bouton = "Connect";
+		alert("Disconnected");
 	};
 
 	logger.login = function(username, password, ip, port) {
@@ -21,13 +21,13 @@ app.factory('Logger', function($http) {
 		.success(function(data, status) {
 			connected = true;
 			errCon = false;
-			bouton = "Déconnecter";
+			bouton = "Disconnect";
 			window.location = "#/remote";
 		})
 		.error(function(data, status) {
 			connected = false;
 			errCon = true;
-			bouton = "Connecter";
+			bouton = "Connect";
 			alert("Error " + status);
 			console.log(window.base_url);
 		});

@@ -1,5 +1,8 @@
-app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce) {
+app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce, Loader) {
 
+	// Get artist, album and song labels and ids to display
+	// on each view and filter to get the correct albums and
+	// songs for a selected artist
 	$scope.artist_label = $stateParams.artistLabel;
 	$scope.artist_id = $stateParams.artistId;
 
@@ -9,114 +12,40 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 	$scope.song_label = $stateParams.songLabel;
 	$scope.song_id = $stateParams.songId;
 
-	$scope.showSearch = false;
-
-	$scope.searchBox = function() {
-		$scope.showSearch = !$scope.showSearch;
-	};
-
+	// Get artists to display in list
 	$scope.showArtists = function() {
-		method = "AudioLibrary.GetArtists";
-		params =  '{"properties":["style","description","born","yearsactive","died","thumbnail","genre","fanart"],"limits":{"start":1,"end":2000}},"id":"libMusic"';
-
-		getArtists($http, method, params);
-	};
-
-	function getArtists($http, method, params) {
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
+		Loader.getArtists(function(data) {
 			$scope.artists = data.result.artists;
 			$scope.$broadcast('scroll.refreshComplete');
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			$scope.$broadcast('scroll.refreshComplete');
-			alert("Error fetching music");
 		});
-	}
+	};
 
+	// Get albums of selected artist based on id
 	$scope.showAlbums = function(artistid) {
-		method = "AudioLibrary.GetAlbums";
-		params = '{"limits":{"start":0,"end":9999},"properties":["playcount","artist","genre","rating","thumbnail","year","mood","style"],"sort":{"order":"ascending","method":"album","ignorearticle":true},"filter":{"artistid":' + artistid + '}},"id":"libAlbums"}';
-
-		getAlbums($http, method, params);
-	};
-
-	function getAlbums($http, method, params) {
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
+		Loader.getAlbums(artistid, function(data) {
 			$scope.albums = data.result.albums;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Error fetching albums");
+			$scope.$broadcast('scroll.refreshComplete');
 		});
-	}
+	};
 
+	// Get songs of selected album based on id
 	$scope.showSongs = function(albumid) {
-		method = "AudioLibrary.GetSongs";
-		params = '{"limits":{"start":0,"end":9999},"properties":["file","artist","duration","album","albumid","track","playcount"],"sort":{"order":"ascending","method":"track","ignorearticle":true},"filter":{"albumid":' + albumid + '}},"id":"libSongs"}';
-
-		getSongs($http, method, params);
-	};
-
-	function getSongs($http, method, params) {
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
+		Loader.getSongs(albumid, function(data) {
 			$scope.songs = data.result.songs;
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Error fetching tracks");
+			$scope.$broadcast('scroll.refreshComplete');
 		});
-	}
-
-	$scope.showSongDetails = function(songid) {
-		method = "AudioLibrary.GetSongDetails";
-		params = '{"songid":' + songid + ', "properties": ["title","artist","genre","duration","album","thumbnail","file"]}, "id": "libSongs"';
-
-		getSongDetails($http, method, params);
 	};
 
-	function getSongDetails($http, method, params) {
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + '}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
+	// Get song details based on id
+	$scope.showSongDetails = function(songid) {
+		Loader.getSongDetails(songid, function(data) {
 			$scope.songdetails = data.result.songdetails;
-
 			$scope.getStreamInfoMusic($scope.songdetails.file);
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			alert("Error fetching this track");
 		});
-	}
+	};
 
+	// Play song on Kodi and redirect to remote view
 	$scope.playSong = function(file) {
-
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
@@ -125,15 +54,39 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
 		.success(function(data, status, headers, config) {
-			console.log("musique ok");
 		})
 		.error(function(data, status, headers, config) {
 			alert("Cannot play this track");
 		});
 	};
 
-	$scope.toMinutes = function(duration) {
+	// Get song path for streaming
+	// with Videogular plugin
+	$scope.getStreamInfoMusic = function(file) {
+		var trackPath = encodeURIComponent(file);
+		var streamUrl = window.base_url + '/vfs/' + trackPath;
 
+		$scope.config = {
+			sources: [{
+				src: $sce.trustAsResourceUrl(streamUrl),
+				type: "audio/mpeg"
+			}],
+			theme: "lib/videogular-themes-default/videogular.min.css",
+		};
+
+		return $scope.config;
+	};
+
+	// Show search input on top of list
+	// ngClick on search button
+	$scope.showSearch = false;
+	$scope.searchBox = function() {
+		$scope.showSearch = !$scope.showSearch;
+	};
+
+	// Convert song.duration to minutes
+	$scope.Math = window.Math;
+	$scope.toMinutes = function(duration) {
 		var minutes = Math.floor((duration/60));
 		var seconds = duration - (minutes*60);
 
@@ -145,35 +98,20 @@ app.controller('MusicCtrl', function($scope, $http, $stateParams, $location, $io
 		return time;
 	};
 
+	// Get artist thumbnail to display on list
 	$scope.getThumbnailArtist = function(thumbnailUri) {
-		thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
-		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
+		var thumbnailUri = thumbnailUri.replace("image://","").replace("jpg/","jpg");
+		var thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
 
-		return $scope.thumbnailUriDecoded;
+		return thumbnailUriDecoded;
 	};
 
+	// Get album thumbnail, encoded differently from artist thumbnails
 	$scope.getThumbnailAlbum = function(thumbnailUri) {
-		thumbnailUri = thumbnailUri.replace("image://","");
-		thumbnailURIencoded = encodeURIComponent(thumbnailUri);
-		$scope.thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
+		var thumbnailUri = thumbnailUri.replace("image://","");
+		var thumbnailURIencoded = encodeURIComponent(thumbnailUri);
+		var thumbnailUriComplete = window.base_url + '/image/image://' + thumbnailURIencoded;
 
-		return $scope.thumbnailUriComplete;
-	};
-
-	$scope.getStreamInfoMusic = function(file) {
-		$scope.trackPath = encodeURIComponent(file);
-		$scope.streamUrl = window.base_url + '/vfs/' + $scope.trackPath;
-
-		console.log("streamUrl : " + $scope.streamUrl);
-
-		$scope.config = {
-			sources: [{
-				src: $sce.trustAsResourceUrl($scope.streamUrl),
-				type: "audio/mpeg"
-			}],
-			theme: "lib/videogular-themes-default/videogular.min.css",
-		};
-
-		return $scope.config;
+		return thumbnailUriComplete;
 	};
 });

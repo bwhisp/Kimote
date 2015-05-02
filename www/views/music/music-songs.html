@@ -1,10 +1,10 @@
-<ion-view view-title="Saison {{season_id}}" ng-init="showEpisodes(series_id, season_id)" cache-view="true">
+<ion-view view-title="{{album_label}}" ng-init="showSongs(album_id)" cache-view="true">
 	<ion-nav-buttons side="right">
 		<button class="button button-icon ion-android-search" ng-click="searchBox()"></button>
 	</ion-nav-buttons>
 
 	<ion-content>
-		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showSeries()">
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showSongs(album_id)">
 		</ion-refresher>
 		<div class="list list-inset search-box" ng-show="showSearch">
 			<label class="item item-input search-input">
@@ -14,8 +14,9 @@
 		</div>
 
 		<ion-list>
-			<a class="item item-icon-right" collection-repeat="episode in episodes | filter:search" href="#/tab/episode-detail/{{episode.title}}/{{episode.episodeid}}">
-				<h2>{{episode.episode}} &nbsp; <b>{{episode.title}}</b></h2>
+			<a class="item item-icon-right" collection-repeat="song in songs | filter:search" href="#/tab/track-detail/{{song.songid}}/{{song.label}}">
+				{{song.track}}&nbsp;&nbsp;&nbsp; <b>{{song.label}}</b>
+				<span class="item-note">{{toMinutes(song.duration)}}</span>
 				<i class="icon ion-chevron-right icon-accessory"></i>
 			</a>
 		</ion-list>

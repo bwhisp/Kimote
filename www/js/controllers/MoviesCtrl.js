@@ -1,44 +1,19 @@
-app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce) {
+app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $ionicLoading, $sce, Loader) {
 
+	// Get movie label from previous view for display
 	$scope.movie_label = $stateParams.movieLabel;
 
-	$scope.showSearch = false;
-
-	$scope.searchBox = function() {
-		$scope.showSearch = !$scope.showSearch;
-	};
-
-	//préparation de la requête http pour afficher la liste des films
-	$scope.showMovies = function() {
-		method = "VideoLibrary.GetMovies";
-		params = '{"limits":{"start":0,"end":9999},"properties":["art","rating","thumbnail","playcount","file","year","genre","plot","runtime"],"sort": {"order":"ascending","method":"label","ignorearticle":true}},"id":"libMovies"';
-		
-		getMovies($http, method, params);
-	};
-
-	//récupération des films
-	function getMovies($http, method, params) {
-
-		param_url = '/jsonrpc?request={"jsonrpc":"2.0","method":"' + method + '", "params":' + params + ',"id":1}';
-		complete_url = window.base_url + param_url;
-
-		$ionicLoading.show();
-		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$ionicLoading.hide();
+	// Get and display movies list
+	// $broadcast top stop pull to refresh
+	$scope.showMovies = function() {
+		Loader.getMovies(function(data) {
 			$scope.movies = data.result.movies;
 			$scope.$broadcast('scroll.refreshComplete');
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			$scope.$broadcast('scroll.refreshComplete');
-			alert("Error fetching movies");
 		});
-	}
+	};
 
-	//lire le film sur Kodi et redirection vers remote
+	// Play movie on Kodi and redirect to remote view
 	$scope.playMovieOnKodi = function(file) {
-
 		method = "Player.Open";
 		params = '{"item":{"file":"' + file + '"}}';
 
@@ -46,37 +21,49 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		complete_url = window.base_url + param_url;
 
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-		})
-		.error(function(data, status, headers, config) {
-			alert("Cannot play this movie");
-		});
+			.success(function(data, status, headers, config) {
+			})
+			.error(function(data, status, headers, config) {
+				alert("Cannot play this movie");
+			});
 	};
 
+	// Get movie path for streaming
+	// with Videogular plugin
 	$scope.getStreamInfo = function(file, poster) {
-		$scope.moviePath = encodeURIComponent(file);
-		$scope.streamUrl = window.base_url + '/vfs/' + $scope.moviePath;
+		// Get movie path 
+		var moviePath = encodeURIComponent(file);
+		var streamUrl = window.base_url + '/vfs/' + moviePath;
 
-		poster = poster.replace("image://","");
-		$scope.posterUriDecoded = decodeURIComponent(poster);
+		// Get movie fanart to display on video player
+		var poster = poster.replace("image://","");
+		var posterUriDecoded = decodeURIComponent(poster);
 
-		console.log("streamUrl : " + $scope.streamUrl);
-
+		// Configuration for Videogular
+		// Get streamUrl as source and posterUri
 		$scope.config = {
 			sources: [{
-				src: $sce.trustAsResourceUrl($scope.streamUrl),
+				src: $sce.trustAsResourceUrl(streamUrl),
 				type: "video/mp4"
 			}],
 			theme: "lib/videogular-themes-default/videogular.min.css",
 			plugins: {
-				poster: $scope.posterUriDecoded
+				poster: posterUriDecoded
 			}
 		};
 
 		return $scope.config;
 	};
 
-	//conversion du champ movie.runtime en heures
+	// Show search input on top of list
+	// ngClick on search button
+	$scope.showSearch = false;
+	$scope.searchBox = function() {
+		$scope.showSearch = !$scope.showSearch;
+	};
+
+	// Convert movie.runtime in hours
+	$scope.Math = window.Math;
 	$scope.toHours = function(duration) {
 		var hours = Math.floor(duration/3600);
 		var minutes = Math.floor((duration - (hours*3600))/60);
@@ -89,13 +76,11 @@ app.controller('MoviesCtrl', function($scope, $http, $stateParams, $location, $i
 		return time;
 	};
 
-	//téléchargement l'image de présentation du film
+	// Get thumbnail image to display in movie-detail
 	$scope.getThumbnail = function(thumbnailUri) {
-		thumbnailUri = thumbnailUri.replace("image://","");
-		$scope.thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
+		var thumbnailUri = thumbnailUri.replace("image://","");
+		var thumbnailUriDecoded = decodeURIComponent(thumbnailUri);
 
-		return $scope.thumbnailUriDecoded;
+		return thumbnailUriDecoded;
 	};
-
-	$scope.Math = window.Math;
 });

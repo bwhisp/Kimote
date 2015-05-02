@@ -4,8 +4,6 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 	$scope.title = "Sources";
 
 	$scope.getStart = function() {
-		// $scope.files = {};
-
 		method = "Files.GetSources";
 		params = '{"media":"files"}';
 
@@ -14,17 +12,17 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 
 		$ionicLoading.show();
 		$http.jsonp(complete_url, {params: {callback: 'JSON_CALLBACK', format: 'json'}})
-		.success(function(data, status, headers, config) {
-			$scope.files = data.result.sources;
-			$scope.title = "Files";
-			$ionicLoading.hide();
-			$scope.$broadcast('scroll.refreshComplete');
-		})
-		.error(function(data, status, headers, config) {
-			$ionicLoading.hide();
-			$scope.$broadcast('scroll.refreshComplete');
-			alert("Error fetching sources");
-		});
+			.success(function(data, status, headers, config) {
+				$scope.files = data.result.sources;
+				$scope.title = "Files";
+				$ionicLoading.hide();
+				$scope.$broadcast('scroll.refreshComplete');
+			})
+			.error(function(data, status, headers, config) {
+				$ionicLoading.hide();
+				$scope.$broadcast('scroll.refreshComplete');
+				alert("Error fetching sources");
+			});
 	};
 
 	$scope.getDir = function(dir) {
@@ -40,7 +38,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 			$ionicLoading.hide();
 
 			if (!('result' in data)) {
-				// La destination est trop proche de / : accès interdit. Revenir au début
+				// Destination too close from root / => restricted access. Go back to beginnning
 				$scope.getStart();
 			} else {
 				$scope.files = data.result.files;
@@ -59,14 +57,14 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 			if (getFileType(file) == 1 ) { // audio file
 				play(file);
 			} else {
-				console.log("we can't play it");
+				alert("The file cannot be played");
 			}
 		} else {
 			$scope.getDir(file);
 		}
 	};
 
-	// Reconstruit le chemin du parent puis lance getDirectory
+	// Rebuild the parent directory path then fire getDirectory
 	$scope.getParent = function() {
 		var reg = new RegExp("/", "g");
 		var tmp = path.split(reg);
@@ -78,12 +76,12 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 	};
 
 	var getFileType = function (file) {
-		// Liste des extensions supportées par Kodi
+		// List of supported extensions
 		var media = ["3gp","aif","aiff","aac","amr","flac","m3u","m4a","mid","midi","mp2","mp3","ogg","oga","wav","wma",
 					"avi","mp4","mkv","mpeg",
 					"bmp","jpg","jpeg","gif","png","tif","tiff","ico"];
 
-		// Extraction de l'extension
+		// Extract the file extension
 		var reg = /\.[0-9a-z]{1,5}$/i;
 		var ext = (file.match(reg))[0];
 		ext = ext.substring(1);
@@ -106,38 +104,7 @@ app.controller('FilesCtrl', function($scope, $http, $ionicLoading, Loader) {
 		.success(function(data, status, headers, config) {
 		})
 		.error(function(data, status, headers, config) {
-			alert("Impossible de lire le titre");
+			alert("Cannot read file");
 		});
 	};
-
-	$scope.data = {
-		artists : {},
-		albums : {},
-		songs : {},
-
-		movies : {},
-
-		series : {},
-		seasons : {},
-		episodes : {}
-	}
-
-	$scope.setLoader = function () {
-		Loader.getSongs(0, function(data) {
-			$scope.data.songs = data.result.songs;
-			Loader.getSeries(function(data){
-				$scope.data.series = data.result.series;
-				Loader.getMovies(function(data){
-					$scope.data.movies=data.result.movies;
-					Loader.getAlbums(0, function(data){
-						$scope.data.albums=data.result.albums;
-						Loader.getArtists(function(data){
-							$scope.data.artists=data.result.artists;
-						})
-					})
-				})
-			})		
-		});
-	};
-
 });

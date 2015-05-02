@@ -66,7 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: "/movies",
 		views: {
 			'movies-tab': {
-				templateUrl: "views/movies.html",
+				templateUrl: "views/movies/movies.html",
 				controller: 'MoviesCtrl'
 			}
 		}
@@ -75,7 +75,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: "/movies/:movieLabel",
 		views: {
 			"movies-tab": {
-				templateUrl: "views/movie-detail.html",
+				templateUrl: "views/movies/movie-detail.html",
 				controller: 'MoviesCtrl'
 			}
 		}
@@ -86,7 +86,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	url: "/tvshows",
 		views: {
 			'tvshows-tab': {
-				templateUrl: "views/tvshows.html",
+				templateUrl: "views/tvshows/tvshows.html",
 				controller: "TVShowsCtrl"
 			}
 		}
@@ -95,7 +95,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url:'/tvshows/:seriesLabel/:seriesId',
 		views: {
 			'tvshows-tab': {
-				templateUrl: 'views/tvshow-detail.html',
+				templateUrl: 'views/tvshows/tvshow-detail.html',
 				controller: 'TVShowsCtrl'
 			}
 		}
@@ -104,7 +104,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url:'/season-detail/:seriesId/:seasonId',
 		views: {
 			'tvshows-tab': {
-				templateUrl: 'views/season-detail.html',
+				templateUrl: 'views/tvshows/season-detail.html',
 				controller: 'TVShowsCtrl'
 			}
 		}
@@ -113,7 +113,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url:'/episode-detail/:episodeLabel/:episodeId',
 		views: {
 			'tvshows-tab': {
-				templateUrl: 'views/episode-detail.html',
+				templateUrl: 'views/tvshows/episode-detail.html',
 				controller: 'TVShowsCtrl'
 			}
 		}
@@ -124,7 +124,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: "/music",
 		views: {
 			'music-tab': {
-				templateUrl: "views/music.html",
+				templateUrl: "views/music/music.html",
 				controller: "MusicCtrl"
 			}
 		}
@@ -133,7 +133,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/albums/:artistLabel/:artistId',
 		views: {
 			'music-tab': {
-				templateUrl: 'views/music-albums.html',
+				templateUrl: 'views/music/music-albums.html',
 				controller: 'MusicCtrl'
 			}
 		}
@@ -142,7 +142,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/songs/:albumLabel/:albumId',
 		views: {
 			'music-tab': {
-				templateUrl: 'views/music-songs.html',
+				templateUrl: 'views/music/music-songs.html',
 				controller: 'MusicCtrl'
 			}
 		}
@@ -151,7 +151,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/track-detail/:songId/:songLabel',
 		views: {
 			'music-tab': {
-				templateUrl: 'views/track-detail.html',
+				templateUrl: 'views/music/track-detail.html',
 				controller: 'MusicCtrl'
 			}
 		}
