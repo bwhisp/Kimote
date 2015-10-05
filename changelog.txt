@@ -22,3 +22,6 @@ Nouvelle factory, Loader. Pas encore fonctionnelle :
 Utilisée pour charger les listes de films, musiques, séries. 
 Les fonctions n'arrivent pas à renvoyer les données que Kodi envoit.
 J'ai vérifié dans l'onglet network du débugger chrome, les données sont bien récupérées.
+
+
+Un changement
